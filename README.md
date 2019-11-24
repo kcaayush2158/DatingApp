@@ -13,9 +13,9 @@ ANGULAR JS(Outh2)
 ⚡ Back-End
 ---------------------
 Spring Boot    
--Security    
--Data-jpa  
--MVC 
+ -Security    
+ -Data-jpa  
+ -MVC 
  
 ⚡ Database 
 ---------------------
