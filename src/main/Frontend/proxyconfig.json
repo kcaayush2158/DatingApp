@@ -1,0 +1,27 @@
+{
+    "/api/user":{
+        "target":"http://localhost:8080",
+        "secure":false,
+        "changeOrigin":true
+    },
+    "/api/user/create":{
+        "target":"http://localhost:8080",
+        "secure":false,
+        "changeOrigin":true
+    },
+    "/api/user/delete":{
+        "target":"http://localhost:8080",
+        "secure":false,
+        "changeOrigin":true
+    },
+    "/api/user/delete":{
+        "target":"http://localhost:8080",
+        "secure":false,
+        "changeOrigin":true
+    },
+    "/":{
+        "target":"http://localhost:8080",
+        "secure":false,
+        "changeOrigin":true
+    }
+}

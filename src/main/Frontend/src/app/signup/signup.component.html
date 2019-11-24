@@ -1,0 +1,90 @@
+<app-header></app-header>
+<div class="container col-lg-4" id="signup-form">
+    <form method="POST" #myForm="ngForm" novalidate>
+        <h2 class="text-center" style="font-size:33px;">
+            <strong>Account Signup</strong>
+            <hr class="col-lg-5 mb-4">
+        </h2>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-6">
+                    <!--  ===============================================First Name input field ========================================-->
+                    <div class="form-group">
+                        <label for="firstname">First Name: </label>
+                        <input name="firstname" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" [(ngModel)]="userSignupModel.firstname" id="firstname" type="text" id="firstname" class="form-control mb-2 form-control-lg" autofocus required />
+                        <span class="text-danger" [class.d-none]="firstname.untouched || firstname.valid">First Name is required</span>
+                    </div>
+                </div>
+                <!--  ===============================================Last Name input field ========================================-->
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="lastname">Last Name: </label>
+                        <input name="lastname" #lastname="ngModel" [class.is-invalid]="lastname.invalid && lastname.touched" [(ngModel)]="userSignupModel.lastname" id="lastname" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                        <span class="text-danger" [class.d-none]="lastname.untouched || lastname.valid">Last Name is required</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  ===============================================Username input field ========================================-->
+        <div class="form-group">
+            <label for="username">Username: </label>
+            <input #username="ngModel" pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="username.invalid && username.touched" [(ngModel)]="userSignupModel.username" name="username" id="username" type="text" class="form-control mb-2 form-control-lg"
+                autofocus required />
+            <div *ngIf="username.invalid  &&  (username.dirty || username.touched)">
+                <span class="text-danger" *ngIf="username.errors['required']">Username is required</span>
+                <span class="text-danger" *ngIf="username.errors['pattern']">Username must contain one uppercase, lowercase ,digit with atleast 5 charecters</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <!--  ===============================================Password input field ========================================-->
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="password">Password: </label>
+                        <input #password="ngModel" pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="password.valid  && password.touched " [(ngModel)]="userSignupModel.password" name="password" id="password" type="password" class="form-control mb-2 form-control-lg"
+                            required />
+                        <div *ngIf="password.invalid  && (password.dirty || password.untouched)">
+                            <span class="text-danger" *ngIf="password.errors['pattern']">Password must contain one uppercase, lowercase & digit with atleast 5 charecters</span>
+                            <span class="text-danger" *ngIf="password.errors['required']">Password is required.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <!--  ===============================================Retype password input field========================================-->
+                <div class="form-group">
+                    <label for="repassword">Re-Password: </label>
+                    <input #repassword="ngModel" name="repassword" pattern="{{password.value}}" compare="password" [class.is-invalid]="repassword.invalid && repassword.touched" [(ngModel)]="userSignupModel.repassword" id="repassword" type="password" class="form-control mb-2 form-control-lg"
+                        autofocus required />
+                    <div *ngIf="repassword.invalid  && (repassword.dirty || repassword.touched)">
+                        <span class="text-danger" *ngIf="repassword.errors['required']"> Confirm password is required. </span>
+                        <!-- <div class="invalid-feedback" *ngIf="repassword.errors['required'] && repassword.errors['compare']">  Password doesn't match. </div> -->
+                        <span class="text-danger" *ngIf="repassword.errors['compare']"> Password & Confirm Password does not match.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  ===============================================Email field ========================================-->
+        <div class="form-group">
+            <label for="email">Email: </label>
+            <input #email="ngModel" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [class.is-invalid]="email.invalid && email.touched" [(ngModel)]="userSignupModel.email" name="email" id="email" type="text" class="form-control mb-2 form-control-lg"
+                autofocus required />
+            <span class="text-danger" [class.d-none]="email.untouched || email.valid">Email is required</span>
+        </div>
+        <!--  ===============================================Gender field ========================================-->
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select (blur)="validateGender(gender.value)" #gender="ngModel" name="gender" [class.is-invalid]="genderHasError && gender.touched" [(ngModel)]="userSignupModel.gender" name="gender" id="gender" (change)="gender.value" class="custom-select form-control-lg"
+                required>
+                <option value="default" selected>Choose your gender</option>
+                <option *ngFor="let gender of sex" value="{{gender}}">{{gender}}</option>
+            </select>
+            <span class="text-danger" [class.d-none]="!genderHasError || gender.untouched">Gender is required</span>
+        </div>
+        <!--  =============================================== Form submit button  field ========================================-->
+        <button [disabled]="myForm.form.invalid || genderHasError" class="btn btn-block btn-lg btn-success form-control-lg form-control mb-5 mt-5" type="submit" (click)="doSignup()">Sign Up</button>
+    </form>
+    <h1>{{message}}</h1>
+</div>
+<app-footer></app-footer>

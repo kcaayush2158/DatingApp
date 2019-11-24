@@ -1,0 +1,43 @@
+<app-header></app-header>
+
+<div class="container-fluid" style="margin-top: 80px; ">
+    <div class="row">
+        <div class="col-lg-4 mx-auto ">
+            <div class="  my-5">
+                <div class="card-body">
+                    <h2 class="text-center" style="font-size:33px">
+                                <strong>Account Login</strong>
+                                <hr class="col-lg-4 mb-4">
+                         </h2>
+                    <form #myForm="ngForm" method="GET" class="form-signin">
+                        <!--============================================================== username input field======================================-->
+                        <div class="form-label-group">
+                            <label for="inputEmail">Username :</label>
+                            <input type="text" [class.is-invalid]="username.touched && username.invalid" [(ngModel)]="userLoginModel.username" name="username" #username="ngModel" minlength="5" maxlength="25" id="username" class="form-control form-control-lg" required>
+                            <small class="invalid-feedback" [class.d-none]="username.valid || username.untouched">Username is required</small>
+                        </div>
+                        <!--============================================================== password input field======================================-->
+                        <div class="form-label-group">
+                            <label for="inputPassword">Password :</label>
+                            <input type="password" #password="ngModel" name="password" [(ngModel)]="userLoginModel.password" [class.is-invalid]="password.touched && password.invalid" id="inputPassword" class="form-control form-control-lg" required>
+                            <small class="invalid-feedback" *ngIf="password.invalid || password.untouched">Password is required</small>
+                        </div>
+                        <!--============================================================== Remember checkbox input field======================================-->
+                        <div class="custom-control custom-checkbox mb-5 mt-3">
+                            <input type="checkbox" class="custom-control-input form-control-lg" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Remember Me</label>
+                        </div>
+                        <!--=================================================================Signin input button ===============================================-->
+                        <button class="btn btn-lg btn-danger btn-block text-uppercase" (click)="doLogin()" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+                        <hr class="my-4">
+                        <!-- ================================================================google social-login button=============================================-->
+                        <button class="btn btn-lg btn-google btn-block text-uppercase" (click)="googleLogin()" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+                        <!--============================================================== facebook social-login button====================================================================-->
+                        <button class="btn btn-lg btn-facebook btn-block text-uppercase" (click)="facebookLogin()" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

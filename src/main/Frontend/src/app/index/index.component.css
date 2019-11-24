@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+ .register-photo {
+     height: 100vh;
+    background: linear-gradient(to right, #047aed, #e9006581), url(https://i.pinimg.com/originals/41/e5/e5/41e5e50e8773bf8769dfa342e94685d9.jpg) repeat fixed 100%;
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
+}
+ .search-header{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 82px;
+    margin-top:500px;
+}
+
+ .register-photo form {
+     background-color: #fff;
+     height: 100vh;
+     padding: 60px 60px;
+     box-shadow: 0 4px 8px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+}
+ .register-photo form h2 {
+     margin-bottom: 30px 
+}
+ #register-photo-form {
+     height: 600px;
+     line-height:20px;
+     width: 600px;
+     border-radius: 20px;
+}
+/*social login button*/
+ .btn-google {
+     color: white;
+     background-color: #ea4335;
+}
+ .btn-facebook {
+     color: white;
+     background-color: #3b5998;
+}

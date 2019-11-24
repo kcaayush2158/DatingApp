@@ -1,0 +1,19 @@
+<!--==============================================================Navigation Bar =======================================================================-->
+<nav class="navbar navbar-light  navbar-expand-lg  bg-light  navbar-fixed-top navigation-clean-button">
+    <div class="container-fluid"><a class="navbar-brand offset-1" [routerLink]="['/']" routerLinkActive="router-link-active" href="#">DATES NEPAL</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <!--navbar navigation-->
+            <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active">Home</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" [routerLink]="['/search']" routerLinkActive="router-link-active">Search</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" [routerLink]="['/teams']" routerLinkActive="router-link-active">Our Teams</a></li>
+            </ul>
+
+            <span class="navbar-text actions"> 
+                <button type="button" class="btn btn-link" [routerLink]="['/signup']" routerLinkActive="router-link-active"  style="font-size:20px;color:black;">Signup</button>
+                <a class="btn btn-light action-button mb-1" role="button" [routerLink]="['/login']" routerLinkActive="router-link-active"  style="background-color:#00C9A7;width:127px;font-size:20px;border-radius:20px;">Login</a>
+            </span>
+        </div>
+    </div>
+</nav>

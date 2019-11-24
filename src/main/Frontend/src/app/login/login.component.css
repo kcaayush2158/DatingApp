@@ -1,0 +1,25 @@
+
+  
+  .card-signin .card-title {
+    margin-bottom: 2rem;
+    font-weight: 300;
+    font-size: 2.0rem;
+  }
+
+  .form-signin .btn {
+    font-size: 80%;
+    letter-spacing: .1rem;
+    padding: 1rem;
+    border-radius:30px;
+  }
+
+  .btn-google {
+    color: white;
+    background-color: #c23a2b;
+  }
+  
+  .btn-facebook {
+    color: white;
+    background-color: #3b5998;
+  }
+  
