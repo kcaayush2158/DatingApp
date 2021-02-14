@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow&display=swap');
+.text-bold{
+    font-weight: bold;
+}
+
+#navbar{
+    margin-top:150px;
+}
+
+td{
+    font-family: 'Barlow', sans-serif;
+}
+
+#status-matched{
+    font-size: 12px;
+}
+
+#status-not-matched{
+    font-size:12px ;
+}
+
+.card-img-top{
+    object-fit: cover;
+}
+#card-bio{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    color: #222;
+    min-height: 100px;
+    max-height: 100px;
+}
+
+#user-card{
+    max-width: 16rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    -webkit-box-orient: vertical;
+}
+
+#user-card-body{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    color: #222;
+    background-color: white;
+
+}
+#card-href{
+    text-decoration: none;
+    color: #313437;
+    list-style-type: none;
+}
+#card-body-lookingfor{
+    height: 270px;
+
+}
+#card-body-infos{
+    height: 300px;
+
+}
+#card-body-interest{
+    height: 600px;
+}
+
+.modal-dialog{
+    max-width: 900px!important;
+}
+
+
+
+.like-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.like-button.animated {
+    -webkit-animation: pop 0.9s both;
+    animation: pop 0.9s both;
+}
+.like-button svg {
+    opacity: 1;
+}
+.like-button svg path {
+    fill: #333;
+    transition: fill .4s ease-out;
+}
+.like-button.active svg path {
+    fill: #2196f3;
+}
+
+@-webkit-keyframes pop {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes pop {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}

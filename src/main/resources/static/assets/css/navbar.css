@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Source+Sans+Pro&display=swap");
+@import url(//db.onlinewebfonts.com/c/63467b9cbd4a4d7eafb5e64946ecaa18?family=Maison+Neue);
+nav{
+    height:100px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    background-color: white;
+}
+
+.dropdown-menu.show {
+    display: block;
+    padding: 20px;
+}
+
+
+.nav-item:hover{
+    list-style-type: none;
+    text-decoration: none;
+    color: #333333;
+}
+
+.navbar{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+}
+
+#navbar-brand-first{
+    color: #007bff;
+}
+#navbar-brand-second{
+    color:#dc3545;
+}
+
+
+.register-photo {
+    height: 100vh;
+    background: linear-gradient(to right, #047aed, #e9006581), url(https://i.pinimg.com/originals/41/e5/e5/41e5e50e8773bf8769dfa342e94685d9.jpg) repeat fixed 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.dropdown-menu{
+    width: 250px;
+    overflow: scroll;
+}
+.nav-bar{
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+.nav-bar:hover{
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+    font-family: "Source Sans Pro", sans-serif;
+    list-style-type: none;
+}
+
+
+#notifications{
+    width: 250px;
+    overflow: scroll;
+    height: 500px;
+}
+.navbar{
+    height: 100px;
+}
+.dropdown-menu{
+    width: 400px;
+    padding: 20px;
+    height: auto;
+}
+
+#btn-login{
+    font-family: 'Lato', sans-serif;
+    background-color:#00C9A7;
+    width:127px;
+    font-size:20px;
+    border-radius:20px;
+    color: #eeeeee
+}
+
+#btn-signup{
+    font-family: 'Lato', sans-serif;
+    width:127px;
+    font-size:20px;
+    border-radius:20px;
+    color:black;
+}
+
+
+#btn-logout{
+    font-family: 'Lato',
+    sans-serif;
+    background-color:#00C9A7;
+    width:127px;
+    font-size:20px;
+    border-radius:20px;
+    color: #eeeeee;
+}
+
+#search-button{
+    border-radius: 20px;
+    background-color: #00C9A7;
+    color: white
+}
+
+#notification-number{
+    font-weight: 500;
+}
+
+#btn-signup{
+    font-family: 'Lato', sans-serif;
+    width:127px;
+    font-size:20px;
+    border-radius:20px;
+    color:black;
+}
+#btn-login{
+    font-family: 'Lato', sans-serif;
+    background-color:#00C9A7;
+    width:127px;
+    font-size:20px;
+    border-radius:20px;
+    color: #eeeeee
+}
+
+.nav-item{
+    list-style-type: none;
+
+}
+
+#dropdown-menu-notifications{
+    overflow-x: scroll;
+    height: 500px;
+    width: 300px;
+    border-radius: 20px;
+    font-weight: 200;
+    padding-top: 10px;
+}
+
+#nav-link-broadcast{
+    color: #c23a2b;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#nav-link-profile{
+    color: #077aec;
+    font-weight: bold;
+    font-size: 16px;
+}
+#pills-all-rooms-tab{
+    font-weight: bold;
+    font-size: 16px;
+}
+#pills-my-room-tab{
+    font-weight: bold;
+    font-size: 16px;
+}
+#nav-link-online-user{
+    color: #00C9A7;
+    font-weight: bold;
+    font-size: 16px;
+}

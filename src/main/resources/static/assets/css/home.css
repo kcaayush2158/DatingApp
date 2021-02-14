@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+#side-nav{
+    position: fixed;
+}
+.card{
+    max-width: 16rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.card-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-decoration: none;
+    list-style-type: none;
+    color: #222;
+    min-height: 100px;
+    max-height: 100px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+a{
+    text-decoration: none;
+    list-style-type: none;
+    color: #313437;
+}
+a:hover{
+    text-decoration: none;
+    list-style-type: none;
+    color: #313437;
+}
+#card-img{
+    object-fit: cover;
+    height: 200px;
+    width: 256px;
+}
+.card-body{
+    max-width: 16rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    border-radius: 10px;
+    color: #313437;
+    overflow: hidden;
+    background-color: white;
+    text-decoration: none;
+    list-style-type: none;
+}
+.card-title{
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+#nav-link{
+    color: #3b5998;
+    font-weight: bold;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+#card-href{
+    list-style-type: none;
+    color: black;
+    text-decoration: none;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+#card-bio:hover {
+    text-decoration: none;
+    list-style-type: none;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+.shine {
+    background:#d6d6d6;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    width: auto;
+    display: inline-block;
+    background-color:#afafaf;
+    max-width: 16rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    height:5px;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: placeholderShimmer;
+    -webkit-animation-timing-function: linear;
+}
+
+box {
+    height: 104px;
+    width: 100px;
+}
+
+lines {
+    height: 10px;
+    margin-top: 10px;
+    width: 200px;
+}
+
+photo {
+    display: block!important;
+    width: 325px;
+    height: 100px;
+    margin-top: 15px;
+}
+
+@-webkit-keyframes placeholderShimmer {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <link th:href="@{/assets/css/Login.css}" rel="stylesheet" href="/assets/css/Login.css"/>
+        <link rel="stylesheet" th:href="@{/assets/css/login.css}" type="application/javascript" href="/assets/css/login.css">
+        <link th:href="@{/assets/css/navbar.css}" href="/assets/css/navbar.css" type="text/css" media="all" rel="stylesheet" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+
+<body>
+<header th:insert="header.html ::  nav"></header>
+<div class="container-fluid" style="margin-top: 80px; ">
+    <div class="row">
+        <div class="col-lg-4 mx-auto ">
+            <div class="  my-5">
+                <div class="card-body">
+                    <h2 class="text-center"  id="form-title" >
+                        <strong>Account Login</strong>
+
+                        <hr class="col-lg-4 mb-4">
+
+                    </h2>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">You have been logged out.</div>
+                    </div>
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger text-center">
+                            <p><b>Error!</b> Email or password invalid, please verify</p>
+                        </div>
+                    </div>
+                    <form method="post" role="form" th:action="@{/login}" class="form-signin">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control form-control-lg" name="email" id="email" />
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control form-control-lg" name="password" id="password" />
+                        <div class="custom-control custom-checkbox mb-5 mt-3">
+                            <input type="checkbox" class="custom-control-input form-control-lg" name="remember-me" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Remember Me </label>
+                        </div>
+
+                        <button class="btn btn-primary mt-3 mb-3 btn-lg btn-block" type="submit">
+                            <i class="fa fa-paper-plane"></i> Login
+                        </button>
+                        <hr class="my-4">
+                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+                        <!--============================================================== facebook social-login button====================================================================-->
+                        <button class="btn btn-lg  btn-block text-uppercase" type="submit" style="color: white;background-color: #3b5998;"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:insert="footer.html :: footer"></footer>
+</body>
+ <script src="https://kit.fontawesome.com/6f40d29aa1.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+   var loginForm = $('.form-signin');
+   $(loginForm).submit(function () {
+       $.ajax({
+           url:'/login',
+           method:'POST',
+           beforeSend:function () {
+               console.log('success');
+                loginForm.html('').append('<img src="https://loading.io/assets/img/p/landing/comment.svg" height="100" width="100" class="mt-5 mr-5">')
+           }
+       })
+   });
+
+</script>
+</html>

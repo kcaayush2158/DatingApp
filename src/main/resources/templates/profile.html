@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="http://parsleyjs.org/src/parsley.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css" integrity="sha512-Woz+DqWYJ51bpVk5Fv0yES/edIMXjj3Ynda+KWTIkGoynAMHrqTcDUQltbipuiaD5ymEo9520lyoVOo9jCQOCA==" crossorigin="anonymous" />
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- owl carousel-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" />
+    <!-- lightbox-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link th:href="@{../assets/css/sidenav.css}" href="../assets/css/sidenav.css" type="text/css" media="all" rel="stylesheet" />
+    <link th:href="@{/assets/css/navbar.css}" href="/assets/css/navbar.css" type="text/css" media="all" rel="stylesheet" />
+    <link th:href="@{/assets/css/profile.css}" href="/assets/css/profile.css" type="text/css" media="all" rel="stylesheet" />
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+</style>
+<body>
+<header th:insert="header.html ::  nav"></header>
+<div class="container-fluid">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-2 " >
+                <div  th:insert="home/sidenav.html ::  sidenav"></div>
+            </div>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger text-center">
+                    <p><b>Error!</b> Please Complete your profile First</p>
+                </div>
+            </div>
+            <div class="col-lg-10"  >
+                <br>
+                <div th:text="${error}"></div>
+                <nav class="navbar navbar-light " id="sub-navbar" style="margin-top:100px;">
+                    <h6 class="navbar-brand " id="navbar-brand-header " href="#" th:text="${users.getFirstName()} + ' ' + ${users.getLastName()}+ ',' + ${users.getAboutMe().getAge()}" ></h6>
+                    <form class="form-inline">
+                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </form>
+                </nav>
+                <div >
+                    <div class="container-fluid ">
+                        <div class="col-12">
+                            <img class="center img-thumbnail offset-md-4 mt-5"  style="height: 300px; width: 300px; object-fit: cover" th:src="@{ ${users.getProfilePhoto()} }" >
+                            <p class="text-center mt-5"   th:text="${users.getAboutMe().getBio()}" style="font-family: 'Poppins', sans-serif; font-size: 20px"></p>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <hr >
+                        <th:block  th:if="${userPhoto != ''}    ">
+                        <div class="container-fluid" id="container-photos">
+                            <h2 class="text-center mb-5"  ></h2>
+                            <div class="container-fluid">
+                                <div class="col-md-12">
+                            <div class="row">
+
+
+                                    <div class="offset-md-2 col-md-3 ">
+                                        <i class="fa fa-camera-retro"></i> <span id="photo-total" th:text="${totalPhotos }"></span> <!-- Button trigger modal -->
+                                    </div>
+                                    <div class="col-md-3">
+                                       <h2 th:text="${userPhoto != ''} ? 'MEDIAS ' : '' "></h2>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button ml-2" class="btn btn-light" data-toggle="modal" data-target="#photoModal">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <label for="actual-btn"><i class="fa fa-upload"></i> Choose File</label>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title text-center" id="photoModal">Edit Photo</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body offset-md-4" >
+                                                        <table class="table table-border table-responsive">
+                                                            <span id="message-photo"></span>
+                                                            <tbody>
+
+                                                            <div th:each="photo:${userPhoto}">
+                                                                <h3 th:text="${photo == ''} ? 'Photo not available' ">
+
+                                                                </h3>
+                                                                <th:block th:if="${photo != ''} ">
+                                                                    <form th:action="@{'/api/photo/'+${photo.getId()} + '/update'}" id="form-user-photo" method="POST">
+                                                                        <tr>
+                                                                            <td scope="row" >
+                                                                                <img th:src="@{${photo.getPhotoUrl()}}" style="height: 200px;width:200px;object-fit: cover" alt="photo">
+                                                                            </td>
+                                                                            <td>
+                                                                                <select class="form-control" name="photoType" id="select-photo-type">
+                                                                                    <th:block th:if=" ${photo.getPhotoType()}  == 'PUBLIC'">
+                                                                                        <option th:value="${photo.getPhotoType()}" th:text="${photo.getPhotoType()}" selected></option>
+                                                                                        <option value="PRIVATE">PRIVATE</option>
+                                                                                    </th:block>
+                                                                                    <th:block th:if=" ${photo.getPhotoType()} == 'PRIVATE'">
+
+                                                                                        <option th:value="${photo.getPhotoType()}" th:text="${photo.getPhotoType()}" selected></option>
+                                                                                        <option value="PUBLIC">PUBLIC</option>
+                                                                                    </th:block>
+                                                                                </select>
+                                                                            </td>
+                                                                            <td>
+                                                                                <button type="submit" class="btn btn-light"><i class="fa fa-save"></i>  Save</button>
+                                                                            </td>
+                                                                    </form>
+                                                                    <td>
+                                                                        <form  id="form-photo-delete"  th:action="@{'/api/photos/'+${photo.getId()}+'/delete'}" method="POST"> <button class="btn btn-danger" type="submit"><i class="fa fa-trash-alt"></i> </button> </form>
+                                                                    </td>
+                                                                    </tr>
+                                                                </th:block>
+
+                                                            </div>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                <div class="container mr-2">
+                                    <div class="text-center mt-5 mb-5" id="label-medias" >
+                                        <div class="row">
+                                            <div class="item">
+                                                <!-- our custom upload button -->
+
+                                                <form action="/user/p/upload" method="post" enctype="multipart/form-data" id="form-photo">
+                                                    <input type="file"  name="file" class="custom-file-input ml-2" id="actual-btn" hidden/>
+                                                    <label class="custom-file-label ml-5" for="actual-btn"><i class="fa fa-upload"></i> Choose file</label>
+                                                        <button type="submit" id="btn-photo-submit" hidden></button>
+
+                                                </form>
+
+                                            </div>
+                                                <div class="container offset-md-3 mb-5">
+                                                    <div id="uploadPreview"  >
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <button class="btn btn-success mt-3  btn-lg btn-block" id="button-photo-upload"><i class="fa fa-upload"></i> Upload </button>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <button class="btn btn-danger mt-3  ml-2 btn-lg "  id="photo-dismiss"><i class="fa fa-times-circle-o"></i> </button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            <div  class="owl-carousel owl-theme" >
+                                                <div th:each="photo:${userPhoto}">
+                                                    <div class="row">
+                                                        <div class="item">
+                                                            <a th:href="@{${photo.getPhotoUrl()}}" data-lightbox="user-photo">
+                                                                <img th:src="@{${photo.getPhotoUrl()}}" class="img-thumbnail" style="height: 300px; width: 300px;object-fit: cover" alt="photo" >
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                        </div>
+                    </div>
+                        </th:block>
+                        <th:block  th:if="${userPhoto == ''}    ">
+                            <label for="actual-btn"><i class="fa fa-upload"></i> Choose File</label>
+                        </th:block>
+                </div>
+                    <hr>
+
+                    </div>
+
+
+
+                        <h1 class="text-center  mt-5 mb-5"> User Information</h1>
+                <div class="container-fluid mt-5 offset-lg-1" id="container-information">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-3" >
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h2 class="text-center text-danger card-title mt-3 mb-5">About Me</h2>
+                                            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Basic</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Your Appearance</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Your Lifestyle</a>
+                                                                </li>
+                                                            </ul>
+                                                            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form th:action="@{/aboutme/save}" id="my-form" method="post">
+                                                            <div class="modal-body">
+                                                                <div class="tab-content" id="myTabContent">
+                                                                    <!--========================TAB CONTENT BASIC INFORMATION ===================================-->
+                                                                    <div class="tab-pane fade show active" id="home" role="tabpanel" required aria-labelledby="basic-tab">
+                                                                        <h3 class="text-center">Your Basics</h3>
+                                                                        <div class="form-group">
+                                                                            <label for="firstName">First Name</label>
+                                                                            <input type="text" name="firstName"   id="firstName" required th:value="${users.getFirstName()} " class="form-control">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="lastName">Last Name :</label>
+                                                                            <input type="text" name="lastName" id="lastName" required th:value="${users.getLastName()}" class="form-control">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="age">Age</label>
+                                                                            <input type="text" name="age" id="age" required th:value="${users.getAboutMe().getAge()}" min="18" max="80" class="form-control">
+                                                                        </div>
+                                                                        <label for="gender">What is your Gender ? </label>
+                                                                        <select class="form-control" name="gender" id="gender">
+                                                                            <option th:value="${users.getAboutMe().getGender()}"  required th:text="${users.getAboutMe().getGender()}" selected></option>
+                                                                            <option  data-divider="true"></option>
+                                                                            <option value="Male">Male</option>
+                                                                            <option value="Female">Female</option>
+                                                                        </select>
+                                                                        <div class="form-group">
+                                                                            <label for="liveIn">Which city do you live ??</label>
+                                                                            <input type="text" required name="liveIn" id="liveIn"  th:value="${users.getAboutMe().getLiveIn()}" class="form-control">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="education">What is your Education Level?</label>
+                                                                            <select class="form-control" name="education" required id="education">
+                                                                                <option selected th:value="${users.getAboutMe().getEducation()}" th:text="${users.getAboutMe().getEducation()}" ></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="High School">High School</option>
+                                                                                <option value="College">College</option>
+                                                                                <option value="Associates Degree">Associates Degree</option>
+                                                                                <option value="Bachelors Degree">Bachelors Degree</option>
+                                                                                <option value="Graduate Degree<">Graduate Degree</option>
+                                                                                <option value="PhD">PhD</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="country">What is your Country Name ? </label>
+                                                                            <select class="form-control" id="country" required name="country">
+                                                                                <option th:value="${users.getAboutMe().getCountry()}" th:text="${users.getAboutMe().getCountry()}" selected ></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="Afghanistan">Afghanistan</option>
+                                                                                <option value="Albania">Albania</option>
+                                                                                <option value="Algeria">Algeria</option>
+                                                                                <option value="American Samoa">American Samoa</option>
+                                                                                <option value="Andorra">Andorra</option>
+                                                                                <option value="Angola">Angola</option>
+                                                                                <option value="Anguilla">Anguilla</option>
+                                                                                <option value="Antigua & Barbuda">Antigua & Barbuda</option>
+                                                                                <option value="Argentina">Argentina</option>
+                                                                                <option value="Armenia">Armenia</option>
+                                                                                <option value="Aruba">Aruba</option>
+                                                                                <option value="Australia">Australia</option>
+                                                                                <option value="Austria">Austria</option>
+                                                                                <option value="Azerbaijan">Azerbaijan</option>
+                                                                                <option value="Bahamas">Bahamas</option>
+                                                                                <option value="Bahrain">Bahrain</option>
+                                                                                <option value="Bangladesh">Bangladesh</option>
+                                                                                <option value="Barbados">Barbados</option>
+                                                                                <option value="Belarus">Belarus</option>
+                                                                                <option value="Belgium">Belgium</option>
+                                                                                <option value="Belize">Belize</option>
+                                                                                <option value="Benin">Benin</option>
+                                                                                <option value="Bermuda">Bermuda</option>
+                                                                                <option value="Bhutan">Bhutan</option>
+                                                                                <option value="Bolivia">Bolivia</option>
+                                                                                <option value="Bonaire">Bonaire</option>
+                                                                                <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+                                                                                <option value="Botswana">Botswana</option>
+                                                                                <option value="Brazil">Brazil</option>
+                                                                                <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+                                                                                <option value="Brunei">Brunei</option>
+                                                                                <option value="Bulgaria">Bulgaria</option>
+                                                                                <option value="Burkina Faso">Burkina Faso</option>
+                                                                                <option value="Burundi">Burundi</option>
+                                                                                <option value="Cambodia">Cambodia</option>
+                                                                                <option value="Cameroon">Cameroon</option>
+                                                                                <option value="Canada">Canada</option>
+                                                                                <option value="Canary Islands">Canary Islands</option>
+                                                                                <option value="Cape Verde">Cape Verde</option>
+                                                                                <option value="Cayman Islands">Cayman Islands</option>
+                                                                                <option value="Central African Republic">Central African Republic</option>
+                                                                                <option value="Chad">Chad</option>
+                                                                                <option value="Channel Islands">Channel Islands</option>
+                                                                                <option value="Chile">Chile</option>
+                                                                                <option value="China">China</option>
+                                                                                <option value="Christmas Island">Christmas Island</option>
+                                                                                <option value="Cocos Island">Cocos Island</option>
+                                                                                <option value="Colombia">Colombia</option>
+                                                                                <option value="Comoros">Comoros</option>
+                                                                                <option value="Congo">Congo</option>
+                                                                                <option value="Cook Islands">Cook Islands</option>
+                                                                                <option value="Costa Rica">Costa Rica</option>
+                                                                                <option value="Cote DIvoire">Cote DIvoire</option>
+                                                                                <option value="Croatia">Croatia</option>
+                                                                                <option value="Cuba">Cuba</option>
+                                                                                <option value="Curaco">Curacao</option>
+                                                                                <option value="Cyprus">Cyprus</option>
+                                                                                <option value="Czech Republic">Czech Republic</option>
+                                                                                <option value="Denmark">Denmark</option>
+                                                                                <option value="Djibouti">Djibouti</option>
+                                                                                <option value="Dominica">Dominica</option>
+                                                                                <option value="Dominican Republic">Dominican Republic</option>
+                                                                                <option value="East Timor">East Timor</option>
+                                                                                <option value="Ecuador">Ecuador</option>
+                                                                                <option value="Egypt">Egypt</option>
+                                                                                <option value="El Salvador">El Salvador</option>
+                                                                                <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                                                                <option value="Eritrea">Eritrea</option>
+                                                                                <option value="Estonia">Estonia</option>
+                                                                                <option value="Ethiopia">Ethiopia</option>
+                                                                                <option value="Falkland Islands">Falkland Islands</option>
+                                                                                <option value="Faroe Islands">Faroe Islands</option>
+                                                                                <option value="Fiji">Fiji</option>
+                                                                                <option value="Finland">Finland</option>
+                                                                                <option value="France">France</option>
+                                                                                <option value="French Guiana">French Guiana</option>
+                                                                                <option value="French Polynesia">French Polynesia</option>
+                                                                                <option value="French Southern Ter">French Southern Ter</option>
+                                                                                <option value="Gabon">Gabon</option>
+                                                                                <option value="Gambia">Gambia</option>
+                                                                                <option value="Georgia">Georgia</option>
+                                                                                <option value="Germany">Germany</option>
+                                                                                <option value="Ghana">Ghana</option>
+                                                                                <option value="Gibraltar">Gibraltar</option>
+                                                                                <option value="Great Britain">Great Britain</option>
+                                                                                <option value="Greece">Greece</option>
+                                                                                <option value="Greenland">Greenland</option>
+                                                                                <option value="Grenada">Grenada</option>
+                                                                                <option value="Guadeloupe">Guadeloupe</option>
+                                                                                <option value="Guam">Guam</option>
+                                                                                <option value="Guatemala">Guatemala</option>
+                                                                                <option value="Guinea">Guinea</option>
+                                                                                <option value="Guyana">Guyana</option>
+                                                                                <option value="Haiti">Haiti</option>
+                                                                                <option value="Hawaii">Hawaii</option>
+                                                                                <option value="Honduras">Honduras</option>
+                                                                                <option value="Hong Kong">Hong Kong</option>
+                                                                                <option value="Hungary">Hungary</option>
+                                                                                <option value="Iceland">Iceland</option>
+                                                                                <option value="Indonesia">Indonesia</option>
+                                                                                <option value="India">India</option>
+                                                                                <option value="Iran">Iran</option>
+                                                                                <option value="Iraq">Iraq</option>
+                                                                                <option value="Ireland">Ireland</option>
+                                                                                <option value="Isle of Man">Isle of Man</option>
+                                                                                <option value="Israel">Israel</option>
+                                                                                <option value="Italy">Italy</option>
+                                                                                <option value="Jamaica">Jamaica</option>
+                                                                                <option value="Japan">Japan</option>
+                                                                                <option value="Jordan">Jordan</option>
+                                                                                <option value="Kazakhstan">Kazakhstan</option>
+                                                                                <option value="Kenya">Kenya</option>
+                                                                                <option value="Kiribati">Kiribati</option>
+                                                                                <option value="Korea North">Korea North</option>
+                                                                                <option value="Korea Sout">Korea South</option>
+                                                                                <option value="Kuwait">Kuwait</option>
+                                                                                <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                                                                <option value="Laos">Laos</option>
+                                                                                <option value="Latvia">Latvia</option>
+                                                                                <option value="Lebanon">Lebanon</option>
+                                                                                <option value="Lesotho">Lesotho</option>
+                                                                                <option value="Liberia">Liberia</option>
+                                                                                <option value="Libya">Libya</option>
+                                                                                <option value="Liechtenstein">Liechtenstein</option>
+                                                                                <option value="Lithuania">Lithuania</option>
+                                                                                <option value="Luxembourg">Luxembourg</option>
+                                                                                <option value="Macau">Macau</option>
+                                                                                <option value="Macedonia">Macedonia</option>
+                                                                                <option value="Madagascar">Madagascar</option>
+                                                                                <option value="Malaysia">Malaysia</option>
+                                                                                <option value="Malawi">Malawi</option>
+                                                                                <option value="Maldives">Maldives</option>
+                                                                                <option value="Mali">Mali</option>
+                                                                                <option value="Malta">Malta</option>
+                                                                                <option value="Marshall Islands">Marshall Islands</option>
+                                                                                <option value="Martinique">Martinique</option>
+                                                                                <option value="Mauritania">Mauritania</option>
+                                                                                <option value="Mauritius">Mauritius</option>
+                                                                                <option value="Mayotte">Mayotte</option>
+                                                                                <option value="Mexico">Mexico</option>
+                                                                                <option value="Midway Islands">Midway Islands</option>
+                                                                                <option value="Moldova">Moldova</option>
+                                                                                <option value="Monaco">Monaco</option>
+                                                                                <option value="Mongolia">Mongolia</option>
+                                                                                <option value="Montserrat">Montserrat</option>
+                                                                                <option value="Morocco">Morocco</option>
+                                                                                <option value="Mozambique">Mozambique</option>
+                                                                                <option value="Myanmar">Myanmar</option>
+                                                                                <option value="Nambia">Nambia</option>
+                                                                                <option value="Nauru">Nauru</option>
+                                                                                <option value="Nepal">Nepal</option>
+                                                                                <option value="Netherland Antilles">Netherland Antilles</option>
+                                                                                <option value="Netherlands">Netherlands (Holland, Europe)</option>
+                                                                                <option value="Nevis">Nevis</option>
+                                                                                <option value="New Caledonia">New Caledonia</option>
+                                                                                <option value="New Zealand">New Zealand</option>
+                                                                                <option value="Nicaragua">Nicaragua</option>
+                                                                                <option value="Niger">Niger</option>
+                                                                                <option value="Nigeria">Nigeria</option>
+                                                                                <option value="Niue">Niue</option>
+                                                                                <option value="Norfolk Island">Norfolk Island</option>
+                                                                                <option value="Norway">Norway</option>
+                                                                                <option value="Oman">Oman</option>
+                                                                                <option value="Pakistan">Pakistan</option>
+                                                                                <option value="Palau Island">Palau Island</option>
+                                                                                <option value="Palestine">Palestine</option>
+                                                                                <option value="Panama">Panama</option>
+                                                                                <option value="Papua New Guinea">Papua New Guinea</option>
+                                                                                <option value="Paraguay">Paraguay</option>
+                                                                                <option value="Peru">Peru</option>
+                                                                                <option value="Phillipines">Philippines</option>
+                                                                                <option value="Pitcairn Island">Pitcairn Island</option>
+                                                                                <option value="Poland">Poland</option>
+                                                                                <option value="Portugal">Portugal</option>
+                                                                                <option value="Puerto Rico">Puerto Rico</option>
+                                                                                <option value="Qatar">Qatar</option>
+                                                                                <option value="Republic of Montenegro">Republic of Montenegro</option>
+                                                                                <option value="Republic of Serbia">Republic of Serbia</option>
+                                                                                <option value="Reunion">Reunion</option>
+                                                                                <option value="Romania">Romania</option>
+                                                                                <option value="Russia">Russia</option>
+                                                                                <option value="Rwanda">Rwanda</option>
+                                                                                <option value="St Barthelemy">St Barthelemy</option>
+                                                                                <option value="St Eustatius">St Eustatius</option>
+                                                                                <option value="St Helena">St Helena</option>
+                                                                                <option value="St Kitts-Nevis">St Kitts-Nevis</option>
+                                                                                <option value="St Lucia">St Lucia</option>
+                                                                                <option value="St Maarten">St Maarten</option>
+                                                                                <option value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+                                                                                <option value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+                                                                                <option value="Saipan">Saipan</option>
+                                                                                <option value="Samoa">Samoa</option>
+                                                                                <option value="Samoa American">Samoa American</option>
+                                                                                <option value="San Marino">San Marino</option>
+                                                                                <option value="Sao Tome & Principe">Sao Tome & Principe</option>
+                                                                                <option value="Saudi Arabia">Saudi Arabia</option>
+                                                                                <option value="Senegal">Senegal</option>
+                                                                                <option value="Seychelles">Seychelles</option>
+                                                                                <option value="Sierra Leone">Sierra Leone</option>
+                                                                                <option value="Singapore">Singapore</option>
+                                                                                <option value="Slovakia">Slovakia</option>
+                                                                                <option value="Slovenia">Slovenia</option>
+                                                                                <option value="Solomon Islands">Solomon Islands</option>
+                                                                                <option value="Somalia">Somalia</option>
+                                                                                <option value="South Africa">South Africa</option>
+                                                                                <option value="Spain">Spain</option>
+                                                                                <option value="Sri Lanka">Sri Lanka</option>
+                                                                                <option value="Sudan">Sudan</option>
+                                                                                <option value="Suriname">Suriname</option>
+                                                                                <option value="Swaziland">Swaziland</option>
+                                                                                <option value="Sweden">Sweden</option>
+                                                                                <option value="Switzerland">Switzerland</option>
+                                                                                <option value="Syria">Syria</option>
+                                                                                <option value="Tahiti">Tahiti</option>
+                                                                                <option value="Taiwan">Taiwan</option>
+                                                                                <option value="Tajikistan">Tajikistan</option>
+                                                                                <option value="Tanzania">Tanzania</option>
+                                                                                <option value="Thailand">Thailand</option>
+                                                                                <option value="Togo">Togo</option>
+                                                                                <option value="Tokelau">Tokelau</option>
+                                                                                <option value="Tonga">Tonga</option>
+                                                                                <option value="Trinidad & Tobago">Trinidad & Tobago</option>
+                                                                                <option value="Tunisia">Tunisia</option>
+                                                                                <option value="Turkey">Turkey</option>
+                                                                                <option value="Turkmenistan">Turkmenistan</option>
+                                                                                <option value="Turks & Caicos Is">Turks & Caicos Is</option>
+                                                                                <option value="Tuvalu">Tuvalu</option>
+                                                                                <option value="Uganda">Uganda</option>
+                                                                                <option value="United Kingdom">United Kingdom</option>
+                                                                                <option value="Ukraine">Ukraine</option>
+                                                                                <option value="United Arab Erimates">United Arab Emirates</option>
+                                                                                <option value="United States of America">United States of America</option>
+                                                                                <option value="Uraguay">Uruguay</option>
+                                                                                <option value="Uzbekistan">Uzbekistan</option>
+                                                                                <option value="Vanuatu">Vanuatu</option>
+                                                                                <option value="Vatican City State">Vatican City State</option>
+                                                                                <option value="Venezuela">Venezuela</option>
+                                                                                <option value="Vietnam">Vietnam</option>
+                                                                                <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+                                                                                <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+                                                                                <option value="Wake Island">Wake Island</option>
+                                                                                <option value="Wallis & Futana Is">Wallis & Futana Is</option>
+                                                                                <option value="Yemen">Yemen</option>
+                                                                                <option value="Zaire">Zaire</option>
+                                                                                <option value="Zambia">Zambia</option>
+                                                                                <option value="Zimbabwe">Zimbabwe</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="bio">Bio</label>
+                                                                            <textarea class="form-control"  required th:value="${users.getAboutMe().getBio()}" th:text="${users.getAboutMe().getBio()}"  name="bio" id="bio"> </textarea>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="interests">Interests</label>
+                                                                            <textarea class="form-control" required th:value="${users.getAboutMe().getInterests()}" th:text="${users.getAboutMe().getInterests()}" name="interests" id="interests"> </textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- =============================Appearance ===========================================-->
+                                                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                                        <h3 class="text-center">Your Appearance</h3>
+                                                                        <div class="form-group">
+                                                                            <label for="bodyType "> What is your body type ?</label>
+                                                                            <select class="form-control" required name="bodyType" id="bodyType ">
+                                                                                <option th:value="${users.getAboutMe().getBodyType()}" th:text="${users.getAboutMe().getBodyType()}" selected></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="Average">Average</option>
+                                                                                <option value="Curvy">Curvy</option>
+                                                                                <option value="Athletic">Athletic</option>
+                                                                                <option value="Muscular">Muscular</option>
+                                                                                <option value="Slim">Slim</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="height">What is your height ?</label>
+                                                                            <select class="form-control autofill" required  name="height" id="height" tabindex="2">
+                                                                                <option th:value="${users.getAboutMe().getHeight()}" th:text="${users.getAboutMe().getHeight()}" selected></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="91">3'</option>
+                                                                                <option value="94">3'1"</option>
+                                                                                <option value="96">3'2"</option>
+                                                                                <option value="99">3'3"</option>
+                                                                                <option value="101">3'4"</option>
+                                                                                <option value="104">3'5"</option>
+                                                                                <option value="106">3'6"</option>
+                                                                                <option value="109">3'7"</option>
+                                                                                <option value="111">3'8"</option>
+                                                                                <option value="114">3'9"</option>
+                                                                                <option value="116">3'10"</option>
+                                                                                <option value="119">3'11"</option>
+                                                                                <option value="122">4'</option>
+                                                                                <option value="124">4'1"</option>
+                                                                                <option value="127">4'2"</option>
+                                                                                <option value="129">4'3"</option>
+                                                                                <option value="132">4'4"</option>
+                                                                                <option value="134">4'5"</option>
+                                                                                <option value="137">4'6"</option>
+                                                                                <option value="139">4'7"</option>
+                                                                                <option value="142">4'8"</option>
+                                                                                <option value="144">4'9"</option>
+                                                                                <option value="147">4'10"</option>
+                                                                                <option value="149">4'11"</option>
+                                                                                <option value="152">5'</option>
+                                                                                <option value="155">5'1"</option>
+                                                                                <option value="157">5'2"</option>
+                                                                                <option value="160">5'3"</option>
+                                                                                <option value="162">5'4"</option>
+                                                                                <option value="165">5'5"</option>
+                                                                                <option value="167">5'6"</option>
+                                                                                <option value="170">5'7"</option>
+                                                                                <option value="172">5'8"</option>
+                                                                                <option value="175">5'9"</option>
+                                                                                <option value="177">5'10"</option>
+                                                                                <option value="180">5'11"</option>
+                                                                                <option value="183">6'</option>
+                                                                                <option value="185">6'1"</option>
+                                                                                <option value="188">6'2"</option>
+                                                                                <option value="190">6'3"</option>
+                                                                                <option value="193">6'4"</option>
+                                                                                <option value="195">6'5"</option>
+                                                                                <option value="198">6'6"</option>
+                                                                                <option value="200">6'7"</option>
+                                                                                <option value="203">6'8"</option>
+                                                                                <option value="205">6'9"</option>
+                                                                                <option value="208">6'10"</option>
+                                                                                <option value="210">6'11"</option>
+                                                                                <option value="213">7'</option>
+                                                                                <option value="216">7'1"</option>
+                                                                                <option value="218">7'2"</option>
+                                                                                <option value="221">7'3"</option>
+                                                                                <option value="223">7'4"</option>
+                                                                                <option value="226">7'5"</option>
+                                                                                <option value="228">7'6"</option>
+                                                                                <option value="231">7'7"</option>
+                                                                                <option value="233">7'8"</option>
+                                                                                <option value="236">7'9"</option>
+                                                                                <option value="238">7'10"</option>
+                                                                                <option value="241">7'11"</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="eye">What is your eye colour ?</label>
+                                                                            <select class="form-control autofill" name="eyes"  required tabindex="2" id="eye">
+                                                                                <option  th:text="${users.getAboutMe().getEyes()}" th:value="${users.getAboutMe().getEyes()}" selected></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="blue">Blue</option>
+                                                                                <option value="brown">Brown</option>
+                                                                                <option value="gray">Gray</option>
+                                                                                <option value="green">Green</option>
+                                                                                <option value="hazel">Hazel</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="hair">What is your hair color?</label>
+                                                                            <select class="form-control autofill" required  name="hair" id="hair" tabindex="2">
+                                                                                <option  th:text="${users.getAboutMe().getHair()}" th:value="${users.getAboutMe().getHair()}" selected></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="black">Black</option>
+                                                                                <option value="blond">Blond</option>
+                                                                                <option value="brown">Brown</option>
+                                                                                <option value="fair">Fair</option>
+                                                                                <option value="chestnut">Chestnut</option>
+                                                                                <option value="red">Red</option>
+                                                                                <option value="bal">Bald</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                                                        <h3 class="text-center">Your Lifestyle</h3>
+                                                                        <div class="form-group">
+                                                                            <label for="languages">Which Language do you know?</label>
+                                                                            <select class="form-control" required name="languages" id="languages">
+                                                                                <option th:value="${users.getAboutMe().getLanguages()}" th:text="${users.getAboutMe().getLanguages()}"  selected></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="Afrikaans">Afrikaans</option>
+                                                                                <option value="Albanian">Albanian</option>
+                                                                                <option value="Arabic">Arabic</option>
+                                                                                <option value="Armenian">Armenian</option>
+                                                                                <option value="Basque">Basque</option>
+                                                                                <option value="Bengali">Bengali</option>
+                                                                                <option value="Bulgarian">Bulgarian</option>
+                                                                                <option value="Catalan">Catalan</option>
+                                                                                <option value="Cambodian">Cambodian</option>
+                                                                                <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+                                                                                <option value="Croatian">Croatian</option>
+                                                                                <option value="Czech">Czech</option>
+                                                                                <option value="Danish">Danish</option>
+                                                                                <option value="Dutch">Dutch</option>
+                                                                                <option value="English">English</option>
+                                                                                <option value="Estonian">Estonian</option>
+                                                                                <option value="Fiji">Fiji</option>
+                                                                                <option value="Finnish">Finnish</option>
+                                                                                <option value="French">French</option>
+                                                                                <option value="Georgian">Georgian</option>
+                                                                                <option value="German">German</option>
+                                                                                <option value="Greek">Greek</option>
+                                                                                <option value="Gujarati">Gujarati</option>
+                                                                                <option value="Hebrew">Hebrew</option>
+                                                                                <option value="Hindi">Hindi</option>
+                                                                                <option value="Hungarian">Hungarian</option>
+                                                                                <option value="Icelandic">Icelandic</option>
+                                                                                <option value="Indonesian">Indonesian</option>
+                                                                                <option value="Irish">Irish</option>
+                                                                                <option value="Italian">Italian</option>
+                                                                                <option value="Japanese">Japanese</option>
+                                                                                <option value="Javanese">Javanese</option>
+                                                                                <option value="Korean">Korean</option>
+                                                                                <option value="Latin">Latin</option>
+                                                                                <option value="Latvian">Latvian</option>
+                                                                                <option value="Lithuanian">Lithuanian</option>
+                                                                                <option value="Macedonian">Macedonian</option>
+                                                                                <option value="Malay">Malay</option>
+                                                                                <option value="Malayalam">Malayalam</option>
+                                                                                <option value="Maltese">Maltese</option>
+                                                                                <option value="Maori">Maori</option>
+                                                                                <option value="Marathi">Marathi</option>
+                                                                                <option value="Mongolian">Mongolian</option>
+                                                                                <option value="Nepali">Nepali</option>
+                                                                                <option value="Norwegian">Norwegian</option>
+                                                                                <option value="Persian">Persian</option>
+                                                                                <option value="Polish">Polish</option>
+                                                                                <option value="Portuguese">Portuguese</option>
+                                                                                <option value="Punjabi">Punjabi</option>
+                                                                                <option value="Quechua">Quechua</option>
+                                                                                <option value="Romanian">Romanian</option>
+                                                                                <option value="Russian">Russian</option>
+                                                                                <option value="Samoan">Samoan</option>
+                                                                                <option value="Serbian">Serbian</option>
+                                                                                <option value="Slovak">Slovak</option>
+                                                                                <option value="Slovenian">Slovenian</option>
+                                                                                <option value="Spanish">Spanish</option>
+                                                                                <option value="Swahili">Swahili</option>
+                                                                                <option value="Swedish ">Swedish </option>
+                                                                                <option value="Tamil">Tamil</option>
+                                                                                <option value="Tatar">Tatar</option>
+                                                                                <option value="Telugu">Telugu</option>
+                                                                                <option value="Thai">Thai</option>
+                                                                                <option value="Tibetan">Tibetan</option>
+                                                                                <option value="Tonga">Tonga</option>
+                                                                                <option value="Turkish">Turkish</option>
+                                                                                <option value="Ukrainian">Ukrainian</option>
+                                                                                <option value="Urdu">Urdu</option>
+                                                                                <option value="Uzbek">Uzbek</option>
+                                                                                <option value="Vietnamese">Vietnamese</option>
+                                                                                <option value="Welsh">Welsh</option>
+                                                                                <option value="Xhosa">Xhosa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="relationship">What is your relationship Status?</label>
+                                                                            <select class="form-control" required  name="relationship" id="relationship">
+                                                                                <option th:value="${users.getAboutMe().getRelationship()}" th:text="${users.getAboutMe().getRelationship()}"  selected></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="Single">Single</option>
+                                                                                <option value="Separated">Separated</option>
+                                                                                <option value="Divorced">Divorced</option>
+                                                                                <option value="Widowed">Widowed</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="known">Known</label>
+                                                                            <input type="text" name="known" required  id="known" th:value="${users.getAboutMe().getKnown()}" class="form-control">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="workAs">What is your Occupation ?</label>
+                                                                            <select class="form-control" required name="workAs" id="workAs">
+                                                                                <option th:value="${users.getAboutMe().getWorkAs()}" th:text="${users.getAboutMe().getWorkAs()}" selected></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="Administrative / Secretarial / Clerical">Administrative / Secretarial / Clerical</option>
+                                                                                <option value="Advertising / Media">Advertising / Media</option>
+                                                                                <option value="Artistic / Creative / Performance">Artistic / Creative / Performance</option>
+                                                                                <option value="Construction / Trades">Construction / Trades</option>
+                                                                                <option value="Domestic Helper">Domestic Helper</option>
+                                                                                <option value="Education / Academic">Education / Academic</option>
+                                                                                <option value="Entertainment / Media">Entertainment / Media</option>
+                                                                                <option value="Executive / Management / HR">Executive / Management / HR</option>
+                                                                                <option value="Farming / Agriculture">Farming / Agriculture</option>
+                                                                                <option value="Finance / Banking / Real Estate">Finance / Banking / Real Estate</option>
+                                                                                <option value="Fire / law enforcement / security">Fire / law enforcement / security</option>
+                                                                                <option value="Hair Dresser / Personal Grooming">Hair Dresser / Personal Grooming</option>
+                                                                                <option value="IT / Communications">IT / Communications</option>
+                                                                                <option value="Laborer / Manufacturing">Laborer / Manufacturing</option>
+                                                                                <option value="Legal">Legal</option>
+                                                                                <option value="Medical / Dental / Veterinary">Medical / Dental / Veterinary</option>
+                                                                                <option value="Military">Military</option>
+                                                                                <option value="Model">Model</option>
+                                                                                <option value="Nanny / Child care">Nanny / Child care</option>
+                                                                                <option value="No occupation / Stay at home">No occupation / Stay at home</option>
+                                                                                <option value="Non-profit / clergy / social services">Non-profit / clergy / social services</option>
+                                                                                <option value="Political / Govt / Civil Service">Political / Govt / Civil Service</option>
+                                                                                <option value="Retail / Food services">Retail / Food services</option>
+                                                                                <option value="Retired">Retired</option>
+                                                                                <option value="Sales / Marketing">Sales / Marketing</option>
+                                                                                <option value="Self Employed">Self Employed</option>
+                                                                                <option value="Sports / recreation">Sports / recreation</option>
+                                                                                <option value="Student">Student</option>
+                                                                                <option value="Technical / Science / Engineering">Technical / Science / Engineering</option>
+                                                                                <option value="Transportation">Transportation</option>
+                                                                                <option value="Travel / Hospitality">Travel / Hospitality</option>
+                                                                                <option value="Unemployed">Unemployed</option>
+                                                                                <option value="Other">Other</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="lookingFor" >Looking For?</label>
+                                                                            <textarea class="form-control" required name="lookingFor" id="lookingFor" minlength="" maxlength="255" rows="5" th:value="${users.getAboutMe().getLookingFor()}" th:text="${users.getAboutMe().getLookingFor()}" selected></textarea>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="haveKids">Do you have kids?</label>
+                                                                            <select class="form-control" required name="haveKids" id="haveKids">
+                                                                                <option th:value="${users.getAboutMe().getHaveKids()}" th:text="${users.getAboutMe().getHaveKids()}"  selected></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="No">No</option>
+                                                                                <option value="Yes">Yes</option>
+                                                                                <option value="Maybe">Maybe</option>
+                                                                                <option value="I Want some">I Want some</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="smoke">Do you smoke ?</label>
+                                                                            <hr>
+                                                                            <select class="form-control" required  name="smoke" id="smoke">
+                                                                                <option th:value="${users.getAboutMe().getSmoke()}" th:text="${users.getAboutMe().getSmoke()}" selected ></option>
+                                                                                <option  data-divider="true"></option>
+                                                                                <option value="Never">Never</option>
+                                                                                <option value="Occasionally">Occasionally</option>
+                                                                                <option value="Regularly">Regularly</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="drink">Do you Drink ?</label>
+                                                                            <select class="form-control" required name="drink" id="drink">
+                                                                                <option  data-divider="true"></option>
+                                                                                <option th:value="${users.getAboutMe().getDrink()}" th:text="${users.getAboutMe().getDrink()}" selected></option>
+                                                                                <option value="Never">Never</option>
+                                                                                <option value="Occasionally">Occasionally</option>
+                                                                                <option value="Regularly">Regularly</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button class="btn btn-primary" type="submit">Save changes</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-sm table-hover">
+                                                    <thead>
+                                                    <tr></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="text-bold"> Live in :</td>
+                                                        <td th:text="${users.getAboutMe().getLiveIn() != null }  ? ${users.getAboutMe().getLiveIn()}  : 'Update Now' " ></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Country:</td>
+                                                        <td th:text="${users.getAboutMe().getCountry() != null }    ? ${users.getAboutMe().getCountry()} : 'Update Now' " ></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Body type:</td>
+                                                        <td th:text="${users.getAboutMe().getBodyType() != null } ? ${users.getAboutMe().getBodyType()} : 'Update Now' " ></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Work as :</td>
+                                                        <td th:text="${users.getAboutMe().getWorkAs() !=null } ? ${users.getAboutMe().getWorkAs()} : 'Update Now'" ></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Have Kids:</td>
+                                                        <td th:text="${users.getAboutMe().getHaveKids() !=null } ?${users.getAboutMe().getHaveKids()} : 'Update Now'" ></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Education:</td>
+                                                        <td th:text="${users.getAboutMe().getEducation() != null } ? ${users.getAboutMe().getEducation()} : 'Update Now'" >&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Languages&nbsp;:</td>
+                                                        <td th:text="${users.getAboutMe().getLanguages() != null } ? ${users.getAboutMe().getLanguages()} : 'Update Now'">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Smoke:</td>
+                                                        <td th:text="${users.getAboutMe().getSmoke() !=null } ? ${users.getAboutMe().getSmoke()} : 'Update Now'" >&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Drink:</td>
+                                                        <td th:text="${users.getAboutMe().getDrink() !=null }? ${users.getAboutMe().getDrink()} : 'Update Now'" >&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Relationship:</td>
+                                                        <td th:text="${users.getAboutMe().getRelationship() !=null } ?${users.getAboutMe().getRelationship()} : 'Update Now'" >&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Height:</td>
+                                                        <td th:text="${users.getAboutMe().getHeight() !=null } ? ${users.getAboutMe().getHeight()} : 'Update Now'" ></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Eyes:</td>
+                                                        <td th:text="${users.getAboutMe().getEyes() !=null } ? ${users.getAboutMe().getEyes()} : 'Update Now'">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-bold">Hair:</td>
+                                                        <td th:text="${users.getAboutMe().getHair() !=null } ?  ${users.getAboutMe().getHair()} : 'Update Now'" >&nbsp;</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 ">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="card">
+                                                    <div class="card-body" id="card-body-lookingfor">
+                                                        <h2 class="text-center text-danger card-title"  >Looking For&nbsp;</h2>
+                                                        <p class="card-text" th:text="${users.getAboutMe().getLookingFor() !=null} ? ${users.getAboutMe().getLookingFor()} : 'Update Now'"></p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h6 class="text-muted card-subtitle mb-2"></h6>
+                                                        <a class="card-link" href="#"></a>
+                                                        <a class="card-link" href="#"></a>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="card">
+                                                    <div class="card-body" id="card-body-infos">
+                                                        <h2 class="text-center text-danger card-title">Infos</h2>
+                                                        <p class="card-text"></p>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-sm table-hover">
+                                                                <thead>
+                                                                <tr></tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td class="text-bold">Profile Visited :</td>
+                                                                    <td   th:text="${totalViews !=null} ?  ${totalViews} : '0' "></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-bold">Profile Created :</td>
+                                                                    <td  th:text="${users.getCreatedDate() !=null}  ? ${users.getCreatedDate()} : 'Update Now'  "></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  class="text-bold">Last Connection:</td>
+                                                                    <td th:text="${users.getLastConnection() !=null}  ? ${users.getLastConnection()} : 'Update Now'  "></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-bold">Profile Likes:</td>
+                                                                    <td th:text="${users.getLastConnection() !=null}  ? ${users.getLastConnection()} : 'Update Now'  "></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="card" style="width: 18rem;">
+                                                    <h2 class=" text-danger text-center card-title mt-3">Interest</h2>
+                                                    <div class="card-body" id="card-body-interest">
+                                                        <p class="card-text"  th:text="${users.getAboutMe().getInterests() !=null }  ? ${users.getAboutMe().getInterests()} : 'Update Now'  ">
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer th:insert="footer.html :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.js"></script>
+<script src="https://kit.fontawesome.com/6f40d29aa1.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script th:src="@{/assets/js/header.js}" type="application/javascript" src="/assets/js/header.js"></script>
+<script th:src="@{/assets/js/profile.js}" type="application/javascript" src="/assets/js/profile.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
+<script type="text/javascript">
+    $('#my-form').parsley();
+</script>
+</html>

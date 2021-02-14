@@ -1,0 +1,18 @@
+#container-sub{
+    padding: 50px;
+}
+#custom-button{
+    background-color: #00C9A7;
+    color: white;
+    padding: 10px;
+    border: white;
+    border-radius:10px;
+}
+#custom-text{
+    margin-left: 10px;
+    font-family: sans-serif;
+    color: #aaa;
+}
+#navbar {
+    margin-top: 100px;
+}

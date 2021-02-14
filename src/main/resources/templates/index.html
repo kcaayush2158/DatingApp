@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Home</title>
+    <link th:href="@{/assets/css/navbar.css}" href="/assets/css/navbar.css" type="text/css" media="all" rel="stylesheet" />
+    <style>
+        .register-photo {
+            height: 100vh;
+            background: linear-gradient(to right, #047aed, #e9006581), url(https://i.pinimg.com/originals/41/e5/e5/41e5e50e8773bf8769dfa342e94685d9.jpg) repeat fixed 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+#subheading{
+    font-size:30px;
+
+}
+        #heading{
+            font-size:80px;
+        }
+       #paragraph{
+           font-size:20px;
+       }
+        #container-banner{
+            margin-top:300px;color :white;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<header th:insert="header.html ::  nav"></header>
+<div class="section s1 active">
+
+    <!-- ===============================================================Search Container ===================================================================-->
+    <div class="register-photo ">
+        <div class="container-fluid offset-lg-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-6">
+                        <div class="container"  id="container-banner" >
+                            <p id="subheading" >WELCOME TO</p>
+                            <h1 id="heading" >CUPID LOVE</h1>
+                            <p  id="paragraph">CUPID LOVE is a magnificent set developed to
+                                inspire your next world’s largest Dating Website & Application design.</p>
+                            <a th:href="@{/signup}"><button class="btn btn-danger btn-lg" >Register now</button></a>
+                        </div>
+<!--                    </div>-->
+                    <div class="col-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:insert="footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,20 @@
+.form-signin .btn {
+    font-size: 80%;
+    letter-spacing: .1rem;
+    padding: 1rem;
+    border-radius:30px;
+}
+
+.btn-google {
+    color: white;
+    background-color: #c23a2b;
+}
+
+.btn-facebook {
+    color: white;
+    background-color: #3b5998;
+}
+
+#form-title{
+    font-size:33px;
+}

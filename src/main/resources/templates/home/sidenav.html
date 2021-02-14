@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/sidenav.css}" href="/assets/css/sidenav.css">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<div th:fragment="sidenav" >
+<div class="sidenav"  >
+    <a th:href="@{/profile}" class="custom-anchor mt-3 mb-3"  ><img src="https://img.icons8.com/color/48/000000/contract-job.png" height="36"  alt=""/> Profile</a>
+    <a th:href="@{/chatroom}" th:class="custom-anchor" class="custom-anchor mt-3 mb-3"><img src="https://image.flaticon.com/icons/png/512/566/566487.png" height="36" /> Public Room</a>
+<!--    <a href="#" class="custom-anchor mt-3 mb-3"  th:class="custom-anchor"><img src="https://img.icons8.com/color/48/000000/youtube-live.png" height="36" /> Live Broadcast</a>-->
+    <a href="#" class="custom-anchor mt-3 mb-3" th:href="@{/likes}"><img src="https://www.flaticon.com/svg/static/icons/svg/3915/3915794.svg" height="36"  alt=""/> Likes</a>
+    <a href="#" class="custom-anchor mt-3 mb-3" th:href="@{/visits}"><img src="https://www.flaticon.com/svg/static/icons/svg/753/753077.svg" height="36"  alt=""/> Visits</a>
+    <a href="#" class="custom-anchor  mb-5" th:href="@{/settings}"><img src="https://img.icons8.com/color/48/000000/horizontal-settings-mixer.png" height="36"  alt=""/> Settings</a>
+    <a th:href="@{/logout}" class="custom-anchor mt-3 mb-3 ml-4 text-center button-logout" id="text-white"  > <i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+</div>
+<!-- Page content -->
+<div class="main">
+
+</div>
+</body>
+</html>

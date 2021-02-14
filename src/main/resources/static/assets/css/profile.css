@@ -1,0 +1,72 @@
+.text-bold{
+    font-weight: bold;
+}
+#container-information{
+    margin-bottom: 100px;
+}
+#uploadPhoto{
+    height: 300px;
+    width: 300px;
+
+    background-repeat: no-repeat;
+    padding-top:100px;
+    background-size: cover;
+    color: deepskyblue;
+    object-fit: cover;
+    float:left;
+    text-align: center;
+
+}
+#container-photos{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#file-chosen{
+    margin-left: 0.3rem;
+    font-family: sans-serif;
+}
+label {
+    color: black;
+    font-family: sans-serif;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+#pic1{
+    border:1px solid black;
+    width:200px;
+    color: #077aec;
+    height:300px;
+}
+#card-body-lookingfor{
+    height: 200px;
+
+}
+#card-body-infos{
+    height: 300px;
+
+}
+#card-body-interest{
+    height: 530px;
+}
+.modal-dialog{
+    max-width: 900px!important;
+}
+#upload-picture{
+  height: 300px; width: 300px;object-fit: cover;background-repeat: no-repeat;background-size: cover;
+}
+#uploadPreview {
+    border: 1px solid red;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+#uploadPreview img {
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org" >
+<head lang="en">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/assets/css/navbar.css}" href="/assets/css/navbar.css" type="text/css" media="all" rel="stylesheet" />
+    <link th:href="@{/assets/css/sidenav.css}" href="/assets/css/sidenav.css" type="text/css" media="all" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/assets/css/chatroom/rooms.css}" href="/assets/css/chatroom/rooms.css" type="text/css" media="all">
+
+</head>
+<body>
+
+<header th:insert="header.html ::  nav"></header>
+<div class="container-fluid mt-5">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-2">
+                <div id="side-nav" th:insert="home/sidenav.html ::  sidenav"></div>
+            </div>
+            <div class="col-lg-10 ml-5" id="container-rooms">
+                <div class="container-fluid">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="container-fluid">
+                                    <div class="messaging-container " >
+                                        <div class="messaging-header" >
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+
+                                                        <a th:href="@{/chatroom}" >
+                                                            <button class="btn btn-lg btn-light" type="submit" >
+                                                               <i class="fa fa-arrow-left"></i>
+                                                             </button>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-10">
+
+                                                        <h4 id="message-header" class=" text-center" th:text="${chatRoom.getChatRoomName()}"> </h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                        <hr>
+
+                                        <div class="messaging-body mt-2 mb-2 ">
+
+                                        </div>
+                                        <hr>
+                                        <input type="hidden"  name="chatroomId" id="chatRoomId"  th:value="${chatRoom.getChatRoomId()}" >
+                                        <input type="text" id="roomId" th:value="${chatRoom.getChatRoomId()}"  hidden>
+                                        <div class="messaging-footer ">
+                                            <div class="col-lg-12 ">
+                                                <span id="message-response"></span>
+
+                                                           <div class="col-lg-10 col-md-2 offset-md-1" >
+                                                               <form method="POST" th:action="@{'/api/chatroom/public/'+${chatRoom.getChatRoomId()}+'/save'}"  id="form-message">
+                                                                   <div class="form-group">
+                                                                       <div class="col-md-12">
+                                                                       <div class="row">
+                                                                           <div class="col-md-10">
+                                                                            <input name="message" type="text" class="form-control form-control-lg"  id="message" placeholder="Type message">
+                                                                           </div>
+                                                                           <div class="col-md-2">
+                                                                               <button class="btn btn-light " id="btn-message" type="submit"><i class="fa fa-send"></i> Send</button>
+                                                                           </div>
+                                                                       </div>
+                                                                       </div>
+                                                                   </div>
+                                                               </form>
+                                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<!--                            <div class="col-lg-3 ">-->
+<!--                                <div class="container-participants ">-->
+<!--                                    <div class="container-participants-header  mb-2">-->
+<!--                                        <h5><b>Participants <i class="fa fa-users"></i> (31)</b>  <p th:text="${username}"></p></h5>-->
+<!--                                        <hr>-->
+<!--                                    </div>-->
+<!--                                    <div class="container-participants-footer ">-->
+<!--                                        <th:block th:each="user :${users}">-->
+
+<!--                                        <div class="participants-user">-->
+<!--                                            <div class="row">-->
+<!--                                                <div class="col-3">-->
+<!--                                                    <img th:src="@{${user.getProfilePhoto()}}" class="img-thumbnail" id="image"  height="50" width="50">-->
+<!--                                                </div>-->
+<!--                                                <div class="col-9">-->
+<!--                                                    <h5 class="ml-3 mt-2" th:text="${user.getUsername()}"></h5>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
+<!--                                        </th:block>-->
+
+
+<!--                                        <br>-->
+<!--                                    </div>-->
+<!--                                    <hr>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/6f40d29aa1.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script th:src="@{/assets/js/header.js}" type="application/javascript" src="/assets/js/header.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+<script th:src="@{/assets/js/chatroom/rooms.js}" type="application/javascript" src="/assets/js/chatroom/rooms.js"></script>
+<script>
+
+    var pusher = new Pusher('fe6ae4d627b4ab84c8d9', {
+        cluster: 'ap2'
+    });
+
+
+    var channel = pusher.subscribe('public-room');
+
+    channel.bind('8fc446a2-ed1f-485d-a5d1-db55c7861a8e', function(data) {
+        var obj = JSON.parse(JSON.stringify(data));
+
+        $(".messaging-body mt-2 mb-2 ").html(`<div class="messaging-section mb-2 mt-2">
+                             <div class="row">
+                                  <div class="message-header" >
+                                       <img src="`+data.sender.profilePhoto+`"  style="width:50px;height:50px;object-fit: cover;">
+                                    </div>
+                              <div class="message-body ml-2" id="message-body-receiver">
+                                    <p> `+data.sender.firstName +' : '+data.message+`</p>
+                           </div>
+
+                            </div>
+                         </div>`);
+
+    });
+</script>
+</html>

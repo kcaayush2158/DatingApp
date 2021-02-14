@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Source+Sans+Pro&display=swap");
+@import url(//db.onlinewebfonts.com/c/63467b9cbd4a4d7eafb5e64946ecaa18?family=Maison+Neue);
+p{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+.ajax-loader {
+    visibility: visible;
+    background-color: rgba(255,255,255,0.7);
+    position: absolute;
+    z-index: +100 !important;
+    width: 100%;
+    height:100%;
+}
+.btn-warning{
+    border-radius: 20px;
+    color: #ffc107;
+}
+.btn-warning:hover{
+    border-radius: 20px;
+    color: white;
+}
+.ajax-loader img {
+    position: relative;
+    top:50%;
+    left:50%;
+}
+.shine {
+    background: #ffffff;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    width: auto;
+    display: inline-block;
+    position: relative;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: placeholderShimmer;
+    -webkit-animation-timing-function: linear;
+}
+box {
+    height: 104px;
+    width: 100px;
+}
+lines {
+    height: 10px;
+    margin-top: 10px;
+    width: 200px;
+}
+photo {
+    display: block!important;
+    width: 325px;
+    height: 100px;
+    margin-top: 15px;
+}
+@-webkit-keyframes placeholderShimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+nav{
+    background-color: #ffffff ;padding-top:10px;padding-bottom: 10px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);border-radius: 10px;
+}
+#chatDescription{
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+    min-height: 100px;
+    max-height: 100px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+
+}
+#navbar{
+    margin-top: 100px;
+}
+
+#custom-card-design{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);border-radius:20px;
+}
+
+#card-href{
+    list-style-type:none;
+    text-decoration:none;
+    background-color:white;
+}
+.container-shout-out{
+    position: fixed;
+    width: 270px;
+}
+.shout-out-header{
+    font-family: 'Oswald', sans-serif;
+    padding:30px;
+}
+
+.shout-out-body{
+    overflow-y: scroll;
+    height: auto;
+    margin-bottom:20px;
+
+}
+
+li{
+    list-style:none;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.message{
+    padding:5px;
+}
+.card-title{
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+.card-body{
+    overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3; /* number of lines to show */-webkit-box-orient: vertical;color:#222;
+}
+
+#side-nav{
+    position: fixed;
+}
+#nav-link{
+    color: #3b5998;font-weight: bold;
+
+}
+#chatDescription{
+    font-size: 18px;
+    font-family: "Source Sans Pro", sans-serif;
+    color: #313437;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.btn-join-room-public{
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: white;
+}
+.btn-join-room-private{
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    color: white;
+}
+#pills-my-room-tab{
+    color: #757373;
+}
+#pills-all-rooms-tab{
+    color: #757373;
+}
+

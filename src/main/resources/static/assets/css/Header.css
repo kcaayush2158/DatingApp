@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+/*Changing the hight of the navbar*/
+nav{
+    height:100px;
+}
+
+.navbar{
+    height:100px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    background-color:white
+}
+.dropdown-menu.show {
+    display: block;
+    padding: 20px;
+}
+
+.dropdown-menu {
+    width: 400px;
+    padding: 20px;
+    height: auto;
+}
+
+a{
+    list-style-type: none;
+    text-decoration: none;
+}
+
+/*navbar item  */
+.nav-bar{
+    list-style-type: none;
+    text-decoration: none;
+    color: #077aec;
+    font-size: 20px;
+}
+
+.dropdown{
+    text-decoration: none;
+    padding: 100px;
+    list-style-type: none;
+}
+
+.dropdown-menu{
+    height: 500px;
+    width: 400px;
+    color: black;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+
+
+
+.navbar-link{
+    color: #313437;
+    font-weight: 600;
+    font-size:17px;
+}
+

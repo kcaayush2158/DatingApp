@@ -1,0 +1,81 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link th:href="@{/assets/css/sidenav.css}" href="/assets/css/sidenav.css" type="text/css" media="all" rel="stylesheet" />
+    <link th:href="@{/assets/css/navbar.css}" href="/assets/css/navbar.css" type="text/css" media="all" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<Style>
+    #user-bio{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        color: #222;
+        min-height: 100px;
+        max-height: 100px;
+    }
+    #navbar{
+        background-color: white;
+    }
+    .card{
+        max-width: 16rem;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+        border-radius: 10px;
+        overflow: hidden;
+        text-decoration: none;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    .card-body{
+        background-color: white;
+    }
+    .card-title{
+        font-size: 18px;
+        font-weight: 700;
+        color: #222;
+    }
+</Style>
+<header th:insert="header.html ::  nav"></header>
+<br>
+<br>
+<br>
+<div class="container-fluid">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-2" >
+                <div th:insert="home/sidenav.html ::  sidenav"></div>
+            </div>
+            <div class="col-lg-10" >
+                <nav class="navbar navbar-light  mb-5 mt-5 " id="navbar">
+                    <h6 class="navbar-brand " id="navbar-brand-header " href="#" th:text="${message}" ></h6>
+                </nav>
+                <div th:each=" user : ${users}" >
+                    <div class="row" style="float: left;">
+                        <a th:href="@{'/user/profile/'+${user.getUsername()}}" class="custom-card" style="text-decoration: none; color: #313437;">
+                            <div class="card bg-light mb-3 mr-5  ml-5 mt-2 " >
+                                <img class="card-img-top image-thumbnail" height="200" width="150" th:src="@{${user.getProfilePhoto()} }"  alt="Card image cap">
+                                <div class="card-body" >
+                                    <h5 class="card-title " th:text="${user.getFirstName()} +' , ' + ${user.getAboutMe().getAge()}"></h5>
+                                    <p id="user-bio" th:text="${user.getAboutMe().getBio()}" ></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:insert="footer.html :: footer"></footer>
+</body>
+
+<script src="https://kit.fontawesome.com/6f40d29aa1.js" crossorigin="anonymous"></script>
+<script th:src="@{/assets/js/header.js}" type="application/javascript" src="/assets/js/header.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>

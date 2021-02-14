@@ -1,0 +1,92 @@
+.messaging-body::-webkit-scrollbar {
+    width: 0.5em;
+}
+.messaging-header{
+    width: auto;
+    color: #333333;
+    font-size: 20px;
+    padding-left: 50px;
+    padding-top:30px;
+}
+.messaging-body{
+    overflow-y: scroll;
+    height: 500px;
+    padding-left:50px;
+    padding-top:50px;
+}
+.messaging-footer{
+    padding: 20px;
+}
+.container-participants{
+    overflow-y: scroll;
+    height: 90%;
+    margin-top: 100px;
+}
+.container-participants-header{
+    padding: 20px;
+    text-align: center;
+}
+.container-participants-footer{
+}
+.message-header{
+    color: #3b5998;
+}
+.message-body{
+    width: 250px;
+    color: white;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:10px;
+    padding-bottom: 5px;
+}
+.messaging-container{
+    margin-top:100px;
+}
+
+#image{
+    height: 80px;width: 130px
+}
+#container-rooms{
+    left: 12% ;
+}
+#message-body-sender{
+    background-color: #3b5998;
+    box-shadow: 0 20px 8px 0 rgba(0,0,0,0.08);
+    width: auto;
+}
+.messaging-section{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+#message-body-receiver{
+    background-color: #eb4034;
+    box-shadow: 0 20px 8px 0 rgba(0,0,0,0.08);
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 250px;
+
+}
+.messaging-container{
+    box-shadow: 0 4px 8px 3px rgba(0,0,0,0.08);
+}
+#btn-message{
+    color: white;
+    background-color: #00C9A7;
+    height: 50px;
+    width: 120px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.container-participants{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+}
+.card-body{
+    background-color: white;
+}
+
+#side-nav{
+    position: fixed;
+}

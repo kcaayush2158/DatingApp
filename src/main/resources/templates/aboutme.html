@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<style>
+    .text-bold{
+        font-weight: bold;
+    }
+</style>
+<body>
+<header th:insert="header.html ::  nav"></header>
+<div class="container">
+    <br><br><br>
+<form th:action="@{/user/aboutme/save}" th:object="${aboutMe}" method="post" class="mt-5 mb-5">
+    <div th:if="${param.error}">
+        <div class="alert alert-danger" role="alert">
+            <span class="fa fa-remove"></span> Invalid field
+        </div>
+    </div>
+
+    <h1 class="text-bold">Personal Information</h1>
+
+    <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" th:field="*{age}" name="age" id="age" class="form-control"  max="80" min="16"required>
+    </div>
+    <div class="form-group">
+        <label for="liveIn">Where do you live ??</label>
+        <input type="text" th:field="*{liveIn}" name="liveIn" id="liveIn" class="form-control"required  >
+    </div>
+    <div class="form-group">
+        <label for="country">What is your Country Name ? </label>
+        <select class="form-control" th:field="*{country}" id="country" name="country" required>
+            <option value="" selected> </option>
+            <option value="Afghanistan">Afghanistan</option>
+            <option value="Albania">Albania</option>
+            <option value="Algeria">Algeria</option>
+            <option value="American Samoa">American Samoa</option>
+            <option value="Andorra">Andorra</option>
+            <option value="Angola">Angola</option>
+            <option value="Anguilla">Anguilla</option>
+            <option value="Antigua & Barbuda">Antigua & Barbuda</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Armenia">Armenia</option>
+            <option value="Aruba">Aruba</option>
+            <option value="Australia">Australia</option>
+            <option value="Austria">Austria</option>
+            <option value="Azerbaijan">Azerbaijan</option>
+            <option value="Bahamas">Bahamas</option>
+            <option value="Bahrain">Bahrain</option>
+            <option value="Bangladesh">Bangladesh</option>
+            <option value="Barbados">Barbados</option>
+            <option value="Belarus">Belarus</option>
+            <option value="Belgium">Belgium</option>
+            <option value="Belize">Belize</option>
+            <option value="Benin">Benin</option>
+            <option value="Bermuda">Bermuda</option>
+            <option value="Bhutan">Bhutan</option>
+            <option value="Bolivia">Bolivia</option>
+            <option value="Bonaire">Bonaire</option>
+            <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+            <option value="Botswana">Botswana</option>
+            <option value="Brazil">Brazil</option>
+            <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+            <option value="Brunei">Brunei</option>
+            <option value="Bulgaria">Bulgaria</option>
+            <option value="Burkina Faso">Burkina Faso</option>
+            <option value="Burundi">Burundi</option>
+            <option value="Cambodia">Cambodia</option>
+            <option value="Cameroon">Cameroon</option>
+            <option value="Canada">Canada</option>
+            <option value="Canary Islands">Canary Islands</option>
+            <option value="Cape Verde">Cape Verde</option>
+            <option value="Cayman Islands">Cayman Islands</option>
+            <option value="Central African Republic">Central African Republic</option>
+            <option value="Chad">Chad</option>
+            <option value="Channel Islands">Channel Islands</option>
+            <option value="Chile">Chile</option>
+            <option value="China">China</option>
+            <option value="Christmas Island">Christmas Island</option>
+            <option value="Cocos Island">Cocos Island</option>
+            <option value="Colombia">Colombia</option>
+            <option value="Comoros">Comoros</option>
+            <option value="Congo">Congo</option>
+            <option value="Cook Islands">Cook Islands</option>
+            <option value="Costa Rica">Costa Rica</option>
+            <option value="Cote DIvoire">Cote DIvoire</option>
+            <option value="Croatia">Croatia</option>
+            <option value="Cuba">Cuba</option>
+            <option value="Curaco">Curacao</option>
+            <option value="Cyprus">Cyprus</option>
+            <option value="Czech Republic">Czech Republic</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Djibouti">Djibouti</option>
+            <option value="Dominica">Dominica</option>
+            <option value="Dominican Republic">Dominican Republic</option>
+            <option value="East Timor">East Timor</option>
+            <option value="Ecuador">Ecuador</option>
+            <option value="Egypt">Egypt</option>
+            <option value="El Salvador">El Salvador</option>
+            <option value="Equatorial Guinea">Equatorial Guinea</option>
+            <option value="Eritrea">Eritrea</option>
+            <option value="Estonia">Estonia</option>
+            <option value="Ethiopia">Ethiopia</option>
+            <option value="Falkland Islands">Falkland Islands</option>
+            <option value="Faroe Islands">Faroe Islands</option>
+            <option value="Fiji">Fiji</option>
+            <option value="Finland">Finland</option>
+            <option value="France">France</option>
+            <option value="French Guiana">French Guiana</option>
+            <option value="French Polynesia">French Polynesia</option>
+            <option value="French Southern Ter">French Southern Ter</option>
+            <option value="Gabon">Gabon</option>
+            <option value="Gambia">Gambia</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Germany">Germany</option>
+            <option value="Ghana">Ghana</option>
+            <option value="Gibraltar">Gibraltar</option>
+            <option value="Great Britain">Great Britain</option>
+            <option value="Greece">Greece</option>
+            <option value="Greenland">Greenland</option>
+            <option value="Grenada">Grenada</option>
+            <option value="Guadeloupe">Guadeloupe</option>
+            <option value="Guam">Guam</option>
+            <option value="Guatemala">Guatemala</option>
+            <option value="Guinea">Guinea</option>
+            <option value="Guyana">Guyana</option>
+            <option value="Haiti">Haiti</option>
+            <option value="Hawaii">Hawaii</option>
+            <option value="Honduras">Honduras</option>
+            <option value="Hong Kong">Hong Kong</option>
+            <option value="Hungary">Hungary</option>
+            <option value="Iceland">Iceland</option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="India">India</option>
+            <option value="Iran">Iran</option>
+            <option value="Iraq">Iraq</option>
+            <option value="Ireland">Ireland</option>
+            <option value="Isle of Man">Isle of Man</option>
+            <option value="Israel">Israel</option>
+            <option value="Italy">Italy</option>
+            <option value="Jamaica">Jamaica</option>
+            <option value="Japan">Japan</option>
+            <option value="Jordan">Jordan</option>
+            <option value="Kazakhstan">Kazakhstan</option>
+            <option value="Kenya">Kenya</option>
+            <option value="Kiribati">Kiribati</option>
+            <option value="Korea North">Korea North</option>
+            <option value="Korea Sout">Korea South</option>
+            <option value="Kuwait">Kuwait</option>
+            <option value="Kyrgyzstan">Kyrgyzstan</option>
+            <option value="Laos">Laos</option>
+            <option value="Latvia">Latvia</option>
+            <option value="Lebanon">Lebanon</option>
+            <option value="Lesotho">Lesotho</option>
+            <option value="Liberia">Liberia</option>
+            <option value="Libya">Libya</option>
+            <option value="Liechtenstein">Liechtenstein</option>
+            <option value="Lithuania">Lithuania</option>
+            <option value="Luxembourg">Luxembourg</option>
+            <option value="Macau">Macau</option>
+            <option value="Macedonia">Macedonia</option>
+            <option value="Madagascar">Madagascar</option>
+            <option value="Malaysia">Malaysia</option>
+            <option value="Malawi">Malawi</option>
+            <option value="Maldives">Maldives</option>
+            <option value="Mali">Mali</option>
+            <option value="Malta">Malta</option>
+            <option value="Marshall Islands">Marshall Islands</option>
+            <option value="Martinique">Martinique</option>
+            <option value="Mauritania">Mauritania</option>
+            <option value="Mauritius">Mauritius</option>
+            <option value="Mayotte">Mayotte</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Midway Islands">Midway Islands</option>
+            <option value="Moldova">Moldova</option>
+            <option value="Monaco">Monaco</option>
+            <option value="Mongolia">Mongolia</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Morocco">Morocco</option>
+            <option value="Mozambique">Mozambique</option>
+            <option value="Myanmar">Myanmar</option>
+            <option value="Nambia">Nambia</option>
+            <option value="Nauru">Nauru</option>
+            <option value="Nepal">Nepal</option>
+            <option value="Netherland Antilles">Netherland Antilles</option>
+            <option value="Netherlands">Netherlands (Holland, Europe)</option>
+            <option value="Nevis">Nevis</option>
+            <option value="New Caledonia">New Caledonia</option>
+            <option value="New Zealand">New Zealand</option>
+            <option value="Nicaragua">Nicaragua</option>
+            <option value="Niger">Niger</option>
+            <option value="Nigeria">Nigeria</option>
+            <option value="Niue">Niue</option>
+            <option value="Norfolk Island">Norfolk Island</option>
+            <option value="Norway">Norway</option>
+            <option value="Oman">Oman</option>
+            <option value="Pakistan">Pakistan</option>
+            <option value="Palau Island">Palau Island</option>
+            <option value="Palestine">Palestine</option>
+            <option value="Panama">Panama</option>
+            <option value="Papua New Guinea">Papua New Guinea</option>
+            <option value="Paraguay">Paraguay</option>
+            <option value="Peru">Peru</option>
+            <option value="Phillipines">Philippines</option>
+            <option value="Pitcairn Island">Pitcairn Island</option>
+            <option value="Poland">Poland</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Puerto Rico">Puerto Rico</option>
+            <option value="Qatar">Qatar</option>
+            <option value="Republic of Montenegro">Republic of Montenegro</option>
+            <option value="Republic of Serbia">Republic of Serbia</option>
+            <option value="Reunion">Reunion</option>
+            <option value="Romania">Romania</option>
+            <option value="Russia">Russia</option>
+            <option value="Rwanda">Rwanda</option>
+            <option value="St Barthelemy">St Barthelemy</option>
+            <option value="St Eustatius">St Eustatius</option>
+            <option value="St Helena">St Helena</option>
+            <option value="St Kitts-Nevis">St Kitts-Nevis</option>
+            <option value="St Lucia">St Lucia</option>
+            <option value="St Maarten">St Maarten</option>
+            <option value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+            <option value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+            <option value="Saipan">Saipan</option>
+            <option value="Samoa">Samoa</option>
+            <option value="Samoa American">Samoa American</option>
+            <option value="San Marino">San Marino</option>
+            <option value="Sao Tome & Principe">Sao Tome & Principe</option>
+            <option value="Saudi Arabia">Saudi Arabia</option>
+            <option value="Senegal">Senegal</option>
+            <option value="Seychelles">Seychelles</option>
+            <option value="Sierra Leone">Sierra Leone</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Slovakia">Slovakia</option>
+            <option value="Slovenia">Slovenia</option>
+            <option value="Solomon Islands">Solomon Islands</option>
+            <option value="Somalia">Somalia</option>
+            <option value="South Africa">South Africa</option>
+            <option value="Spain">Spain</option>
+            <option value="Sri Lanka">Sri Lanka</option>
+            <option value="Sudan">Sudan</option>
+            <option value="Suriname">Suriname</option>
+            <option value="Swaziland">Swaziland</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Switzerland">Switzerland</option>
+            <option value="Syria">Syria</option>
+            <option value="Tahiti">Tahiti</option>
+            <option value="Taiwan">Taiwan</option>
+            <option value="Tajikistan">Tajikistan</option>
+            <option value="Tanzania">Tanzania</option>
+            <option value="Thailand">Thailand</option>
+            <option value="Togo">Togo</option>
+            <option value="Tokelau">Tokelau</option>
+            <option value="Tonga">Tonga</option>
+            <option value="Trinidad & Tobago">Trinidad & Tobago</option>
+            <option value="Tunisia">Tunisia</option>
+            <option value="Turkey">Turkey</option>
+            <option value="Turkmenistan">Turkmenistan</option>
+            <option value="Turks & Caicos Is">Turks & Caicos Is</option>
+            <option value="Tuvalu">Tuvalu</option>
+            <option value="Uganda">Uganda</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Ukraine">Ukraine</option>
+            <option value="United Arab Erimates">United Arab Emirates</option>
+            <option value="United States of America">United States of America</option>
+            <option value="Uraguay">Uruguay</option>
+            <option value="Uzbekistan">Uzbekistan</option>
+            <option value="Vanuatu">Vanuatu</option>
+            <option value="Vatican City State">Vatican City State</option>
+            <option value="Venezuela">Venezuela</option>
+            <option value="Vietnam">Vietnam</option>
+            <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+            <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+            <option value="Wake Island">Wake Island</option>
+            <option value="Wallis & Futana Is">Wallis & Futana Is</option>
+            <option value="Yemen">Yemen</option>
+            <option value="Zaire">Zaire</option>
+            <option value="Zambia">Zambia</option>
+            <option value="Zimbabwe">Zimbabwe</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="education">What is your Education Level?</label>
+        <select class="form-control"  th:field="*{education}" name="education" id="education" required>
+            <option value="" selected> </option>
+            <option value="High School">High School</option>
+            <option value="College">College</option>
+            <option value="Associates Degree">Associates Degree</option>
+            <option value="Bachelors Degree">Bachelors Degree</option>
+            <option value="Graduate Degree<">Graduate Degree</option>
+            <option value="PhD">PhD</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="bio">Bio </label>
+        <textarea th:field="*{bio}" name="bio" id="bio" class="form-control"  required></textarea>
+    </div>
+    <h1 class="text-bold">Your Appearance</h1>
+
+    <div class="form-group">
+        <label for="bodyType">Body type </label>
+        <select class="form-control" th:field="*{bodyType}" name="bodyType" id="bodyType" required>
+            <option value=" " selected> </option>
+            <option value="Average">Average</option>
+            <option value="Curvy">Curvy</option>
+            <option value="Athletic">Athletic</option>
+            <option value="Muscular">Muscular</option>
+            <option value="Slim">Slim</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="smoke">Do you smoke ?</label>
+        <select class="form-control" th:field="*{smoke}" name="smoke" id="smoke" required>
+            <option value="" selected> </option>
+            <option th:value="Never">Never</option>
+            <option th:value="Occasionally">Occasionally</option>
+            <option th:value="Regularly">Regularly</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="drink">Do you Drink ?</label>
+        <select class="form-control" th:field="*{drink}" name="drink" id="drink" required>
+            <option value="" selected> </option>
+            <option th:value="Never">Never</option>
+            <option th:value="Occasionally">Occasionally</option>
+            <option th:value="Regularly">Regularly</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="height">What is your height ?</label>
+        <select class="form-control autofill" th:field="*{height}" name="height" tabindex="2" id="height" required>
+            <option value="" selected> </option>
+            <option value="91">3'</option>
+            <option value="94">3'1"</option>
+            <option value="96">3'2"</option>
+            <option value="99">3'3"</option>
+            <option value="101">3'4"</option>
+            <option value="104">3'5"</option>
+            <option value="106">3'6"</option>
+            <option value="109">3'7"</option>
+            <option value="111">3'8"</option>
+            <option value="114">3'9"</option>
+            <option value="116">3'10"</option>
+            <option value="119">3'11"</option>
+            <option value="122">4'</option>
+            <option value="124">4'1"</option>
+            <option value="127">4'2"</option>
+            <option value="129">4'3"</option>
+            <option value="132">4'4"</option>
+            <option value="134">4'5"</option>
+            <option value="137">4'6"</option>
+            <option value="139">4'7"</option>
+            <option value="142">4'8"</option>
+            <option value="144">4'9"</option>
+            <option value="147">4'10"</option>
+            <option value="149">4'11"</option>
+            <option value="152">5'</option>
+            <option value="155">5'1"</option>
+            <option value="157">5'2"</option>
+            <option value="160">5'3"</option>
+            <option value="162">5'4"</option>
+            <option value="165">5'5"</option>
+            <option value="167">5'6"</option>
+            <option value="170">5'7"</option>
+            <option value="172">5'8"</option>
+            <option value="175">5'9"</option>
+            <option value="177">5'10"</option>
+            <option value="180">5'11"</option>
+            <option value="183">6'</option>
+            <option value="185">6'1"</option>
+            <option value="188">6'2"</option>
+            <option value="190">6'3"</option>
+            <option value="193">6'4"</option>
+            <option value="195">6'5"</option>
+            <option value="198">6'6"</option>
+            <option value="200">6'7"</option>
+            <option value="203">6'8"</option>
+            <option value="205">6'9"</option>
+            <option value="208">6'10"</option>
+            <option value="210">6'11"</option>
+            <option value="213">7'</option>
+            <option value="216">7'1"</option>
+            <option value="218">7'2"</option>
+            <option value="221">7'3"</option>
+            <option value="223">7'4"</option>
+            <option value="226">7'5"</option>
+            <option value="228">7'6"</option>
+            <option value="231">7'7"</option>
+            <option value="233">7'8"</option>
+            <option value="236">7'9"</option>
+            <option value="238">7'10"</option>
+            <option value="241">7'11"</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="eye">What is your eye colour ?</label>
+        <select class="form-control autofill" th:field="*{eyes}" name="eye" tabindex="2" id="eye" required>
+            <option value="" selected> </option>
+            <option value="blue">Blue</option>
+            <option value="brown" >Brown</option>
+            <option value="gray">Gray</option>
+            <option value="green">Green</option>
+            <option value="hazel">Hazel</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="hair">What is your hair color?</label>
+        <select class="form-control autofill"  th:field ="*{hair}" name="hair" tabindex="2" id="hair" required>
+            <option value="" selected> </option>
+            <option value="black">Black</option>
+            <option value="blond">Blond</option>
+            <option value="brown">Brown</option>
+            <option value="fair">Fair</option>
+            <option value="chestnut">Chestnut</option>
+            <option value="red">Red</option>
+            <option value="bal">Bald</option>
+        </select>
+    </div>
+
+
+
+    <h1 class="text-bold">Your LifeStyle </h1>
+
+    <div class="form-group">
+        <label for="kids">Do you have kids?</label>
+        <select th:field="*{haveKids}" class="form-control" name="kids" id="kids" required>
+            <option value="" selected> </option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+            <option value="Maybe">Maybe</option>
+            <option value="I Want some">I Want some</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="workAs">What is your Occupation ?</label>
+        <select class="form-control" th:field="*{workAs}" name="workAs" id="workAs" required>
+            <option value="" selected> </option>
+            <option value="Administrative / Secretarial / Clerical">Administrative / Secretarial / Clerical</option>
+            <option value="Advertising / Media">Advertising / Media</option>
+            <option value="Artistic / Creative / Performance">Artistic / Creative / Performance</option>
+            <option value="Construction / Trades">Construction / Trades</option>
+            <option value="Domestic Helper">Domestic Helper</option>
+            <option value="Education / Academic">Education / Academic</option>
+            <option value="Entertainment / Media">Entertainment / Media</option>
+            <option value="Executive / Management / HR">Executive / Management / HR</option>
+            <option value="Farming / Agriculture">Farming / Agriculture</option>
+            <option value="Finance / Banking / Real Estate">Finance / Banking / Real Estate</option>
+            <option value="Fire / law enforcement / security">Fire / law enforcement / security</option>
+            <option value="Hair Dresser / Personal Grooming">Hair Dresser / Personal Grooming</option>
+            <option value="IT / Communications">IT / Communications</option>
+            <option value="Laborer / Manufacturing">Laborer / Manufacturing</option>
+            <option value="Legal">Legal</option>
+            <option value="Medical / Dental / Veterinary">Medical / Dental / Veterinary</option>
+            <option value="Military">Military</option>
+            <option value="Model">Model</option>
+            <option value="Nanny / Child care">Nanny / Child care</option>
+            <option value="No occupation / Stay at home">No occupation / Stay at home</option>
+            <option value="Non-profit / clergy / social services">Non-profit / clergy / social services</option>
+            <option value="Political / Govt / Civil Service">Political / Govt / Civil Service</option>
+            <option value="Retail / Food services">Retail / Food services</option>
+            <option value="Retired">Retired</option>
+            <option value="Sales / Marketing">Sales / Marketing</option>
+            <option value="Self Employed">Self Employed</option>
+            <option value="Sports / recreation">Sports / recreation</option>
+            <option value="Student">Student</option>
+            <option value="Technical / Science / Engineering">Technical / Science / Engineering</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Travel / Hospitality">Travel / Hospitality</option>
+            <option value="Unemployed">Unemployed</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+
+        <div class="form-group">
+            <label for="languages">What Language do you know?</label>
+            <select class="form-control" th:field="*{languages}" name="languages" id="languages" required>
+                <option value="" selected> </option>
+                <option value="Afrikaans">Afrikaans</option>
+                <option value="Albanian">Albanian</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Armenian">Armenian</option>
+                <option value="Basque">Basque</option>
+                <option value="Bengali">Bengali</option>
+                <option value="Bulgarian">Bulgarian</option>
+                <option value="Catalan">Catalan</option>
+                <option value="Cambodian">Cambodian</option>
+                <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+                <option value="Croatian">Croatian</option>
+                <option value="Czech">Czech</option>
+                <option value="Danish">Danish</option>
+                <option value="Dutch">Dutch</option>
+                <option value="English">English</option>
+                <option value="Estonian">Estonian</option>
+                <option value="Fiji">Fiji</option>
+                <option value="Finnish">Finnish</option>
+                <option value="French">French</option>
+                <option value="Georgian">Georgian</option>
+                <option value="German">German</option>
+                <option value="Greek">Greek</option>
+                <option value="Gujarati">Gujarati</option>
+                <option value="Hebrew">Hebrew</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Hungarian">Hungarian</option>
+                <option value="Icelandic">Icelandic</option>
+                <option value="Indonesian">Indonesian</option>
+                <option value="Irish">Irish</option>
+                <option value="Italian">Italian</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Javanese">Javanese</option>
+                <option value="Korean">Korean</option>
+                <option value="Latin">Latin</option>
+                <option value="Latvian">Latvian</option>
+                <option value="Lithuanian">Lithuanian</option>
+                <option value="Macedonian">Macedonian</option>
+                <option value="Malay">Malay</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Maltese">Maltese</option>
+                <option value="Maori">Maori</option>
+                <option value="Marathi">Marathi</option>
+                <option value="Mongolian">Mongolian</option>
+                <option value="Nepali">Nepali</option>
+                <option value="Norwegian">Norwegian</option>
+                <option value="Persian">Persian</option>
+                <option value="Polish">Polish</option>
+                <option value="Portuguese">Portuguese</option>
+                <option value="Punjabi">Punjabi</option>
+                <option value="Quechua">Quechua</option>
+                <option value="Romanian">Romanian</option>
+                <option value="Russian">Russian</option>
+                <option value="Samoan">Samoan</option>
+                <option value="Serbian">Serbian</option>
+                <option value="Slovak">Slovak</option>
+                <option value="Slovenian">Slovenian</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Swahili">Swahili</option>
+                <option value="Swedish ">Swedish </option>
+                <option value="Tamil">Tamil</option>
+                <option value="Tatar">Tatar</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Thai">Thai</option>
+                <option value="Tibetan">Tibetan</option>
+                <option value="Tonga">Tonga</option>
+                <option value="Turkish">Turkish</option>
+                <option value="Ukrainian">Ukrainian</option>
+                <option value="Urdu">Urdu</option>
+                <option value="Uzbek">Uzbek</option>
+                <option value="Vietnamese">Vietnamese</option>
+                <option value="Welsh">Welsh</option>
+                <option value="Xhosa">Xhosa</option>
+            </select>
+        </div>
+
+    <div class="form-group">
+        <label for="relationship">What is your relationship Status?</label>
+        <select class="form-control" th:feild="*{relationship}" name="relationship" id="relationship" required>
+            <option value="" selected> </option>
+            <option th:value="Single">Single</option>
+            <option th:value="Separated">Separated</option>
+            <option th:value="Divorced">Divorced</option>
+            <option th:value="Widowed">Widowed</option>
+        </select>
+    </div>
+
+   <button class="btn btn-primary btn-block btn-lg" type="submit">Save changes</button>
+
+</form>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Messages</title>
+
+    <link th:href="@{/assets/css/navbar.css}" href="/assets/css/navbar.css" type="text/css" media="all" rel="stylesheet" />
+    <!-- Custom Javascript and CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Material+Icons" rel="stylesheet" type="text/css">
+
+<body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Open+Sans:wght@600&display=swap');
+
+    #container-header {
+        padding: 10%;
+        font-family: 'Open Sans', sans-serif;
+        margin-bottom: 5px;
+    }
+
+    #messages {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        height: 100%;
+    }
+
+    #messages:hover {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        height: 100%;
+        background-color: green;
+    }
+
+
+
+    #user-listview {
+        height: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: block;
+
+
+    }
+
+    #user-listview:hover {
+        height: auto;
+        display: block;
+        background-color: #f8f9fa;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 20px;
+    }
+
+    #user-username {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 18px;
+    }
+
+    #user-message {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 13px;
+    }
+
+    #user-time {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 13px;
+    }
+
+
+
+    #container-message-header {
+        height: 140px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-right: 20px;
+        padding-left: 20px;
+        margin-top: 50px;
+    }
+
+    #container-message-body {
+        height: 650px;
+        width: 100%;
+        border: 1px solid lightgray;
+        overflow-y: scroll;
+        margin-bottom: 10px;
+        border-radius: 10px;
+
+    }
+
+    img {
+        border-radius: 50px;
+    }
+
+    .message-layout {
+        background-color: lightgreen;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+
+    }
+
+    #container-message-layout {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    li{
+        list-style-type: none;
+        font-family: 'Open Sans', sans-serif;
+    }
+</style>
+
+<body>
+<header th:insert="header.html ::  nav"></header>
+<br><br><br><br>
+<div class="container-fluid">
+    <div class="col-md-12">
+
+        <div class="row">
+            <!-- container for the user -->
+            <div class="col-md-3">
+                <div class="col-md-12" id="container-header">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2 id="message-header">Direct</h2>
+                            <br>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#new-message">
+                                <i class="fa fa-plus"></i>
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="new-message" tabindex="-1" role="dialog" aria-labelledby="new-message" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">New Message</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <form action="">
+
+                                                    <div class="form-group">
+                                                        <label for="email">Email:</label>
+                                                        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelpId" placeholder="Enter email">
+                                                        <small  class="form-text text-muted">Help text</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="new-messages">Message</label>
+                                                        <textarea class="form-control" name="messages" id="new-messages" rows="3"></textarea>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-light"><i class="fa fa-send"></i> Send</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="Search" />
+                        </div>
+                    </div>
+
+                </div>
+                <hr>
+                <div style="overflow-y: scroll; height: 700px;">
+                        <div class="container-fluid" id="user-listview">
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-9">
+                <div class="container-fluid">
+                    <div class="col-md-12" id="container-message-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                                                 height="80">
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <h2 class="ml-4">
+                                                <b id="user-username"></b><br>
+                                            </h2>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#modelId">
+                                                <i class="fa fa-cog"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                <!-- Button trigger modal -->
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title"></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul>
+                                                    <li >Visit userprofile</li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="container-fluid" id="container-message-body">
+
+
+                        <!--  Message receiver -->
+                        <div class="container-fluid" id="container-message-layout">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <img src="https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg"
+                                             height="80" width="80">
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <div class="message-layout">
+                                            Hello this is test
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Message sender -->
+                        <div class="col-md-12 ">
+                            <div class="row ">
+                                <div class="col-md-auto ">
+                                    <div class="message-layout">
+                                        Hello this is test
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <img src="https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg"
+                                         height="80" width="80">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="container-fluid" id="container-message-footer">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="text" class="form-control form-control-lg" name="message"
+                                       placeholder="Message" id="message">
+                            </div>
+                            <div class="col-md-2">
+                                <form action="" id="message-form">
+                                    <button class="btn btn-light btn-lg"><i class="fa fa-send"></i></button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/6f40d29aa1.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/6f40d29aa1.js" crossorigin="anonymous"></script>
+<script>
+    document.querySelector("#message-form").addEventListener('submit', (event) => {
+        event.preventDefault();
+    })
+
+</script>
+<script th:src="@{/assets/js/header.js}" type="application/javascript" src="/assets/js/header.js"></script>
+<script th:src="@{/assets/js/privatechat/privatechat.js}" type="application/javascript" src="/assets/js/privatechat/privatechat.js"></script>
