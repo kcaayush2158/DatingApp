@@ -1,0 +1,184 @@
+.swiper-container {
+  width: 100%;
+}
+
+.card-text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-decoration: none;
+  list-style-type: none;
+  color: #222;
+  min-height: 100px;
+  max-height: 100px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+
+.text-bold {
+  font-weight: bold;
+}
+#container-information {
+  margin-bottom: 100px;
+}
+#uploadPhoto {
+  height: 300px;
+  width: 300px;
+
+  background-repeat: no-repeat;
+  padding-top: 100px;
+  background-size: cover;
+  color: deepskyblue;
+  object-fit: cover;
+  float: left;
+  text-align: center;
+}
+
+#button-message {
+  color: white;
+  background-color: #00c9a7;
+  border-radius: 50px;
+  height: 50px;
+}
+#button-message:hover {
+  color: white;
+  background-color: #00c9a7;
+  border-radius: 50px;
+  border-color: #00c9a7;
+  height: 50px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+#sub-navbar {
+  margin-top: 100px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
+  padding: 10px;
+  margin-top: 100px;
+}
+#container-photos {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#file-chosen {
+  margin-left: 0.3rem;
+  font-family: sans-serif;
+}
+label {
+  color: black;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+#pic1 {
+  border: 1px solid black;
+  width: 200px;
+  color: #077aec;
+  height: 300px;
+}
+#card-body-lookingfor {
+  height: auto;
+}
+
+.bio {
+  font-size: 20px;
+}
+.image {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}
+#card-body-infos {
+  height: 300px;
+}
+#card-body-interest {
+  height: auto;
+  width: fit-content;
+}
+.modal-dialog {
+  max-width: 900px !important;
+}
+#upload-picture {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#uploadPreview {
+  border: 1px solid red;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+#uploadPreview img {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+.card-body {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.container-topic {
+  height: auto;
+  width: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#topicName {
+  color: #949aa6;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  line-height: 12px;
+}
+.container-topic {
+  cursor: pointer;
+  padding: 20px 50px 20px 20px;
+
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
+  position: relative;
+  font-size: 18px;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+
+  border: none;
+}
+#topicAnswer {
+  color: #2a2f35;
+  word-wrap: break-word;
+  font-family: "GT America", Helvetica Neue, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.0625rem;
+  line-height: 25px;
+  white-space: pre-wrap;
+}

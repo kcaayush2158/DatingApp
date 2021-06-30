@@ -1,0 +1,180 @@
+<nav class="navbar navbar-light mt-5" id="navbar" style="box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);">
+  <a class="navbar-brand mb-0 h1 " href="#">All Rooms</a>
+  <ul class="nav justify-content-center">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <button  routerLink="/rooms/all-rooms" class="btn btn-light"  [routerLinkActive] >All Rooms <span class="badge badge-secondary ml-1" ></span></button>
+              </li>
+              <li class="nav-item">
+                <button class="btn btn-light"  routerLink="/rooms/my-rooms" routerLinkActive>My Rooms<span class="badge badge-secondary ml-1" id="my-chatroom" [innerText]="myRoomsCount"></span></button>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </ul>
+  <div class="my-2 ml-2">
+    <div class="row">
+      <div class="mr-3">
+        <input type="text"  [(ngModel)]="text" class="form-control mr-4" id="search_box" name="search_box"  placeholder="Room Name">
+
+      </div>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-light text-bold  mr-3" data-toggle="modal" data-target="#staticBackdrop">
+        <span> <i class="fa fa-plus"> </i> Room</span>
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="staticBackdropLabel">Chat Room</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form  [formGroup]="createRoomForm"  (ngSubmit)="createChatroom()" id="form-room" method="POST">
+                <div class="form-group">
+                  <label for="chatRoomName">Room Name : </label>
+                  <input type="text"  formControlName="chatRoomName"   [class.is-valid]="registerFormControl.chatRoomName.valid && registerFormControl.chatRoomName.untouched"   [class.is-invalid]="registerFormControl.chatRoomName.invalid && registerFormControl.chatRoomName.touched"  class="form-control" name="chatRoomName" id="chatRoomName" />
+                  <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.chatRoomName.invalid && registerFormControl.chatRoomName.touched">
+                    <small class="text-danger" *ngIf="registerFormControl.chatRoomName.errors?.required"><i class="fa fa-remove"></i> Chat Room name is required</small>
+                    <small class="text-danger" *ngIf="registerFormControl.chatRoomName.errors?.minlength"><i class="fa fa-remove"></i> Chat Room must charecters must be atleast 3 charecters</small>
+                    <small class="text-danger" *ngIf="registerFormControl.chatRoomName.errors?.maxlength"><i class="fa fa-remove"></i> Chat Room must charecters must be less than 20 charecters</small>
+                    <small class="text-danger" *ngIf="registerFormControl.chatRoomName.errors?.forbiddenName"><i class="fa fa-remove"></i> Chat Room is not allowed</small>
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <label for="roomDescription">Room Description :</label>
+                  <textarea class="form-control" formControlName="roomDescription" [class.is-valid]="registerFormControl.roomDescription.valid && registerFormControl.roomDescription.untouched"    [class.is-invalid]="registerFormControl.roomDescription.invalid && registerFormControl.roomDescription.touched"  name="roomDescription"  id="roomDescription"></textarea>
+                  <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.roomDescription.invalid && registerFormControl.roomDescription.touched">
+                    <small class="text-danger" *ngIf="registerFormControl.roomDescription.errors?.required"><i class="fa fa-remove"></i> Chat Room Description  is required</small>
+                    <small class="text-danger" *ngIf="registerFormControl.roomDescription.errors?.minlength"><i class="fa fa-remove"></i> Chat Room Description  must be atleast 20 charecters</small>
+                    <small class="text-danger" *ngIf="registerFormControl.roomDescription.errors?.maxlength"><i class="fa fa-remove"></i> Chat Room Description  must be less than 100 charecters</small>
+                    <small class="text-danger" *ngIf="registerFormControl.roomDescription.errors?.forbiddenName"><i class="fa fa-remove"></i> Chat Room Description is not allowed</small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="roomType">Room Type :</label>
+                  <select class="form-control" formControlName="roomType"    [class.is-invalid]="registerFormControl.roomType.invalid && registerFormControl.roomType.touched"  name="roomType" id="roomType">
+                    <option value="PRIVATE">PRIVATE</option>
+                    <option value="PUBLIC" selected>PUBLIC</option>
+                  </select>
+                  <div class="alert alert-danger" role="alert"  *ngIf="registerFormControl.roomType.invalid && registerFormControl.roomType.touched">
+                    <small class="text-danger" *ngIf="registerFormControl.roomType.errors?.required"><i class="fa fa-remove"></i> Chat Room Type  is required</small>
+                  </div>
+                </div>
+
+                <div class="form-group" id="form-group-password">
+                  <label for="password">Password :</label>
+                  <input type="password" formControlName="password"  class="form-control"   [class.is-valid]="registerFormControl.password.valid && registerFormControl.password.untouched"  [class.is-invalid]="registerFormControl.password.invalid && registerFormControl.password.touched"  name="password" id="password" />
+                  <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.password.invalid && registerFormControl.password.touched">
+                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.required"><i class="fa fa-remove"></i> Chat Room password  is required</small>
+                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.minlength"><i class="fa fa-remove"></i> Chat Room password  must be atleast 6 charecters</small>
+                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.maxlength"><i class="fa fa-remove"></i> Chat Room password  must be less than 20 charecters</small>
+                  </div>
+                </div>
+                <button class="btn btn-primary btn-block"  type="submit">Save</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="col-md-12">
+    <div class="container-fluid ">
+      <div class="row mt-3 offset-md-10">
+        <h6 style="font-size: 12px" class="mr-1">Private :</h6>
+        <img class="mr-3"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Location_dot_purple.svg/1024px-Location_dot_purple.svg.png"
+          height="15" />
+        <h6 style="font-size: 12px" class="mr-1">Public:</h6>
+        <img
+          src="data:image/png;base64,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"
+          height="15" />
+      </div>
+  </div>
+
+      <div *ngIf="allRooms == null">
+        <div class ="container-fluid ml-5">
+          <h1> Create  +Room button to create new room</h1>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row" >
+
+          <div  *ngFor="let in of counter(10) ;let i = index">
+            <div *ngIf="shimmer">
+              <div class="card mb-2  col-xs-12  col-md-6  ml-1  mr-2 mt-2 search-results" id="custom-card-design" >
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%'" [height]="'20px'" class="mt-3"></ngx-shimmer-loading>
+      
+                <div class="mt-2 mb-2 mb-2">
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'10px'"></ngx-shimmer-loading>
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'10px'"></ngx-shimmer-loading>
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'10px'"></ngx-shimmer-loading>
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'10px'"></ngx-shimmer-loading>
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'10px'"></ngx-shimmer-loading>
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'10px'"></ngx-shimmer-loading>
+                <div class="mt-5">
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'40px'"></ngx-shimmer-loading>
+              </div>
+              </div>
+            </div>
+              </div>
+            </div>
+
+      <span *ngFor="let room of allRooms | filter: text  " >
+        <div class="col-xs-12  mt-3"  *ngIf="!shimmer">
+          <div class="card mb-2  col-xs-12  col-md-6  ml-1  mr-2 mt-2 search-results" id="custom-card-design"
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="10"
+
+          >
+            <div class="card-body">
+              <h5 class="card-title text-uppercase text-center mb-2">{{ room.chatRoomName }}</h5>
+              <p class="mt-4 mb-5" id="chatDescription">{{ room.chatRoomDescription }}</p>
+            <ng-container *ngIf=" room.type == 'PUBLIC'; else elseTemplate">
+              <form routerLink="/rooms/{{room.chatRoomId }}" method="GET">
+                <button class="btn btn-block mt- mb-2 btn-join-room-public" type="submit">
+                  <b> <i class="fa fa-plus-circle" aria-hidden="true"></i> Join Room</b>
+                </button>
+                </form>
+             </ng-container>
+             <ng-template #elseTemplate>
+              <form  method="GET">
+                <button  routerLink="/rooms/{{room.chatRoomId }}"lass="btn btn-block mt-5 mb-2 btn-join-room-private"  type="submit">
+                  <b> <i class="fa fa-plus-circle" aria-hidden="true"></i> Join Room</b>
+                </button>
+                </form>
+             </ng-template>
+
+
+
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+  </div>
+
+
+
+</div>

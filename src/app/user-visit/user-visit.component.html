@@ -1,0 +1,320 @@
+<div class="container-fluid">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-2 " >
+                <app-side-nav></app-side-nav>
+            </div>
+            <div class="col-lg-10">  
+                <div class="container-fluid">
+                          
+                <nav class="navbar navbar-light " id="sub-navbar"  >
+                    <h6 class="navbar-brand " id="navbar-brand-header " href="#">Profiles</h6>
+                    <form class="form-inline">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div *ngFor="let user of navigationProfiles">
+                                  <div routerLink="/profile/{{user.username}}" >
+                                     <img  class="img-rounded mr-2 " src="{{user.profilePhoto}}" height="50" alt="loading..">                
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </form>                 
+                </nav>
+               
+
+                <div class="container-fluid ">
+                    <div class="col-md-12">
+                    <div class="col-12">
+                        <img class="center img-thumbnail  image center mt-5 mb-4"  src="{{user.profilePhoto}}" alt="loading.." >
+                        <h1 class="text-center mb-3 mt-4">{{user.firstName}} {{user.lastName}} , {{user.aboutMe.age}}</h1>
+                        <h4 class="mr-2 mb-3"><b> A Few Words About {{user.firstName}} </b></h4>
+                        <p class="text-center mt-2 bio">{{user.aboutMe.bio}} </p>
+                        <div class="container-fluid">
+
+                      
+                        <div class="row">
+                            <div class="col-md-8 offset-2 mt-2">
+                                <textarea class="form-control" [(ngModel)]="message"  cols="80" rows="8"  (ngModelChange)="onModelChange($event)"
+                                [attr.maxlength]="counter ? maxNumberOfCharacters : ''"  name="message" placeholder="Enter a message"></textarea>
+                            </div>   
+                            <div class="col-md-2">
+                                <button class="btn  mt-3"  (click)="sendMessage(user.id)" id="button-message">Send Message</button>
+                              <br> 
+                              <div class="mt-2 ml-5">
+                                {{numberOfCharacters2}} / {{maxNumberOfCharacters}}
+                            </div> 
+                            </div>   
+                           
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <router-outlet></router-outlet>
+        
+     <div class="row  mb-5" >
+
+               
+                <h4 class="mb-5">Public Photos</h4>
+                <swiper [effect]="'coverflow'" [grabCursor]="true"  [centeredSlides]="true" [slidesPerView]="'auto'" [coverflowEffect]="{
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 20,
+                    modifier: 1,
+                    slideShadows: false
+                  }" class="mySwiper" [lazy]="true">
+               
+            <div *ngFor="let photo of photos">
+    
+    
+                <div *ngIf="photo.photoType == 'PUBLIC'  ">
+                    <ng-template swiperSlide>
+                        <div lightbox-group>
+                            <img class="img-thumbnail" src="{{photo.photoUrl}}" [backgroundOpacity]="0.5" lightbox
+                            height="200" width="200" [fullImage]="photo.photoUrl" style="object-fit: contain;" />
+                        </div>
+                    </ng-template>
+                </div>
+    
+            </div>
+        </swiper>
+    
+    </div>
+<hr>
+    <div class="row  mb-5" >
+
+               
+        <h4 class="mb-5">Private Photos</h4>
+        <swiper [effect]="'coverflow'" [grabCursor]="true" [centeredSlides]="true" [slidesPerView]="'auto'" [coverflowEffect]="{
+            rotate: 50,
+            stretch: 0,
+            depth: 20,
+            modifier: 1,
+            slideShadows: false
+          }" class="mySwiper" [lazy]="true">
+       
+        
+        
+          <div *ngFor="let photo of photos">
+              <div *ngIf="photo.photoType == 'PRIVATE' ">
+        
+                  <div lightbox-group>
+                      <ng-template  carouselSlide swiperSlide>
+                          <img src="{{photo.photoUrl}}" class="img-thumbnail"  [backgroundOpacity]="0.5" lightbox [fullImage]="photo.photoUrl"
+                              height="200" width="200" style="object-fit: contain;" />
+                      </ng-template>
+                  </div>
+              </div>
+          </div>
+ 
+          
+      </swiper>
+    </div>
+
+
+
+
+<router-outlet></router-outlet>
+                    <div class="col-12">
+                        <div class="row">
+                        <div class="col-6">
+                          
+                            <div *ngIf=" topics == null">
+                                <h1> +ADD Some Answers to get matches</h1>
+                            </div>
+                          
+                            <div class="container-fluid" *ngFor="let topic of topics">
+                          
+                                <div class="container-topic ">
+                                  
+                                        <div class="col-12">
+                                          
+                                            <div class="container-topic-header">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <b id="topicName">{{topic.topicName}} </b>
+                                                    </div>
+                                                   
+                                                   
+                                                </div>
+                                            
+                      
+                                            </div>
+                                            <div class="container-topic-question">
+                                                {{topic.topicQuestion}}
+                                            </div>
+                                            <hr>
+                                            <div class="container-body-answer">
+                                                {{topic.topicAnswer}}
+                                            </div>
+                                        </div>
+                                    
+                                      
+                                </div>
+                              
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="container-fluid mt-5 " id="container-information">
+                    
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-12" >
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h2 class="text-center text-danger card-title mt-3 mb-5">About {{user.firstName}} </h2>
+                                                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                 
+                                                                
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm table-hover">
+                                                            <thead>
+                                                            <tr></tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr *ngIf="user.aboutMe.liveIn">
+                                                                <td class="text-bold"> Live in :</td>
+                                                                <td >{{user.aboutMe.liveIn}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.country">
+                                                                <td class="text-bold">Country:</td>
+                                                                <td >{{user.aboutMe.country}} </td>
+                                                            </tr>
+                                                          
+                                                            <tr *ngIf="user.aboutMe.bodyType">
+                                                                <td class="text-bold" >Body type:</td>
+                                                                <td >{{user.aboutMe.bodyType}}</td>
+                                                            </tr>
+
+                                                            <tr *ngIf="user.aboutMe.workAs">
+                                                                <td class="text-bold">Work as :</td>
+                                                                <td >{{user.aboutMe.workAs}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.haveKids">
+                                                                <td class="text-bold">Have Kids:</td>
+                                                                <td >{{user.aboutMe.haveKids}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.education">
+                                                                <td class="text-bold">Education:</td>
+                                                                <td >{{user.aboutMe.education}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.languages">
+                                                                <td class="text-bold">Languages</td>
+                                                                <td >{{user.aboutMe.languages}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.smoke">
+                                                                <td class="text-bold">Smoke:</td>
+                                                                <td >{{user.aboutMe.smoke}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.drink">
+                                                                <td class="text-bold">Drink:</td>
+                                                                <td >{{user.aboutMe.drink}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.relationship">
+                                                                <td class="text-bold">Relationship:</td>
+                                                                <td >{{user.aboutMe.relationship}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.height">
+                                                                <td class="text-bold">Height:</td>
+                                                                <td >{{user.aboutMe.height}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.eyes">
+                                                                <td class="text-bold">Eyes:</td>
+                                                                <td >{{user.aboutMe.eyes}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="user.aboutMe.hair">
+                                                                <td class="text-bold">Hair:</td>
+                                                                <td >{{user.aboutMe.hair}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 ">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="card mt-3" >
+                                                            <h2 class=" text-danger text-center card-title mt-3">Interest</h2>
+                                                            <div class="card-body" id="card-body-interest">
+                                                                <p class="card-text" > <span class="badge badge-secondary">{{user.aboutMe.interests}} </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+        
+                                                
+                                                        <br>
+                                                        <div class="card">
+                                                            <div class="card-body" id="card-body-infos">
+                                                                <h2 class="text-center text-danger card-title">Infos</h2>
+                                                                <p class="card-text"></p>
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-sm table-hover">
+                                                                        <thead>
+                                                                        <tr></tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        <tr >
+                                                                            <td class="text-bold">Profile Visited :</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr  *ngIf="user.createdDate">
+                                                                            <td class="text-bold">Profile Created :</td>
+                                                                            <td >{{user.createdDate}}</td>
+                                                                        </tr>
+                                                                
+                                                                        <tr>
+                                                                            <td class="text-bold">Profile Likes:</td>
+                                                                            <!-- <td >{{totalLikes}}</td> -->
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="card mt-3">
+                                                            <div class="card-body" id="card-body-lookingfor">
+                                                                <h2 class="text-center text-danger card-title"  >Looking For&nbsp;</h2>
+                                                                <p class="card-text">{{user.aboutMe.lookingFor}}</p>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h6 class="text-muted card-subtitle mb-2"></h6>
+                                                                <a class="card-link" href="#"></a>
+                                                                <a class="card-link" href="#"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div >
+                                 
+                     </div>           
+                    </div>
+                </div>
+            </div>
+        </div>

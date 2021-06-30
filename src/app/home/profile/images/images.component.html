@@ -1,0 +1,110 @@
+<hr>
+<div class="container-fluid">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-10"  >
+           
+                <nav class="navbar navbar-light " id="sub-navbar"  >
+                    <button class="btn btn-light" [routerLink]="[ '/profile',  ]"> <i class="fa fa-arrow-left"></i></button>
+                    <h6 class="navbar-brand " id="navbar-brand-header " href="#">Your Photos</h6>
+         
+                    <form class="form-inline">
+                        
+                     
+                    </form>
+                </nav>
+                <div class="container-fluid">
+       <h6 class="mt-5 mb-3 " >Upload Photo:</h6>
+       
+       <ngx-dropzone (change)="onSelect($event)">
+        <ngx-dropzone-label>Drop or Browse</ngx-dropzone-label>
+        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let upload of uploads"
+            (removed)="onRemove(upload)" 
+            [file]="upload.data.raw"
+        [removable]="true"
+      >
+        <ngx-dropzone-label>
+            Name: {{ upload.data.name }}<br />
+            State: {{upload.data.state}}<br />
+            Progress: {{upload.data.progress}}%
+        </ngx-dropzone-label>
+    
+      </ngx-dropzone-image-preview>
+    </ngx-dropzone>
+                    
+                   <h2 class="selfviewPhotos-title ml-4"></h2>
+                    <div class="col-12">
+                        <div class="row">
+                                <div class="col-8">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div *ngFor="let photo of photos" class="mt-5">
+                                                    <div class="row">
+
+                                                  
+                                                    <div class="col-md-5">
+                                                        <img  class="selfviewPhotos-photo-image  img-thumbnail"src="{{photo.photoUrl}}" height="200" >
+                                                    </div>
+                                                   
+                                                    <div class="col-md-4">
+                                                        <select class="form-control" [(ngModel)]="photoType" >
+                                                         
+                                                                <option selected>PUBLIC</option>
+                                                           
+                                                          
+                                                                <option>PRIVATE</option>
+                                                          
+                                                                                                       
+                                                        </select>
+                                                   </div>
+                                                   <div class="col-md-2">
+                                                        <button class="btn btn-secondary" (click)="updatePhotoType(photo.id)"><i class="fa fa-save"></i> Save</button>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <button class="btn btn-light" (click)="deleteImage(photo.id)"><i class="fa fa-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                
+                                            </div>
+                                     
+                                        </div>                          
+                                    
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                  <div class="photo-rules-card">
+                                      <h2 class="photo-rules-header">Photo Rules</h2>
+                                      <h5>Post great photos like these</h5>
+                                      <h6>You'll get more dates</h6>
+                                      <hr>
+                                        <h6>Doing something ✅</h6>
+                                        <img  height="100"src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png">
+                                        <h6>Your face</h6>
+                                        <img height="100" src="https://i.ytimg.com/vi/l0W2e1mGntQ/maxresdefault.jpg">
+                                        <h6>Your  doing something  ✅ </h6>
+
+                                        <h5 class="mt-4">NOT photos like these</h5>
+                                        <h6 >You'll get banned </h6>
+                                        <hr>
+                                        <img src="https://www.clipartkey.com/mpngs/m/31-312215_kiss-clipart-transparent-background-lips-icon-png.png" height="100">
+                                         <h6 class="mt-1">Porn / Nudity ❌</h6>
+                                         <img src="https://img.icons8.com/bubbles/2x/visible--v2.png"  class="mt-1" height="100">
+                                         <h6 class="mt-1">Extreme Closeups  ❌</h6>
+                                         <img src="https://i.pinimg.com/736x/9d/4b/7f/9d4b7fb1195c2dae0fc6f6e0913491cc.jpg" class="mt-1" height="100">
+                                         <h6 class="mt-1">Pets / Children Alone ❌</h6>
+                                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTQBPBIdFmRlkwxuMYMbN-BdpdBpDHJzQAkY-vZTbCpYHJLcSKQQHvik4I1RFgBGIHwyA&usqp=CAU" class="mt-1" height="100">
+                                         <h6 class="mt-1">Celebrity  / Fake Photos ❌</h6>
+                                         <img src="https://static.thenounproject.com/png/105264-200.png" class="mt-1"height="100">
+                                         <h6 class="mt-1">Meme / Text / ads ❌</h6>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+</div>

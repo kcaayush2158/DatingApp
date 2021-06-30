@@ -1,0 +1,1198 @@
+
+<div class="container-fluid">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-2 " >
+                <app-side-nav></app-side-nav>
+            </div>
+
+            <div class="col-lg-10"  >
+                <br>
+                <nav class="navbar navbar-light " id="sub-navbar"  >
+                    <h6 class="navbar-brand " id="navbar-brand-header " href="#">Profiles</h6>
+                    <form class="form-inline">
+                  
+                        <button type="button" class="btn btn-light mr-3 " data-toggle="modal" data-target="#exampleModalLong">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <button class="btn btn-light"  routerLink="{{user.id}}/photos"><i class="fas fa-edit"></i> Edit Photos</button>
+                    </form>
+                   
+                </nav>
+               
+
+                <div class="container-fluid ">
+                    <div class="col-12" >
+                    
+                        <div class="container-info">
+                            <img class="center img-thumbnail  image center mt-5 mb-4"  style="border-radius: 999px; float:left" src="{{user.profilePhoto}}">
+                            <h1 class="text-center mb-3 mt-4">{{user.firstName}} {{user.lastName}} , {{user.aboutMe.age}}</h1>
+                            <div class="container-info-body">
+
+                           
+                        <h5 class="mr-2 mb-3 ml-5"><b> A Few Words About Myself</b></h5>
+                        <p class="text-center mt-2  ml-5 bio">{{user.aboutMe.bio}} </p>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <hr>
+<router-outlet></router-outlet>
+                <div class="row  mb-5" >
+
+               
+                <h5 class="mb-5 text-uppercase ">Private Photos</h5>
+                <swiper [effect]="'coverflow'" [grabCursor]="true"  [centeredSlides]="true" [slidesPerView]="'auto'" [coverflowEffect]="{
+                      rotate: 50,
+                      stretch: 0,
+                      depth: 20,
+                      modifier: 1,
+                      slideShadows: false
+                    }" class="mySwiper" [lazy]="true">
+                 
+                  
+                    <div *ngFor="let photo of photos">
+                        <div *ngIf="photo.photoType == 'PRIVATE' ">
+                      <div class="lightbox-group" >
+                          <h1>Private photos</h1>
+                        <img src="{{photo.photoUrl}}" class="img-thumbnail" >
+                      </div>
+                            <div lightbox-group>
+                                <ng-template  carouselSlide swiperSlide>
+                                    <img src="{{photo.photoUrl}}" class="img-thumbnail" [backgroundOpacity]="0.5" lightbox [fullImage]="photo.photoUrl"
+                                        height="200" width="200" style="object-fit: contain;" />
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+           
+                
+                </swiper>
+            </div>
+            <hr>
+                
+                <div class="row">
+                    <h6 class="mb-5 text-uppercase">Public Photos</h6>
+                    <swiper [effect]="'coverflow'" [grabCursor]="true"   [centeredSlides]="true" [slidesPerView]="'auto'"
+                        [coverflowEffect]="{
+                                          rotate: 50,
+                                          stretch: 0,
+                                          depth: 20,
+                                          modifier: 1,
+                                          slideShadows: false
+                                        }" [pagination]="false" class="mySwiper" [lazy]="true">
+                        <div *ngFor="let photo of photos">
+                
+                
+                            <div *ngIf="photo.photoType == 'PUBLIC'  ">
+                                <ng-template swiperSlide>
+                                    <div lightbox-group>
+                                        <img class="img-thumbnail" src="{{photo.photoUrl}}" [backgroundOpacity]="0.5" lightbox
+                                        height="200" width="200"  [fullImage]="photo.photoUrl" style="object-fit: contain;" />
+                                    </div>
+                                </ng-template>
+                            </div>
+                
+                        </div>
+                    </swiper>
+                
+                </div>
+   
+<hr>
+                    <div class="col-12">
+                        <div class="row">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-primary btn-block offset-6 mx-auto mt-5" data-toggle="modal" data-target="#topic">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                Add Topic
+                              </button>
+  
+                          <!-- ------------------Modal  topic --------------->
+                          <div class="modal fade" id="topic" tabindex="-1" role="dialog" aria-labelledby="topicTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLongTitle">Add Topic</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                            
+                                <form (ngSubmit)="saveTopic()" >
+                                    <div class="form-group">
+                                        <label id="topicName">Topic Name</label>
+                                        <select   [(ngModel)]="topicName" class="form-control" id="topicName"  name="topicName"  >
+                                            <option selected></option>
+                                                <option value="ABOUT ME">ABOUT ME</option>
+                                                <option value="ASPIRATIONS">ASPIRATIONS</option>                   
+                                                <option value="TALENTS">TALENTS</option>
+                                                <option value="NEEDS"> NEEDS</option>
+                                                <option value="HOBBIES">HOBBIES</option>
+                                                <option value="MOMENTS">MOMENTS</option>
+                                        </select>
+
+                                        <!-- <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.topicName.invalid && registerFormControl.topicName.touched">
+                                            <small class="text-danger" *ngIf="registerFormControl.topicName.errors?.required"><i class="fa fa-remove"></i>email is required</small>
+                                        </div> -->
+
+                                    </div>
+                                        <div class="form-group">
+                                            <label class="topicQuestion">Topic Question</label>
+                                <select   [(ngModel)]="topicQuestion " class="form-control" id="topicQuestion"  name="topicQuestion" >
+                                            <ng-container *ngIf="topicName === 'ABOUT ME';else ASPIRATIONS">
+                                                <option selected></option>
+                                                <option value="My self-summary">My self-summary</option>
+                                                <option value="Me, a Haiku">Me, a Haiku</option>
+                                                <option value="Favorite thing about the place I live">Favorite thing about the place I live</option>
+                                                <option value="Most people that know me would say I'm">Most people that know me would say I'm</option>
+                                                <option value="Favorite memory from my childhood">Favorite memory from my childhood</option>
+                                            </ng-container>
+                                           
+                                            <ng-template #ASPIRATIONS>
+                                                <ng-container *ngIf="topicName=== 'ASPIRATIONS';else HOBBIES">
+                                                    <option selected></option>
+                                                    <option value="Current goal">Current goal</option>
+                                                    <option value="One day, I would like to"> One day, I would like to</option>
+                                                    <option value="I'd like to be known for my">I'd like to be known for my</option>
+                                                    <option value="If money were no concern, this is what I would be doing">If money were no concern, this is what I would be doing</option>
+                                                    <option value="My dream job is">My dream job is</option>
+                                                </ng-container>
+                                            </ng-template>
+                                            <ng-template #HOBBIES>
+                                                <ng-container *ngIf="topicName === 'HOBBIES';else fourth">
+                                                    <option selected></option>
+                                                    <option value="I like to take pictures of">I like to take pictures of</option>
+                                                    <option value="My favorite conspiracy theory">My favorite conspiracy theory</option>
+                                                    <option value="Last video I watched on YouTube">Last video I watched on YouTube</option>
+                                                    <option value="The last show I binged">The last show I binged</option>
+                                                    <option value="">I should spend less time</option>
+                                                </ng-container>
+                                            </ng-template>
+                                      <ng-template #fourth>
+                                        <ng-container *ngIf="topicName === 'TALENTS';else fifth">
+                                            <option selected></option>
+                                            <option value="I'm really good at"> I'm really good at</option>
+                                            <option value="I could probably beat you at">I could probably beat you at</option>
+                                            <option value="My patronus">My patronus</option>
+                                            <option value="I want to be better at">I want to be better at</option>
+                                            <option value="My worst quality">My worst quality</option>
+                                        </ng-container>
+                                    </ng-template>
+                                      <ng-template #fifth>
+                                        <ng-container *ngIf=" topicName== 'NEEDS';else moments">
+                                            <option selected></option>
+                                            <option value="Six things I could never do without">Six things I could never do without</option>
+                                            <option value="If I could only eat one food for the rest of time it would be">If I could only eat one food for the rest of time it would be</option>
+                                            <option value="This item makes me feel at home">This item makes me feel at home</option>
+                                            <option value="My partner should be">My partner should be</option>
+                                            <option value="I couldn't function without these apps">I couldn't function without these apps</option>
+                                        </ng-container>
+                                      </ng-template>
+                                      
+                                      <ng-template #moments>
+                                        <ng-container *ngIf="topicName === 'MOMENTS'">
+                                            <option selected></option>
+                                            <option value="A perfect day">A perfect day</option>
+                                            <option value="Best day of my life so far">Best day of my life so far</option>
+                                            <option value="Ideal weekend routine">Ideal weekend routine</option>
+                                            <option value="When I die, I will">When I die, I will</option>
+                                            <option value="On a typical Wednesday I am">On a typical Wednesday I am</option>
+                                        </ng-container>
+                                      </ng-template>
+                                      
+                                </select>
+                                    </div>
+                                      <div class="form-group">
+                                        <label  id="label-answer"> Answer</label>
+                                        <textarea name="topicAnswer"  [(ngModel)]="topicAnswer " class="form-control" id="topicAnswer" cols="30" rows="10"></textarea>
+                                      </div>
+                                     
+                             </form>
+                             </div>
+
+                               
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button"  (click)="saveTopic()"class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                            <div *ngIf="!topics">
+                                <h1> +ADD Some Answers to get matches</h1>
+                            </div>
+                            <div class="container-fluid" *ngFor="let topic of topics">
+                          
+                                <div class="container-topic ">
+                                  
+                                        <div class="col-12">
+                                          
+                                            <div class="container-topic-header">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <b id="topicName">{{topic.topicName}} </b>
+                                                    </div>
+                                                    <div class="col-2 offset-6">
+                                                      
+                                                        <button type="light" class="btn btn-light" data-toggle="modal" data-target="#{{topic.id}}">
+                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  
+                                                          </button>
+                                                          
+                                                          <!-- Modal -->
+                                                          <div class="modal fade" id="{{topic.id}}" tabindex="-1" role="dialog" aria-labelledby="{{topic.id}}Title" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                              <div class="modal-content">
+                                                                <div class="modal-header">
+                                                
+                                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                  </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form>
+                                                                        <label class="topicName">{{topic.topicName}}</label>
+                                                                        <select class="form-control" id="topicName"  name="topicName" >
+                                                                        <option value="{{topic.topicQuestion}}"  disabled>{{topic.topicQuestion}}</option>
+                                                                        <option>Current goal</option>
+                                                                        <option>One day, I would like to</option>
+                                                                        <option>I'd like to be known for my</option>
+                                                                        <option>If money were no concern, this is what I would be doing</option>
+                                                                        <option>My dream job is</option>
+                                                                    </select>
+                                                                    <label > Answer</label>
+                                                                     <textarea name="topicAnswer"  value="{{topic.topicAnswer}}" class="form-control" id="topicAnswer" cols="30" rows="10"></textarea>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            
+                      
+                                            </div>
+                                            <div class="container-topic-question">
+                                                {{topic.topicQuestion}}
+                                            </div>
+                                            <hr>
+                                            <div class="container-body-answer">
+                                                {{topic.topicAnswer}}
+                                            </div>
+                                        </div>
+                                    
+                                        <button (click)="deleteTopic(topic.id)" class="btn btn-light mt-3  " > 
+                                            <i class="far fa-trash-alt"></i> Delete</button>
+                                </div>
+                              
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="container-fluid mt-5 " id="container-information">
+                    
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-12" >
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h2 class="text-center text-danger card-title mt-3 mb-5">About Me</h2>
+                                                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Basic</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Your Appearance</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Your Lifestyle</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form [formGroup]="userForm"  method="post">
+                                                                    {{userForm.value | json}}
+                                                                    <div class="modal-body">
+                                                                        <div class="tab-content" id="myTabContent">
+                                                                            <!--========================TAB CONTENT BASIC INFORMATION ===================================-->
+                                                                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="basic-tab">
+                                                                                <h3 class="text-center">Your Basics</h3>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="username">Username: </label>
+                                                                                 
+                                                                                    <input formControlName="username"  value="{{user.username}}"  [class.is-valid]="registerFormControl.username.valid && registerFormControl.username.untouched" pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="registerFormControl.username.invalid && registerFormControl.username.touched" name="username" id="username" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.username.invalid && registerFormControl.username.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.required">   <i class="fa fa-remove"></i>Username is required</small>
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.minlength"><i class="fa fa-remove"></i>Username charecters must be atleast 5 charecters</small>
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.maxlength"><i  class="fa fa-remove"></i> Username charecters must be less than 20 charecters</small>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="firstname">First Name</label>
+                                                                                    <input type="text"  value="{{user.firstname}}" [class.is-valid]="registerFormControl.firstname.valid && registerFormControl.firstname.untouched" [class.is-invalid]="registerFormControl.firstname.invalid && registerFormControl.firstname.touched"   formControlName="firstname" name="firstname" id="firstName" value="{{user.firstname}} " class="form-control">
+                                                                                    <div class="alert alert-danger mt-1" role="alert"   *ngIf="registerFormControl.firstname.invalid && registerFormControl.firstname.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.required"><i class="fa fa-remove"></i>FirstName is required</small>
+                                                                                        <small class="text-danger"*ngIf="registerFormControl.firstname.errors?.minlength"><i class="fa fa-remove"></i>FirstName charecters must be atleast 3 charecters</small>
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.maxlength"><i class="fa fa-remove"></i> FirstName charecters must be less than 20charecters</small>
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.forbiddenName"><i class="fa fa-remove"></i> FirstName is not allowed</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="lastName">Last Name :</label>
+                                                                                    <input name="lastname" formControlName="lastname"   value="{{user.lastName}} "  [class.is-valid]="registerFormControl.lastname.valid && registerFormControl.lastname.untouched" [class.is-invalid]="registerFormControl.lastname.invalid && registerFormControl.lastname.touched" id="lastname" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lastname.invalid && registerFormControl.lastname.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.required"><i class="fa fa-remove"></i>Last Name is required</small>
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.minlength"><i class="fa fa-remove"></i>Last Name charecters must be atleast 3 charecters</small>
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.maxlength"><i  class="fa fa-remove"></i> Last Name charecters must be less than 20 charecters</small>
+                                                                                        <small class="text-danger"*ngIf="registerFormControl.lastname.errors?.forbiddenName"><i class="fa fa-remove"></i> Last Name is not allowed</small>
+                                                                                    </div>
+                                                                                    </div>
+                                                                                 <div class="form-group">
+                                                                                       <label for="email">Email: </label>
+                                                                                      <input formControlName="email" name="email" [class.is-valid]="registerFormControl.email.valid && registerFormControl.email.untouched" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [class.is-invalid]="registerFormControl.email.invalid && registerFormControl.email.touched" name="email" id="email" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                                                                                         <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.password.invalid && registerFormControl.email.touched">
+                                                                                            <small class="text-danger" *ngIf="registerFormControl.email.errors?.required"><i class="fa fa-remove"></i>email is required</small>
+                                                                                            <small class="text-danger" *ngIf="registerFormControl.email.errors?.minlength"><i class="fa fa-remove"></i>email charecters must be atleast 3 charecters</small>
+                                                                                            <small class="text-danger" *ngIf="registerFormControl.email.errors?.maxlength"><i class="fa fa-remove"></i> email charecters must be less than 20 charecters</small>
+                                                                                            <small class="text-danger" *ngIf="registerFormControl.email.errors?.forbiddenName"><i class="fa fa-remove"></i> email is not allowed</small>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    
+                                                                                <div class="form-group">
+                                                                                    <label for="age">Age</label>
+                                                                                    <input type="text"  formControlName="age"  [class.is-valid]="registerFormControl.age.valid && registerFormControl.age.untouched" [class.is-invalid]="registerFormControl.age.invalid && registerFormControl.age.touched"   name="age" id="age" value="{{user.aboutMe.age}} " min="18" max="80" class="form-control">
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.age.invalid && registerFormControl.age.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.age.errors?.required"><i class="fa fa-remove"></i>Age is required</small>
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.age.errors?.minlength"><i class="fa fa-remove"></i>Age charecters must be atleast 18 charecters</small>
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.age.errors?.maxlength"><i class="fa fa-remove"></i> Age charecters must be less than 80 charecters</small>
+                                                                                        </div>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="gender">What is your Gender ? </label>
+                                                                                    <select class="form-control"  [class.is-valid]="registerFormControl.gender.valid && registerFormControl.gender.untouched" [class.is-invalid]="registerFormControl.gender.invalid && registerFormControl.gender.touched"  formControlName="gender"   name="gender" id="gender">
+                                                                                     <option  value="{{user.aboutMe.gender}} "  selected>{{user.aboutMe.gender}}  </option>
+                                                                                      <option  data-divider="true"></option>
+                                                                                      <option  option value="Male">Male</option>
+                                                                                    <option value="Female">Female</option>
+                                                                                </select>
+                                                                                <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.gender.invalid && registerFormControl.gender.touched">
+                                                                                    <small class="text-danger" *ngIf="registerFormControl.gender.errors?.required"><i class="fa fa-remove"></i>Gender is required</small>
+                                                                                    </div>
+                                                                            </div>
+                                                                            
+                                                                        
+                                                                                <div class="form-group">
+                                                                                    <label for="liveIn">Which city do you live ??</label>
+                                                                                    <input type="text"  [class.is-valid]="registerFormControl.liveIn.valid && registerFormControl.liveIn.untouched" [class.is-invalid]="registerFormControl.liveIn.invalid && registerFormControl.liveIn.touched"   formControlName="liveIn"  name="liveIn" id="liveIn" value="{{user.aboutMe.liveIn}} "   class="form-control">
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.liveIn.invalid && registerFormControl.liveIn.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.liveIn.errors?.required"><i class="fa fa-remove"></i>Live In is required</small>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="education">What is your Education Level?</label>
+                                                                                    <select class="form-control" [class.is-valid]="registerFormControl.education.valid && registerFormControl.education.untouched" [class.is-invalid]="registerFormControl.educationinvalid && registerFormControl.education.touched"  name="education" id="education">
+                                                                                        <option   formControlName="education"  selected value="{{user.aboutMe.education}} "  text="{{user.aboutMe.education}} " ></option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="High School">High School</option>
+                                                                                        <option value="College">College</option>
+                                                                                        <option value="Associates Degree">Associates Degree</option>
+                                                                                        <option value="Bachelors Degree">Bachelors Degree</option>
+                                                                                        <option value="Graduate Degree">Graduate Degree</option>
+                                                                                        <option value="PhD">PhD</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.education.invalid && registerFormControl.education.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.education.errors?.required"><i class="fa fa-remove"></i>Education is required</small>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="country">What is your Country Name ? </label>
+                                                                                    <select formControlName="country"  [class.is-valid]="registerFormControl.country.valid && registerFormControl.coutry.untouched" [class.is-invalid]="registerFormControl.country.invalid && registerFormControl.country.touched"  class="form-control" id="country" name="country">
+                                                                                        <option value="{{user.aboutMe.country}} " text="{{user.aboutMe.education}} " selected ></option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="Afghanistan">Afghanistan</option>
+                                                                                        <option value="Albania">Albania</option>
+                                                                                        <option value="Algeria">Algeria</option>
+                                                                                        <option value="American Samoa">American Samoa</option>
+                                                                                        <option value="Andorra">Andorra</option>
+                                                                                        <option value="Angola">Angola</option>
+                                                                                        <option value="Anguilla">Anguilla</option>
+                                                                                        <option value="Antigua & Barbuda">Antigua & Barbuda</option>
+                                                                                        <option value="Argentina">Argentina</option>
+                                                                                        <option value="Armenia">Armenia</option>
+                                                                                        <option value="Aruba">Aruba</option>
+                                                                                        <option value="Australia">Australia</option>
+                                                                                        <option value="Austria">Austria</option>
+                                                                                        <option value="Azerbaijan">Azerbaijan</option>
+                                                                                        <option value="Bahamas">Bahamas</option>
+                                                                                        <option value="Bahrain">Bahrain</option>
+                                                                                        <option value="Bangladesh">Bangladesh</option>
+                                                                                        <option value="Barbados">Barbados</option>
+                                                                                        <option value="Belarus">Belarus</option>
+                                                                                        <option value="Belgium">Belgium</option>
+                                                                                        <option value="Belize">Belize</option>
+                                                                                        <option value="Benin">Benin</option>
+                                                                                        <option value="Bermuda">Bermuda</option>
+                                                                                        <option value="Bhutan">Bhutan</option>
+                                                                                        <option value="Bolivia">Bolivia</option>
+                                                                                        <option value="Bonaire">Bonaire</option>
+                                                                                        <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+                                                                                        <option value="Botswana">Botswana</option>
+                                                                                        <option value="Brazil">Brazil</option>
+                                                                                        <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+                                                                                        <option value="Brunei">Brunei</option>
+                                                                                        <option value="Bulgaria">Bulgaria</option>
+                                                                                        <option value="Burkina Faso">Burkina Faso</option>
+                                                                                        <option value="Burundi">Burundi</option>
+                                                                                        <option value="Cambodia">Cambodia</option>
+                                                                                        <option value="Cameroon">Cameroon</option>
+                                                                                        <option value="Canada">Canada</option>
+                                                                                        <option value="Canary Islands">Canary Islands</option>
+                                                                                        <option value="Cape Verde">Cape Verde</option>
+                                                                                        <option value="Cayman Islands">Cayman Islands</option>
+                                                                                        <option value="Central African Republic">Central African Republic</option>
+                                                                                        <option value="Chad">Chad</option>
+                                                                                        <option value="Channel Islands">Channel Islands</option>
+                                                                                        <option value="Chile">Chile</option>
+                                                                                        <option value="China">China</option>
+                                                                                        <option value="Christmas Island">Christmas Island</option>
+                                                                                        <option value="Cocos Island">Cocos Island</option>
+                                                                                        <option value="Colombia">Colombia</option>
+                                                                                        <option value="Comoros">Comoros</option>
+                                                                                        <option value="Congo">Congo</option>
+                                                                                        <option value="Cook Islands">Cook Islands</option>
+                                                                                        <option value="Costa Rica">Costa Rica</option>
+                                                                                        <option value="Cote DIvoire">Cote DIvoire</option>
+                                                                                        <option value="Croatia">Croatia</option>
+                                                                                        <option value="Cuba">Cuba</option>
+                                                                                        <option value="Curaco">Curacao</option>
+                                                                                        <option value="Cyprus">Cyprus</option>
+                                                                                        <option value="Czech Republic">Czech Republic</option>
+                                                                                        <option value="Denmark">Denmark</option>
+                                                                                        <option value="Djibouti">Djibouti</option>
+                                                                                        <option value="Dominica">Dominica</option>
+                                                                                        <option value="Dominican Republic">Dominican Republic</option>
+                                                                                        <option value="East Timor">East Timor</option>
+                                                                                        <option value="Ecuador">Ecuador</option>
+                                                                                        <option value="Egypt">Egypt</option>
+                                                                                        <option value="El Salvador">El Salvador</option>
+                                                                                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                                                                        <option value="Eritrea">Eritrea</option>
+                                                                                        <option value="Estonia">Estonia</option>
+                                                                                        <option value="Ethiopia">Ethiopia</option>
+                                                                                        <option value="Falkland Islands">Falkland Islands</option>
+                                                                                        <option value="Faroe Islands">Faroe Islands</option>
+                                                                                        <option value="Fiji">Fiji</option>
+                                                                                        <option value="Finland">Finland</option>
+                                                                                        <option value="France">France</option>
+                                                                                        <option value="French Guiana">French Guiana</option>
+                                                                                        <option value="French Polynesia">French Polynesia</option>
+                                                                                        <option value="French Southern Ter">French Southern Ter</option>
+                                                                                        <option value="Gabon">Gabon</option>
+                                                                                        <option value="Gambia">Gambia</option>
+                                                                                        <option value="Georgia">Georgia</option>
+                                                                                        <option value="Germany">Germany</option>
+                                                                                        <option value="Ghana">Ghana</option>
+                                                                                        <option value="Gibraltar">Gibraltar</option>
+                                                                                        <option value="Great Britain">Great Britain</option>
+                                                                                        <option value="Greece">Greece</option>
+                                                                                        <option value="Greenland">Greenland</option>
+                                                                                        <option value="Grenada">Grenada</option>
+                                                                                        <option value="Guadeloupe">Guadeloupe</option>
+                                                                                        <option value="Guam">Guam</option>
+                                                                                        <option value="Guatemala">Guatemala</option>
+                                                                                        <option value="Guinea">Guinea</option>
+                                                                                        <option value="Guyana">Guyana</option>
+                                                                                        <option value="Haiti">Haiti</option>
+                                                                                        <option value="Hawaii">Hawaii</option>
+                                                                                        <option value="Honduras">Honduras</option>
+                                                                                        <option value="Hong Kong">Hong Kong</option>
+                                                                                        <option value="Hungary">Hungary</option>
+                                                                                        <option value="Iceland">Iceland</option>
+                                                                                        <option value="Indonesia">Indonesia</option>
+                                                                                        <option value="India">India</option>
+                                                                                        <option value="Iran">Iran</option>
+                                                                                        <option value="Iraq">Iraq</option>
+                                                                                        <option value="Ireland">Ireland</option>
+                                                                                        <option value="Isle of Man">Isle of Man</option>
+                                                                                        <option value="Israel">Israel</option>
+                                                                                        <option value="Italy">Italy</option>
+                                                                                        <option value="Jamaica">Jamaica</option>
+                                                                                        <option value="Japan">Japan</option>
+                                                                                        <option value="Jordan">Jordan</option>
+                                                                                        <option value="Kazakhstan">Kazakhstan</option>
+                                                                                        <option value="Kenya">Kenya</option>
+                                                                                        <option value="Kiribati">Kiribati</option>
+                                                                                        <option value="Korea North">Korea North</option>
+                                                                                        <option value="Korea Sout">Korea South</option>
+                                                                                        <option value="Kuwait">Kuwait</option>
+                                                                                        <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                                                                        <option value="Laos">Laos</option>
+                                                                                        <option value="Latvia">Latvia</option>
+                                                                                        <option value="Lebanon">Lebanon</option>
+                                                                                        <option value="Lesotho">Lesotho</option>
+                                                                                        <option value="Liberia">Liberia</option>
+                                                                                        <option value="Libya">Libya</option>
+                                                                                        <option value="Liechtenstein">Liechtenstein</option>
+                                                                                        <option value="Lithuania">Lithuania</option>
+                                                                                        <option value="Luxembourg">Luxembourg</option>
+                                                                                        <option value="Macau">Macau</option>
+                                                                                        <option value="Macedonia">Macedonia</option>
+                                                                                        <option value="Madagascar">Madagascar</option>
+                                                                                        <option value="Malaysia">Malaysia</option>
+                                                                                        <option value="Malawi">Malawi</option>
+                                                                                        <option value="Maldives">Maldives</option>
+                                                                                        <option value="Mali">Mali</option>
+                                                                                        <option value="Malta">Malta</option>
+                                                                                        <option value="Marshall Islands">Marshall Islands</option>
+                                                                                        <option value="Martinique">Martinique</option>
+                                                                                        <option value="Mauritania">Mauritania</option>
+                                                                                        <option value="Mauritius">Mauritius</option>
+                                                                                        <option value="Mayotte">Mayotte</option>
+                                                                                        <option value="Mexico">Mexico</option>
+                                                                                        <option value="Midway Islands">Midway Islands</option>
+                                                                                        <option value="Moldova">Moldova</option>
+                                                                                        <option value="Monaco">Monaco</option>
+                                                                                        <option value="Mongolia">Mongolia</option>
+                                                                                        <option value="Montserrat">Montserrat</option>
+                                                                                        <option value="Morocco">Morocco</option>
+                                                                                        <option value="Mozambique">Mozambique</option>
+                                                                                        <option value="Myanmar">Myanmar</option>
+                                                                                        <option value="Nambia">Nambia</option>
+                                                                                        <option value="Nauru">Nauru</option>
+                                                                                        <option value="Nepal">Nepal</option>
+                                                                                        <option value="Netherland Antilles">Netherland Antilles</option>
+                                                                                        <option value="Netherlands">Netherlands (Holland, Europe)</option>
+                                                                                        <option value="Nevis">Nevis</option>
+                                                                                        <option value="New Caledonia">New Caledonia</option>
+                                                                                        <option value="New Zealand">New Zealand</option>
+                                                                                        <option value="Nicaragua">Nicaragua</option>
+                                                                                        <option value="Niger">Niger</option>
+                                                                                        <option value="Nigeria">Nigeria</option>
+                                                                                        <option value="Niue">Niue</option>
+                                                                                        <option value="Norfolk Island">Norfolk Island</option>
+                                                                                        <option value="Norway">Norway</option>
+                                                                                        <option value="Oman">Oman</option>
+                                                                                        <option value="Pakistan">Pakistan</option>
+                                                                                        <option value="Palau Island">Palau Island</option>
+                                                                                        <option value="Palestine">Palestine</option>
+                                                                                        <option value="Panama">Panama</option>
+                                                                                        <option value="Papua New Guinea">Papua New Guinea</option>
+                                                                                        <option value="Paraguay">Paraguay</option>
+                                                                                        <option value="Peru">Peru</option>
+                                                                                        <option value="Phillipines">Philippines</option>
+                                                                                        <option value="Pitcairn Island">Pitcairn Island</option>
+                                                                                        <option value="Poland">Poland</option>
+                                                                                        <option value="Portugal">Portugal</option>
+                                                                                        <option value="Puerto Rico">Puerto Rico</option>
+                                                                                        <option value="Qatar">Qatar</option>
+                                                                                        <option value="Republic of Montenegro">Republic of Montenegro</option>
+                                                                                        <option value="Republic of Serbia">Republic of Serbia</option>
+                                                                                        <option value="Reunion">Reunion</option>
+                                                                                        <option value="Romania">Romania</option>
+                                                                                        <option value="Russia">Russia</option>
+                                                                                        <option value="Rwanda">Rwanda</option>
+                                                                                        <option value="St Barthelemy">St Barthelemy</option>
+                                                                                        <option value="St Eustatius">St Eustatius</option>
+                                                                                        <option value="St Helena">St Helena</option>
+                                                                                        <option value="St Kitts-Nevis">St Kitts-Nevis</option>
+                                                                                        <option value="St Lucia">St Lucia</option>
+                                                                                        <option value="St Maarten">St Maarten</option>
+                                                                                        <option value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+                                                                                        <option value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+                                                                                        <option value="Saipan">Saipan</option>
+                                                                                        <option value="Samoa">Samoa</option>
+                                                                                        <option value="Samoa American">Samoa American</option>
+                                                                                        <option value="San Marino">San Marino</option>
+                                                                                        <option value="Sao Tome & Principe">Sao Tome & Principe</option>
+                                                                                        <option value="Saudi Arabia">Saudi Arabia</option>
+                                                                                        <option value="Senegal">Senegal</option>
+                                                                                        <option value="Seychelles">Seychelles</option>
+                                                                                        <option value="Sierra Leone">Sierra Leone</option>
+                                                                                        <option value="Singapore">Singapore</option>
+                                                                                        <option value="Slovakia">Slovakia</option>
+                                                                                        <option value="Slovenia">Slovenia</option>
+                                                                                        <option value="Solomon Islands">Solomon Islands</option>
+                                                                                        <option value="Somalia">Somalia</option>
+                                                                                        <option value="South Africa">South Africa</option>
+                                                                                        <option value="Spain">Spain</option>
+                                                                                        <option value="Sri Lanka">Sri Lanka</option>
+                                                                                        <option value="Sudan">Sudan</option>
+                                                                                        <option value="Suriname">Suriname</option>
+                                                                                        <option value="Swaziland">Swaziland</option>
+                                                                                        <option value="Sweden">Sweden</option>
+                                                                                        <option value="Switzerland">Switzerland</option>
+                                                                                        <option value="Syria">Syria</option>
+                                                                                        <option value="Tahiti">Tahiti</option>
+                                                                                        <option value="Taiwan">Taiwan</option>
+                                                                                        <option value="Tajikistan">Tajikistan</option>
+                                                                                        <option value="Tanzania">Tanzania</option>
+                                                                                        <option value="Thailand">Thailand</option>
+                                                                                        <option value="Togo">Togo</option>
+                                                                                        <option value="Tokelau">Tokelau</option>
+                                                                                        <option value="Tonga">Tonga</option>
+                                                                                        <option value="Trinidad & Tobago">Trinidad & Tobago</option>
+                                                                                        <option value="Tunisia">Tunisia</option>
+                                                                                        <option value="Turkey">Turkey</option>
+                                                                                        <option value="Turkmenistan">Turkmenistan</option>
+                                                                                        <option value="Turks & Caicos Is">Turks & Caicos Is</option>
+                                                                                        <option value="Tuvalu">Tuvalu</option>
+                                                                                        <option value="Uganda">Uganda</option>
+                                                                                        <option value="United Kingdom">United Kingdom</option>
+                                                                                        <option value="Ukraine">Ukraine</option>
+                                                                                        <option value="United Arab Erimates">United Arab Emirates</option>
+                                                                                        <option value="United States of America">United States of America</option>
+                                                                                        <option value="Uraguay">Uruguay</option>
+                                                                                        <option value="Uzbekistan">Uzbekistan</option>
+                                                                                        <option value="Vanuatu">Vanuatu</option>
+                                                                                        <option value="Vatican City State">Vatican City State</option>
+                                                                                        <option value="Venezuela">Venezuela</option>
+                                                                                        <option value="Vietnam">Vietnam</option>
+                                                                                        <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+                                                                                        <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+                                                                                        <option value="Wake Island">Wake Island</option>
+                                                                                        <option value="Wallis & Futana Is">Wallis & Futana Is</option>
+                                                                                        <option value="Yemen">Yemen</option>
+                                                                                        <option value="Zaire">Zaire</option>
+                                                                                        <option value="Zambia">Zambia</option>
+                                                                                        <option value="Zimbabwe">Zimbabwe</option>
+                                                                                    
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.country.invalid && registerFormControl.country.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.country.errors?.required"><i class="fa fa-remove"></i>Country is required</small>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="bio">Bio</label>
+                                                                                    <textarea class="form-control" [class.is-valid]="registerFormControl.bio.valid && registerFormControl.bio.untouched" [class.is-invalid]="registerFormControl.bio.invalid && registerFormControl.bio.touched"  formControlName="bio" value="{{user.aboutMe.bio}} "   name="bio" id="bio">{{user.aboutMe.education}} </textarea>
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.bio.invalid && registerFormControl.bio.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.bio.errors?.required"><i class="fa fa-remove"></i>Bio is required</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="interests">Interests</label>
+                                                                                    <textarea class="form-control"  [class.is-valid]="registerFormControl.country.valid && registerFormControl.coutry.untouched" [class.is-invalid]="registerFormControl.country.invalid && registerFormControl.country.touched" formControlName="interests"value="{{user.aboutMe.interests}} "  name="interests" id="interests"> {{user.aboutMe.intrests}} </textarea>
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.interests.invalid && registerFormControl.interests.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.interests.errors?.required"><i class="fa fa-remove"></i>Interests is required</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- =============================Appearance ===========================================-->
+                                                                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                                                <h3 class="text-center">Your Appearance</h3>
+                                                                                <div class="form-group">
+                                                                                    <label for="bodyType "> What is your body type ?</label>
+                                                                                    <select class="form-control" [class.is-valid]="registerFormControl.bodyType.valid && registerFormControl.bodyType.untouched" [class.is-invalid]="registerFormControl.bodyType.invalid && registerFormControl.bodyType.touched" formControlName="bodyType" name="bodyType" id="bodyType ">
+                                                                                        <option value="{{user.aboutMe.bodyType}} "    selected>{{user.aboutMe.bodyType}}</option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="Average">Average</option>
+                                                                                        <option value="Curvy">Curvy</option>
+                                                                                        <option value="Athletic">Athletic</option>
+                                                                                        <option value="Muscular">Muscular</option>
+                                                                                        <option value="Slim">Slim</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.bodyType.invalid && registerFormControl.bodyType.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.bodyType.errors?.required"><i class="fa fa-remove"></i>Body Type is required</small>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="height">What is your height ?</label>
+                                                                                    <select class="form-control autofill"  [class.is-valid]="registerFormControl.height.valid && registerFormControl.height.untouched" [class.is-invalid]="registerFormControl.height.invalid && registerFormControl.height.touched" formControlName="height"  name="height" id="height" tabindex="2">
+                                                                                        <option value="{{user.aboutMe.height}} "   selected> {{user.aboutMe.height}} </option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="91">3'</option>
+                                                                                        <option value="94">3'1"</option>
+                                                                                        <option value="96">3'2"</option>
+                                                                                        <option value="99">3'3"</option>
+                                                                                        <option value="101">3'4"</option>
+                                                                                        <option value="104">3'5"</option>
+                                                                                        <option value="106">3'6"</option>
+                                                                                        <option value="109">3'7"</option>
+                                                                                        <option value="111">3'8"</option>
+                                                                                        <option value="114">3'9"</option>
+                                                                                        <option value="116">3'10"</option>
+                                                                                        <option value="119">3'11"</option>
+                                                                                        <option value="122">4'</option>
+                                                                                        <option value="124">4'1"</option>
+                                                                                        <option value="127">4'2"</option>
+                                                                                        <option value="129">4'3"</option>
+                                                                                        <option value="132">4'4"</option>
+                                                                                        <option value="134">4'5"</option>
+                                                                                        <option value="137">4'6"</option>
+                                                                                        <option value="139">4'7"</option>
+                                                                                        <option value="142">4'8"</option>
+                                                                                        <option value="144">4'9"</option>
+                                                                                        <option value="147">4'10"</option>
+                                                                                        <option value="149">4'11"</option>
+                                                                                        <option value="152">5'</option>
+                                                                                        <option value="155">5'1"</option>
+                                                                                        <option value="157">5'2"</option>
+                                                                                        <option value="160">5'3"</option>
+                                                                                        <option value="162">5'4"</option>
+                                                                                        <option value="165">5'5"</option>
+                                                                                        <option value="167">5'6"</option>
+                                                                                        <option value="170">5'7"</option>
+                                                                                        <option value="172">5'8"</option>
+                                                                                        <option value="175">5'9"</option>
+                                                                                        <option value="177">5'10"</option>
+                                                                                        <option value="180">5'11"</option>
+                                                                                        <option value="183">6'</option>
+                                                                                        <option value="185">6'1"</option>
+                                                                                        <option value="188">6'2"</option>
+                                                                                        <option value="190">6'3"</option>
+                                                                                        <option value="193">6'4"</option>
+                                                                                        <option value="195">6'5"</option>
+                                                                                        <option value="198">6'6"</option>
+                                                                                        <option value="200">6'7"</option>
+                                                                                        <option value="203">6'8"</option>
+                                                                                        <option value="205">6'9"</option>
+                                                                                        <option value="208">6'10"</option>
+                                                                                        <option value="210">6'11"</option>
+                                                                                        <option value="213">7'</option>
+                                                                                        <option value="216">7'1"</option>
+                                                                                        <option value="218">7'2"</option>
+                                                                                        <option value="221">7'3"</option>
+                                                                                        <option value="223">7'4"</option>
+                                                                                        <option value="226">7'5"</option>
+                                                                                        <option value="228">7'6"</option>
+                                                                                        <option value="231">7'7"</option>
+                                                                                        <option value="233">7'8"</option>
+                                                                                        <option value="236">7'9"</option>
+                                                                                        <option value="238">7'10"</option>
+                                                                                        <option value="241">7'11"</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.height.invalid && registerFormControl.height.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.height.errors?.required"><i class="fa fa-remove"></i>Height is required</small>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="eye">What is your eye colour ?</label>
+                                                                                    <select class="form-control autofill" [class.is-valid]="registerFormControl.eyes.valid && registerFormControl.eyes.untouched" [class.is-invalid]="registerFormControl.eyes.invalid && registerFormControl.eyes.touched" formControlName="eyes"   name="eyes" tabindex="2" id="eye">
+                                                                                        <option  value="{{user.aboutMe.eyes}} "   selected> {{user.aboutMe.eyes}}</option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="blue">Blue</option>
+                                                                                        <option value="brown">Brown</option>
+                                                                                        <option value="gray">Gray</option>
+                                                                                        <option value="green">Green</option>
+                                                                                        <option value="hazel">Hazel</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.eyes.invalid && registerFormControl.bodyType.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.eyes.errors?.required"><i class="fa fa-remove"></i>Eye Colour  is required</small>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="hair">What is your hair color?</label>
+                                                                                    <select class="form-control autofill"  [class.is-valid]="registerFormControl.hair.valid && registerFormControl.hair.untouched" [class.is-invalid]="registerFormControl.hair.invalid && registerFormControl.hair.touched" formControlName="hair"  name="hair" id="hair" tabindex="2">
+                                                                                        <option  value="{{user.aboutMe.hair}} "  selected>{{user.aboutMe.hair}}</option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="black">Black</option>
+                                                                                        <option value="blond">Blond</option>
+                                                                                        <option value="brown">Brown</option>
+                                                                                        <option value="fair">Fair</option>
+                                                                                        <option value="chestnut">Chestnut</option>
+                                                                                        <option value="red">Red</option>
+                                                                                        <option value="bal">Bald</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.hair.invalid && registerFormControl.hair.touched">
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.hair.errors?.required"><i class="fa fa-remove"></i>Hair Type is required</small>
+                                                                                        </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                                                                <h3 class="text-center">Your Lifestyle</h3>
+                                                                                <div class="form-group">
+                                                                                    <label for="languages">Which Language do you know?</label>
+                                                                                    <select class="form-control"  [class.is-valid]="registerFormControl.languages.valid && registerFormControl.languages.untouched" [class.is-invalid]="registerFormControl.languages.invalid && registerFormControl.languages.touched" formControlName="languages"  name="languages" id="languages">
+                                                                                        <option value="{{user.aboutMe.languages}} "   selected> {{user.aboutMe.languages}} </option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="Afrikaans">Afrikaans</option>
+                                                                                        <option value="Albanian">Albanian</option>
+                                                                                        <option value="Arabic">Arabic</option>
+                                                                                        <option value="Armenian">Armenian</option>
+                                                                                        <option value="Basque">Basque</option>
+                                                                                        <option value="Bengali">Bengali</option>
+                                                                                        <option value="Bulgarian">Bulgarian</option>
+                                                                                        <option value="Catalan">Catalan</option>
+                                                                                        <option value="Cambodian">Cambodian</option>
+                                                                                        <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+                                                                                        <option value="Croatian">Croatian</option>
+                                                                                        <option value="Czech">Czech</option>
+                                                                                        <option value="Danish">Danish</option>
+                                                                                        <option value="Dutch">Dutch</option>
+                                                                                        <option value="English">English</option>
+                                                                                        <option value="Estonian">Estonian</option>
+                                                                                        <option value="Fiji">Fiji</option>
+                                                                                        <option value="Finnish">Finnish</option>
+                                                                                        <option value="French">French</option>
+                                                                                        <option value="Georgian">Georgian</option>
+                                                                                        <option value="German">German</option>
+                                                                                        <option value="Greek">Greek</option>
+                                                                                        <option value="Gujarati">Gujarati</option>
+                                                                                        <option value="Hebrew">Hebrew</option>
+                                                                                        <option value="Hindi">Hindi</option>
+                                                                                        <option value="Hungarian">Hungarian</option>
+                                                                                        <option value="Icelandic">Icelandic</option>
+                                                                                        <option value="Indonesian">Indonesian</option>
+                                                                                        <option value="Irish">Irish</option>
+                                                                                        <option value="Italian">Italian</option>
+                                                                                        <option value="Japanese">Japanese</option>
+                                                                                        <option value="Javanese">Javanese</option>
+                                                                                        <option value="Korean">Korean</option>
+                                                                                        <option value="Latin">Latin</option>
+                                                                                        <option value="Latvian">Latvian</option>
+                                                                                        <option value="Lithuanian">Lithuanian</option>
+                                                                                        <option value="Macedonian">Macedonian</option>
+                                                                                        <option value="Malay">Malay</option>
+                                                                                        <option value="Malayalam">Malayalam</option>
+                                                                                        <option value="Maltese">Maltese</option>
+                                                                                        <option value="Maori">Maori</option>
+                                                                                        <option value="Marathi">Marathi</option>
+                                                                                        <option value="Mongolian">Mongolian</option>
+                                                                                        <option value="Nepali">Nepali</option>
+                                                                                        <option value="Norwegian">Norwegian</option>
+                                                                                        <option value="Persian">Persian</option>
+                                                                                        <option value="Polish">Polish</option>
+                                                                                        <option value="Portuguese">Portuguese</option>
+                                                                                        <option value="Punjabi">Punjabi</option>
+                                                                                        <option value="Quechua">Quechua</option>
+                                                                                        <option value="Romanian">Romanian</option>
+                                                                                        <option value="Russian">Russian</option>
+                                                                                        <option value="Samoan">Samoan</option>
+                                                                                        <option value="Serbian">Serbian</option>
+                                                                                        <option value="Slovak">Slovak</option>
+                                                                                        <option value="Slovenian">Slovenian</option>
+                                                                                        <option value="Spanish">Spanish</option>
+                                                                                        <option value="Swahili">Swahili</option>
+                                                                                        <option value="Swedish ">Swedish </option>
+                                                                                        <option value="Tamil">Tamil</option>
+                                                                                        <option value="Tatar">Tatar</option>
+                                                                                        <option value="Telugu">Telugu</option>
+                                                                                        <option value="Thai">Thai</option>
+                                                                                        <option value="Tibetan">Tibetan</option>
+                                                                                        <option value="Tonga">Tonga</option>
+                                                                                        <option value="Turkish">Turkish</option>
+                                                                                        <option value="Ukrainian">Ukrainian</option>
+                                                                                        <option value="Urdu">Urdu</option>
+                                                                                        <option value="Uzbek">Uzbek</option>
+                                                                                        <option value="Vietnamese">Vietnamese</option>
+                                                                                        <option value="Welsh">Welsh</option>
+                                                                                        <option value="Xhosa">Xhosa</option>
+                                                                                    </select>
+
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.languages.invalid && registerFormControl.languages.touched"    >
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.languages.errors?.required">   <i class="fa fa-remove"></i>Language is required</small>
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="relationship">What is your relationship Status?</label>
+                                                                                    <select class="form-control"  [class.is-valid]="registerFormControl.relationship.valid && registerFormControl.relationship.untouched" [class.is-invalid]="registerFormControl.relationship.invalid && registerFormControl.relationship.touched" formControlName="relationship"  name="relationship" id="relationship">
+                                                                                        <option value="{{user.aboutMe.relationship}} " selected> {{user.aboutMe.relationship}} </option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="Single">Single</option>
+                                                                                        <option value="Separated">Separated</option>
+                                                                                        <option value="Divorced">Divorced</option>
+                                                                                        <option value="Widowed">Widowed</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.relationship.invalid && registerFormControl.relationship.touched"    >
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.relationship.errors?.required">   <i class="fa fa-remove"></i>Relationship Status is required</small>
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="known">Known</label>
+                                                                                    <input type="text" name="known"  [class.is-valid]="registerFormControl.known.valid && registerFormControl.known.untouched" [class.is-invalid]="registerFormControl.known.invalid && registerFormControl.known.touched" id="known" formControlName="known"  value="{{user.aboutMe.known}} " text="{{user.aboutMe.known}} "  class="form-control">
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.known.invalid && registerFormControl.known.touched"    >
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.known.errors?.required">   <i class="fa fa-remove"></i>Known Status is required</small>
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="workAs">What is your Occupation ?</label>
+                                                                                    <select class="form-control"  [class.is-valid]="registerFormControl.occupation.valid && registerFormControl.occupation.untouched" [class.is-invalid]="registerFormControl.occupation.invalid && registerFormControl.occupation.touched" formControlName="occupation" name="workAs" id="workAs">
+                                                                                        <option value="{{user.aboutMe.workAs}} " selected> {{user.aboutMe.workAs}}</option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="Administrative / Secretarial / Clerical">Administrative / Secretarial / Clerical</option>
+                                                                                        <option value="Advertising / Media">Advertising / Media</option>
+                                                                                        <option value="Artistic / Creative / Performance">Artistic / Creative / Performance</option>
+                                                                                        <option value="Construction / Trades">Construction / Trades</option>
+                                                                                        <option value="Domestic Helper">Domestic Helper</option>
+                                                                                        <option value="Education / Academic">Education / Academic</option>
+                                                                                        <option value="Entertainment / Media">Entertainment / Media</option>
+                                                                                        <option value="Executive / Management / HR">Executive / Management / HR</option>
+                                                                                        <option value="Farming / Agriculture">Farming / Agriculture</option>
+                                                                                        <option value="Finance / Banking / Real Estate">Finance / Banking / Real Estate</option>
+                                                                                        <option value="Fire / law enforcement / security">Fire / law enforcement / security</option>
+                                                                                        <option value="Hair Dresser / Personal Grooming">Hair Dresser / Personal Grooming</option>
+                                                                                        <option value="IT / Communications">IT / Communications</option>
+                                                                                        <option value="Laborer / Manufacturing">Laborer / Manufacturing</option>
+                                                                                        <option value="Legal">Legal</option>
+                                                                                        <option value="Medical / Dental / Veterinary">Medical / Dental / Veterinary</option>
+                                                                                        <option value="Military">Military</option>
+                                                                                        <option value="Model">Model</option>
+                                                                                        <option value="Nanny / Child care">Nanny / Child care</option>
+                                                                                        <option value="No occupation / Stay at home">No occupation / Stay at home</option>
+                                                                                        <option value="Non-profit / clergy / social services">Non-profit / clergy / social services</option>
+                                                                                        <option value="Political / Govt / Civil Service">Political / Govt / Civil Service</option>
+                                                                                        <option value="Retail / Food services">Retail / Food services</option>
+                                                                                        <option value="Retired">Retired</option>
+                                                                                        <option value="Sales / Marketing">Sales / Marketing</option>
+                                                                                        <option value="Self Employed">Self Employed</option>
+                                                                                        <option value="Sports / recreation">Sports / recreation</option>
+                                                                                        <option value="Student">Student</option>
+                                                                                        <option value="Technical / Science / Engineering">Technical / Science / Engineering</option>
+                                                                                        <option value="Transportation">Transportation</option>
+                                                                                        <option value="Travel / Hospitality">Travel / Hospitality</option>
+                                                                                        <option value="Unemployed">Unemployed</option>
+                                                                                        <option value="Other">Other</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.occupation.invalid && registerFormControl.occupation.touched"    >
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.occupation.errors?.required">   <i class="fa fa-remove"></i>Ocuupation is required</small>
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="lookingFor" >Looking For?</label>
+                                                                                    <textarea class="form-control"  [class.is-valid]="registerFormControl.lookingFor.valid && registerFormControl.lookingFor.untouched" [class.is-invalid]="registerFormControl.lookingFor.invalid && registerFormControl.lookingFor.touched"  formControlName="lookingFor"  name="lookingFor" id="lookingFor" minlength="" maxlength="255" rows="5" value="{{user.aboutMe.lookingFor}} "  selected>{{user.aboutMe.intrests}}</textarea>
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lookingFor.invalid && registerFormControl.lookingFor.touched"    >
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.lookingFor.errors?.required">   <i class="fa fa-remove"></i>lookingFor is required</small>
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="haveKids">Do you have kids?</label>
+                                                                                    <select class="form-control" [class.is-valid]="registerFormControl.haveKids.valid && registerFormControl.haveKids.untouched" [class.is-invalid]="registerFormControl.haveKids.invalid && registerFormControl.haveKids.touched"  name="haveKids"  formControlName="haveKids"  id="haveKids">
+                                                                                        <option value="{{user.aboutMe.haveKids}} "   selected> {{user.aboutMe.haveKids}}</option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="No">No</option>
+                                                                                        <option value="Yes">Yes</option>
+                                                                                        <option value="Maybe">Maybe</option>
+                                                                                        <option value="I Want some">I Want some</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.haveKids.invalid && registerFormControl.haveKids.touched"    >
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.haveKids.errors?.required">   <i class="fa fa-remove"></i>lookingFor is required</small>
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="smoke">Do you smoke ?</label>
+                                                                                    <hr>
+                                                                                    <select class="form-control"  [class.is-valid]="registerFormControl.smoke.valid && registerFormControl.smoke.untouched" [class.is-invalid]="registerFormControl.smoke.invalid && registerFormControl.smoke.touched" formControlName="smoke"  name="smoke" id="smoke">
+                                                                                        <option value="{{user.aboutMe.smoke}}" selected >{{user.aboutMe.smoke}}</option>
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option value="Never">Never</option>
+                                                                                        <option value="Occasionally">Occasionally</option>
+                                                                                        <option value="Regularly">Regularly</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.smoke.invalid && registerFormControl.smoke.touched"    >
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.smoke.errors?.required">   <i class="fa fa-remove"></i>Smoke  is required</small>
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="drink">Do you Drink ?</label>
+                                                                                    <select class="form-control" [class.is-valid]="registerFormControl.drink.valid && registerFormControl.drink.untouched" [class.is-invalid]="registerFormControl.drink.invalid && registerFormControl.drink.touched" formControlName="drink"  name="drink" id="drink">
+                                                                                        <option  data-divider="true"></option>
+                                                                                        <option  value="{{user.aboutMe.drink}}"selected> {{user.aboutMe.drink}}</option>
+                                                                                        <option value="Never">Never</option>
+                                                                                        <option value="Occasionally">Occasionally</option>
+                                                                                        <option value="Regularly">Regularly</option>
+                                                                                    </select>
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.drink.invalid && registerFormControl.drink.touched"    >
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.drink.errors?.required">   <i class="fa fa-remove"></i>Drink  is required</small>
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button class="btn btn-primary" type="submit">Save changes</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm table-hover">
+                                                            <thead>
+                                                            <tr></tr>
+                                                            </thead>
+                                                            <tbody>
+                                                               
+                                                                    <tr *ngIf="user.aboutMe.liveIn">
+                                                                        <td class="text-bold"> Live in :</td>
+                                                                        <td  >{{user.aboutMe.liveIn}}</td>
+                                                                    </tr>
+                                                             
+                                                            
+                                                                
+                                                                    <tr *ngIf="user.aboutMe.country ">
+                                                                        <td class="text-bold">Country:</td>
+                                                                        <td >{{user.aboutMe.country}} </td>
+                                                                    </tr>
+                                                                
+
+                                                         
+                                                                    <tr *ngIf="user.aboutMe.bodyType">
+                                                                        <td class="text-bold">Body type:</td>
+                                                                        <td >{{user.aboutMe.bodyType}}</td>
+                                                                    </tr>
+                                                            
+                                                                    
+                                                                        <tr *ngIf="user.aboutMe.workAs">
+                                                                            <td class="text-bold">Work as :</td>
+                                                                            <td >{{user.aboutMe.workAs}}</td>
+                                                                        </tr>
+                                                                 
+                                                               
+                                                                        <tr *ngIf="user.aboutMe.haveKids ">
+                                                                            <td class="text-bold">Have Kids:</td>
+                                                                            <td >{{user.aboutMe.haveKids}}</td>
+                                                                        </tr>
+                                                               
+                                                                  
+                                                                        <tr *ngIf="user.aboutMe.education ">
+                                                                            <td class="text-bold">Education:</td>
+                                                                            <td >{{user.aboutMe.education}}</td>
+                                                                        </tr>
+                                                                  
+                                                                        <tr  *ngIf="user.aboutMe.languages">
+                                                                            <td class="text-bold">Languages</td>
+                                                                            <td >{{user.aboutMe.languages}}</td>
+                                                                        </tr>
+                                                                 
+                                                                                   
+                                                                         <tr *ngIf="user.aboutMe.smoke">
+                                                                                <td class="text-bold">Smoke:</td>
+                                                                            <td >{{user.aboutMe.smoke}}</td>
+                                                                        </tr>
+                                                                    
+                                                               
+                                                                        <tr *ngIf="user.aboutMe.drink != null">
+                                                                            <td class="text-bold">Drink:</td>
+                                                                            <td >{{user.aboutMe.drink}}</td>
+                                                                        </tr>
+                                                                
+                                                                        <tr *ngIf="user.aboutMe.relationship ">
+                                                                             <td class="text-bold">Relationship:</td>
+                                                                             <td >{{user.aboutMe.relationship}}</td>
+                                                                        </tr>
+                                                                
+                                                                  
+                                                                        <tr *ngIf="user.aboutMe.eyes ">
+                                                                            <td class="text-bold">Eyes:</td>
+                                                                            <td >{{user.aboutMe.eyes}}</td>
+                                                                        </tr>
+                                                                    
+                                                                    
+                                                                        <tr  *ngIf="user.aboutMe.hair">
+                                                                            <td class="text-bold">Hair:</td>
+                                                                            <td >{{user.aboutMe.hair}}</td>
+                                                                        </tr>
+                                                                
+                                                                
+                                                                        
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 ">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="card mt-3" *ngIf="user.aboutMe.interests" >
+                                                            <h2 class=" text-danger text-center card-title mt-3">Interest</h2>
+                                                            <div class="card-body" id="card-body-interest">
+                                                                <p class="card-text" > <span class="badge badge-secondary">{{user.aboutMe.interests}} </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+        
+                                                
+                                                        <br>
+                                                        <div class="card">
+                                                            <div class="card-body" id="card-body-infos">
+                                                                <h2 class="text-center text-danger card-title">Infos</h2>
+                                                                <p class="card-text"></p>
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-sm table-hover">
+                                                                        <thead>
+                                                                        <tr></tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <td class="text-bold">Profile Visited :</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr *ngIf="user.createdDate">
+                                                                            <td class="text-bold">Profile Created :</td>
+                                                                            <td >{{user.createdDate}}</td>
+                                                                        </tr>
+                                                                        <tr *ngIf="user.lastConnection">
+                                                                            <td  class="text-bold">Last Connection:</td>
+                                                                            <td>{{user.lastConnection}}</td>
+                                                                        </tr>
+                                                                        <tr *ngIf="totalLikes">
+                                                                            <td class="text-bold">Profile Likes:</td>
+                                                                            <td >{{totalLikes}}</td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="card mt-3">
+                                                            <div class="card-body" id="card-body-lookingfor">
+                                                                <h2 class="text-center text-danger card-title"  >Looking For&nbsp;</h2>
+                                                                <p class="card-text">{{user.aboutMe.lookingFor}}</p>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h6 class="text-muted card-subtitle mb-2"></h6>
+                                                                <a class="card-link" href="#"></a>
+                                                                <a class="card-link" href="#"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div >
+                    
+                   
+                     </div>
+              
+
+            
+               
+            </div>
+        </div>
+        <app-footer></app-footer>
+</div>

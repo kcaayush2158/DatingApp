@@ -1,0 +1,56 @@
+#pills-you-liked-tab {
+    color: #757373;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: white;
+    /* background-color: #007bff; */
+}
+
+#liked-you, #you-like{
+    color: black;
+}
+.text-bold{
+    font-weight: bold;
+}
+
+#label-people-you-like {
+    color: #1e1e1e;
+    line-height: 26px;
+    font-weight: 400;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+#label-intro {
+    color: #949aa6;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+.shine {
+    background: #ffffff;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    width: auto;
+    display: inline-block;
+    position: relative;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: placeholderShimmer;
+    -webkit-animation-timing-function: linear;
+}
+
+box {
+    height: 204px;
+    width: 200px;
+}
+
+lines {
+    height: 200px;
+    margin-top: 10px;
+    width: 200px;
+}
+#navbar{
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
+    margin-top: 100px;
+}

@@ -1,0 +1,140 @@
+<div class="container-fluid mt-5">
+
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-2 "  >
+                <app-side-nav></app-side-nav>
+            </div>
+            <div class="col-lg-10 " >
+                <nav class="navbar navbar-light "  id="navbar" >
+                    <a class="navbar-brand mb-0 text-bold h1" href="#">Settings</a>
+
+
+                    <!-- Button trigger modal -->
+                </nav>
+                <div class="container-fluid  mb-5" id="container-sub">
+                    <div class="row">
+                        <!-- Tab panes -->
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="basic-container">
+                                    <div *ngIf="users">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                    <div class="col-md-4 col-xs-12">
+                                                        <div  class="img-thumbnail rounded mx-auto d-block  mb-5 mt-3" id="image" style="background: url({{users.profilePhoto}});background-size: cover;background-position: center; object-fit: contain;"></div>
+                                                        <h1 class="text-center mb-3" > {{users.firstName}} {{users.lastName}}</h1>
+                                                        <h6 class="text-center mb-5" > {{users.username}}</h6>
+                                                    </div>
+                                                    <div class="col-md-8 col-xs-12">
+
+                                                               
+                                                    <div class="container-fluid col-md-8" >
+                                                   
+                                                        <div id="container-password" >
+                                                            <h1 class="mb-5">Change Password </h1>
+                                                            <form method="POST" [formGroup]="formChangePassword" (ngSubmit)="changePassword()" id="password-form">
+                                                             
+                                                                <div class="form-group">
+                                                                    <label for="oldpassword">Old Password :&nbsp;</label>
+                                                                    <input class="form-control form-control-lg" id="oldpassword" formControlName="oldPassword"[class.is-valid]="registerFormControl.oldPassword.valid && registerFormControl.oldPassword.untouched"   [class.is-invalid]="registerFormControl.oldPassword.invalid && registerFormControl.oldPassword.touched"  name="oldPassword"  type="password">
+                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.oldPassword.invalid && registerFormControl.oldPassword.touched">
+                                                                        <small class="text-danger" *ngIf="registerFormControl.oldPassword.errors?.required"><i class="fa fa-remove"></i> Chat Room password  is required</small>
+                                                                        <small class="text-danger" *ngIf="registerFormControl.oldPassword.errors?.minlength"><i class="fa fa-remove"></i> Chat Room password  must be atleast 6 charecters</small>
+                                                                        <small class="text-danger" *ngIf="registerFormControl.oldPassword.errors?.maxlength"><i class="fa fa-remove"></i> Chat Room password  must be less than 20 charecters</small>
+                                                                      </div>
+                                                                    <label for="password">New Password:&nbsp;</label>
+                                                                    <input class="form-control form-control-lg" type="password" [class.is-valid]="registerFormControl.newPassword.valid && registerFormControl.newPassword.untouched"   [class.is-invalid]="registerFormControl.newPassword.invalid && registerFormControl.newPassword.touched" formControlName="newPassword" name="newPassword" id="password">
+                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.newPassword.invalid && registerFormControl.newPassword.touched">
+                                                                        <small class="text-danger" *ngIf="registerFormControl.newPassword.errors?.required"><i class="fa fa-remove"></i> Chat Room password  is required</small>
+                                                                        <small class="text-danger" *ngIf="registerFormControl.newPassword.errors?.minlength"><i class="fa fa-remove"></i> Chat Room password  must be atleast 6 charecters</small>
+                                                                        <small class="text-danger" *ngIf="registerFormControl.newPassword.errors?.maxlength"><i class="fa fa-remove"></i> Chat Room password  must be less than 20 charecters</small>
+                                                                      </div>
+                                                                </div>
+                                                                <hr>
+                                                                <br>
+                                                                <button class="btn btn-success  btn-block" id="password-btn"  type="submit"><i class="fa fa-save"></i>&nbsp;Change
+                                                                    Password
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                   
+                                                    </div>
+                                                    
+                                                      
+                                                    </div>
+                                               
+                                                    <h6>Upload Profile Picture: </h6>
+                                            
+                                                    <ngx-dropzone (change)="onSelect($event)">
+                                                        <ngx-dropzone-label>Drop or Browse</ngx-dropzone-label>
+                                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let upload of uploads"
+                                                            (removed)="onRemove(upload)" 
+                                                            [file]="upload.data.raw"
+                                                             [removable]="true"
+                                                      >
+
+                                                      <ngx-file-upload-ui--progressbar-circle [progress]="upload.data.progress" [parts]="12" >
+                                                    </ngx-file-upload-ui--progressbar-circle>
+                                                        <ngx-dropzone-label>
+                                                            Name: {{ upload.data.name }}<br />
+                                                            State: {{upload.data.state}}<br />
+                                                            Progress: {{upload.data.progress}}%
+                                                        </ngx-dropzone-label>
+                                                
+                                                      </ngx-dropzone-image-preview>
+                                                    </ngx-dropzone>
+
+                                                    <!-- Deletes the user profile-->
+                                                    <button class="btn  btn-link btn-block mt-2" data-toggle="modal" data-target="#exampleModalCenter"> <i class="fas fa-exclamation-circle mr-2"></i>Delete Profile</button>
+                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="alert alert-warning" role="alert">
+                                                                        * Note  : Your every images, videos, messages will be deleted permanently.
+                                                                        Click delete profile to continue
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-secondary" data-dismiss="modal" type="button"><i
+                                                                            class="fas fa-times-circle"></i>Close
+                                                                    </button>
+                                                                    <hr>
+
+                                                                        <button (click)="deleteProfile()" class="btn btn-danger btn-block" type="button"><i class="far fa-trash-alt"></i> Delete
+                                                                            Profile
+                                                                                    </button>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+
+                                        
+                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
+

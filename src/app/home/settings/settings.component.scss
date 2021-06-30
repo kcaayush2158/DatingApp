@@ -1,0 +1,40 @@
+#container-sub{
+    padding: 50px;
+}
+#custom-button{
+    background-color: #00C9A7;
+    color: white;
+    padding: 10px;
+    border: white;
+    border-radius:10px;
+}
+#custom-text{
+    margin-left: 10px;
+    font-family: sans-serif;
+    color: #aaa;
+}
+
+.text-bold{
+    font-weight: bold;
+}
+
+#navbar {
+    margin-top: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+}
+#image{
+    height:300px;
+    width:300px;
+    background-size:cover;
+    background-position:center;
+    margin-left:50%;
+}
+#password-btn{
+  background-color: #00C9A7;border-color: white;padding:10px;border-radius: 10px;
+}
+
+.container-password{
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
+}
+
+

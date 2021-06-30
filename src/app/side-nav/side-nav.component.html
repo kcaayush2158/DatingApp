@@ -1,0 +1,10 @@
+
+<div class="sidenav col-xs-12 col-sm-12"  >
+    <a [routerLink]="['/profile']" routerLinkActive="router-link-active"  class="custom-anchor mt-3 mb-3"  ><img src="https://img.icons8.com/color/48/000000/contract-job.png" height="36"  alt=""/> Profile</a>
+    <a [routerLink]="['/rooms/all-rooms']" routerLinkActive="router-link-active" class="custom-anchor mt-3 mb-3"><img src="https://image.flaticon.com/icons/png/512/566/566487.png" height="36" /> Public Room</a>
+<!--    <a href="#" class="custom-anchor mt-3 mb-3"  th:class="custom-anchor"><img src="https://img.icons8.com/color/48/000000/youtube-live.png" height="36" /> Live Broadcast</a>-->
+    <a [routerLink]="['/likes/liked-you']" routerLinkActive="router-link-active"  class="custom-anchor mt-3 mb-3" ><img src="https://www.flaticon.com/svg/static/icons/svg/3915/3915794.svg" height="36"  alt=""/> Likes</a>
+    <a [routerLink]="['/visits']" routerLinkActive="router-link-active"   class="custom-anchor mt-3 mb-3" ><img src="https://www.flaticon.com/svg/static/icons/svg/753/753077.svg" height="36"  alt=""/> Visits</a>
+    <a [routerLink]="['/settings']" routerLinkActive="router-link-active"   class="custom-anchor  mb-5" ><img src="https://img.icons8.com/color/48/000000/horizontal-settings-mixer.png" height="36"  alt=""/> Settings</a>
+    <a   (click)="logout()" class="custom-anchor mt-3 mb-3 ml-4 text-center button-logout" id="text-white" (click)="logout()" > <i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>

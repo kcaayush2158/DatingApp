@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+.sub-navbar {
+    margin-top: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #313437;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: transparent;
+    /* background-color: #007bff; */
+}
+#card-href {
+    list-style-type: none;
+    text-decoration: none;
+}
+#card-href:hover {
+    list-style-type: none;
+    text-decoration: none;
+}
+
+#nav-link-broadcast{
+    color: tomato;
+}
+#nav-link-profile{
+    color: #3b5998;
+}
+#nav-link-online-users{
+    color: green;
+}
+.sub-navbar {
+    margin-top: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #313437;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: transparent;
+    /* background-color: #007bff; */
+}
+#card-href {
+    list-style-type: none;
+    text-decoration: none;
+}
+#card-href:hover {
+    list-style-type: none;
+    text-decoration: none;
+}
+
+#side-nav{
+    position: fixed;
+}
+.card{
+    max-width: 16rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.card-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-decoration: none;
+    list-style-type: none;
+    color: #222;
+    min-height: 100px;
+    max-height: 100px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+a{
+    text-decoration: none;
+    list-style-type: none;
+    color: #313437;
+}
+a:hover{
+    text-decoration: none;
+    list-style-type: none;
+    color: #313437;
+}
+#card-img{
+    object-fit: cover;
+    height: 200px;
+    width: 256px;
+}
+.card-body{
+    max-width: 16rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    border-radius: 10px;
+    color: #313437;
+    overflow: hidden;
+    background-color: white;
+    text-decoration: none;
+    list-style-type: none;
+}
+.card-title{
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+#nav-link{
+    color: #3b5998;
+    font-weight: bold;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+#card-href{
+    list-style-type: none;
+    color: black;
+    text-decoration: none;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+#card-bio:hover {
+    text-decoration: none;
+    list-style-type: none;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+
+
+
+#side-nav{
+    position: fixed;
+}
+.card{
+    max-width: 16rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.card-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-decoration: none;
+    list-style-type: none;
+    color: #222;
+    min-height: 100px;
+    max-height: 100px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+a{
+    text-decoration: none;
+    list-style-type: none;
+    color: #313437;
+}
+a:hover{
+    text-decoration: none;
+    list-style-type: none;
+    color: #313437;
+}
+#card-img{
+    object-fit: cover;
+    height: 200px;
+    width: 256px;
+}
+.card-body{
+    max-width: 16rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+    border-radius: 10px;
+    color: #313437;
+    overflow: hidden;
+    background-color: white;
+    text-decoration: none;
+    list-style-type: none;
+}
+.card-title{
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+#nav-link{
+    color: #3b5998;
+    font-weight: bold;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+#card-href{
+    list-style-type: none;
+    color: black;
+    text-decoration: none;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+#card-bio:hover {
+    text-decoration: none;
+    list-style-type: none;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+

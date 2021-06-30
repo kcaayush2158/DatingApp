@@ -1,0 +1,54 @@
+<div class="col-md- 12 ">
+  <div class="row">
+
+    <div  *ngFor="let in of counter(10) ;let i = index">
+      <div *ngIf="shimmer">
+        <div class="card  mb-3 mr-2  ml-2 mt-2 " id="custom-card-design" style="width: 300px;">
+          <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%'" [height]="'200px'"></ngx-shimmer-loading>
+
+          <div class="mt-2 mb-2 mb-2">
+            <ngx-shimmer-loading [shape]="'rectangle'" [width]="'50%'" class="pb-3"></ngx-shimmer-loading>
+          <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'20px'"></ngx-shimmer-loading>
+          <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'20px'"></ngx-shimmer-loading>
+          <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'20px'"></ngx-shimmer-loading>
+          <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'20px'"></ngx-shimmer-loading>
+        </div>
+      </div>
+        </div>
+      </div>
+      
+    <div *ngFor="let user of users">
+
+      <div id="container-users-visits">
+        <div class="row">
+          <div class="row" style="float: left;">
+            <a routerLink="/profile/{{ user.username }}" id="card-href " class="search-results" infiniteScroll
+              [infiniteScrollDistance]="2" [infiniteScrollThrottle]="3" 
+              style="list-style-type:none;text-decoration:none;">
+              <div class="card bg-light  mb-3 mr-5  ml-5 mt-2 " id="custom-card-design">
+                <img id="card-img-top image-thumbnail" id="card-img" src="{{ user.profilePhoto }} "
+                  alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title ">{{ user.firstName }} {{ user.lastName }} , {{ user.aboutMe.age }}<img src="https://www.nicepng.com/png/detail/335-3354103_home-icon-button-png-green-online-icon-png.png" class =" ml-5"height="10" width="10" alt="online">
+                  </h5>
+                  <p class="card-text" id="card-bio">{{ user.aboutMe.bio }}
+                  </p>
+                </div>
+              </div>
+
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  
+  
+    <ngx-spinner  size="medium" color="#00C9A7" type="ball-clip-rotate" [fullScreen] = "true">
+      <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
+  </div>
+  

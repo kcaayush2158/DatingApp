@@ -1,0 +1,36 @@
+.selfviewPhotos-photo-image     {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-width: 150px;
+    min-height: 20px;
+    border-radius: 3px;
+}
+.selfviewPhotos-title{
+    color: #1e1e1e;
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 1.1875rem;
+    line-height: 22px;
+}
+
+.photo-rules-card  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    margin-top: 16px;
+    padding: 8px 24px;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
+}
+
+.photo-rules-header{
+    padding: 16px 8px;
+    font-size: 1.4375rem;
+    line-height: 1.4375rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+}

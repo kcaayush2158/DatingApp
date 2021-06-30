@@ -1,0 +1,51 @@
+
+<div class="container-fluid mt-5">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-2">
+          <app-side-nav></app-side-nav>
+        </div>
+
+        <div class="col-md-10">
+            <div class="container-fluid container-boost">
+                <div class="boost-header">
+                 
+                    <center>
+                        <img src="https://i.pinimg.com/originals/d4/49/da/d449da75691ce2c50d47c57ea9c477a2.jpg" height="200">
+                    </center>
+                    <h1 class="text-center mb-5">Make tons  of  friends with  help of boost <i class="fas fa-fire-alt"></i></h1>
+                   
+                </div>
+                <div class="card-group">
+                    <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title text-center" > {{premiumBoost}} <i class="fas fa-fire-alt"></i></h4>
+                            <p  class="card-text text-center"> $ {{premiumBoostPrice}} / ea</p>
+                            <button (click)="makePayment(premiumBoostPrice,premiumBoost)" class="btn btn-block btn-primary mt-5">Pay  {{premiumBoostPrice}} / ea </button>
+                        </div>
+                    </div>
+                    <div class="card  ">
+             
+                        <div class="card-body">
+                            <h4 class="card-title text-center "> {{sliverBoost}} <i class="fas fa-fire-alt"></i></h4>
+                            <p  class="card-text text-center"> $ {{sliverBoostPrice}} / ea </p>
+                            <button (click)="makePayment(sliverBoostPrice,sliverBoost)" class="btn btn-block btn-warning mt-5">Pay  {{sliverBoostPrice}} / ea</button>
+                        </div>
+                    </div>
+                    <div class="card ">
+                 
+                        <div  class="card-body">
+                            <h4 class="card-title text-center"> {{bronzeBoost}} <i class="fas fa-fire-alt"></i></h4>
+                            <p   class="card-text text-center"> $ {{premiumBoostPrice}} / ea</p>
+                            <button (click)="makePayment(sliverBoostPrice,bronzeBoost)" class="btn btn-block btn-primary mt-5">Pay {{bronzeBoostPrice}} / ea </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-boost-button mt-5 ">
+                <div class="btn  btn-block btn-light">No thanks </div>
+            </div>
+              </div>
+            </div>
+            </div>
+    </div>
+

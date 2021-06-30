@@ -1,0 +1,202 @@
+<div class="container-fluid mt-5">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <app-side-nav></app-side-nav>
+            </div>
+
+            <div class="col-md-10">
+                <br /><br /><br />
+                <div class="col-md-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="inbox-header">
+                                <div class="row">
+                                    <div class="col-md-3 mb-1">
+                                        <h4 id="inbox-header-label " class="mt-2 ml-3">Inbox</h4>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                              
+                                                <div class="col-md-11">
+                                                    <input type="" [(ngModel)]="search" class="form-control"
+                                                        placeholder="Enter username" />
+                                                </div>
+                                                <div class="col-md-1 ">
+                                                    <i class="fa fa-search mt-2"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inbox-body" >
+
+                                <div *ngFor="let in of counter(12) ;let i = index">
+                                    <div *ngIf="shimmer">
+                                      <div class="col-md-12">
+                                        <div class="row">
+                                          <div class="col-md-2">
+                                            <ngx-shimmer-loading [shape]="'square'" [width]="'50px' " [height]="'70px'"></ngx-shimmer-loading>
+                                          </div>
+                                          <div class="col-md-10">
+                                            <ngx-shimmer-loading [shape]="'rectangle'" [width]="'50%' " class="ml-4" [height]="'10px'">
+                                            </ngx-shimmer-loading>
+                                            <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " class="mt-2 3 ml-4 " [height]="'10px'">
+                                            </ngx-shimmer-loading>
+                                            <hr>
+                                          </div>
+                                
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+                                <div *ngFor="let user of users | filter: search" >
+                                    <hr />
+
+                                    <div *ngIf="!shimmer" >
+                                  
+                                        <div *ngIf="user.conversation.sender.username  ==  authenticatedUser">
+                                      
+                                            <div class="container-user-list" routerLink="/inbox/u/{{ user.conversation.receiver.id }}/{{ user.conversation.roomId }} ">
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-md-1 col-xs-12">
+                                                            <img class="inbox-image" src="{{  user.conversation.receiver.profilePhoto }}" height="60" />
+                                                        </div>
+                                                        <div class="col-md-9 col-xs-12">
+                                                            <h3 class="label-header ml-5">
+                                                                {{ user.conversation.receiver.username }}
+                                                            </h3>
+                                                            <p class="label-message ml-5">
+                                                                <span style="color:black">{{ user.conversation.message }}  {{user.conversation.date.timestamp | date: 'yyyy-MM-dd'}}</span>
+    
+                                                               
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button (click)="deleteUser(user.id)" class="btn btn-light"><i class="fa fa-trash-o"></i>Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="user.conversation.sender.username  !=  authenticatedUser">
+                                       
+                                            <div class="container-user-list"  routerLink="/inbox/u/{{ user.conversation.sender.id }}/{{ user.conversation.roomId }} " >
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-md-1 col-xs-12">
+                                                            <img class="inbox-image" src="{{  user.conversation.sender.profilePhoto }}" height="60" />
+                                                        </div>
+                                                        <div class="col-md-9 col-xs-12">
+                                                            <h3 class="label-header ml-5">
+                                                                {{ user.conversation.sender.username }}
+                                                            </h3>
+                                                            <div class="label-message ml-5">
+                                                                {{ user.conversation.message }}
+                                                            
+                                                            
+                                                               
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button (click)="deleteUser(user.id)" class="btn btn-light"><i class="fa fa-trash-o"></i>Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                              
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-xs-12">
+                            <div class="container container-chat">
+                                <div class="chat-header">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <button class="btn btn-light btn-lg" routerLink="/inbox">
+                                                <i class="fa fa-arrow-left"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-8 col-xs-12">
+                                          
+                                                <h2 class="text-center" > </h2>
+                                         
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="chat-body" #scrollMe>
+                                    <div *ngFor="let message of privateMessages">
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div *ngIf=" message.conversation.sender.username != authenticatedUser ">
+                                                        <div class="row mt-2 mb-2">
+                                                            
+                                                         
+                                                            <div class="col-md-1 col-xs-12">
+                                                                <img src="{{message.conversation.sender.profilePhoto }}" height="50" />
+                                                            </div>
+                                                            <div class="col-md-8 ml-4 col-xs-12">
+                                                                <p id="message-body-receiver">
+                                                                    {{ message.conversation.message }}
+                                                                  
+                                                                  
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div *ngIf=" message.conversation.sender.username ==authenticatedUser " class="mt-3">
+                                                        <div class="row">
+                                                            <div class="col-md-8 col-xs-12 offset-md-1">
+                                                                <p id="message-body-sender">
+                                                               {{ message.conversation.message }}
+                                                 
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-2 col-xs-12">
+                                                                <img src="{{ message.conversation.sender.profilePhoto  }}" height="50" />
+                                                            </div>
+                                                            <div class="col-md-1 col-xs-12">
+                                                                <button (click)="deleteUserMessage(message.id)" class="btn btn-light"><i class="fa fa-trash-o"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="chat-footer">
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-md-8 col-xs-9">
+                                            <textarea [(ngModel)]="message" class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-md-4 colxs-3">
+                                            <button (click)="sendPrivateMessage()"
+                                                class="btn btn-success btn-lg btn-block button-send">
+                                                <i class="fa fa-send"></i> Send Message
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

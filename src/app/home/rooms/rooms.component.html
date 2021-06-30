@@ -1,0 +1,111 @@
+
+<div class="container-fluid mt-5">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-2">
+        <app-side-nav></app-side-nav>
+      </div>
+      <div class="col-md-7 " >
+     
+
+    <br> 
+    <router-outlet (activate)="currentMsgToChild1" [searchText]='currentMsgToChild1' ></router-outlet>
+
+     
+
+      </div>
+
+      <div class="col-md-3 mt-5">
+        <div class="container-fluid">
+          <div class="container-shout-out" style="position: fixed;">
+
+
+            <div class="shout-out-footer">
+              
+                <textarea maxlength="255" rows="2" [(ngModel)]="message.textValue"
+                (ngModelChange)="onModelChange($event)"
+                [attr.maxlength]="counter ? maxNumberOfCharacters : ''"  maxlength="255" class="form-control mb-3" placeholder="Enter message to shoutout " id="message"
+                  name="message" ></textarea>
+                 
+                <button (click)="createShoutOuts()" class="btn btn-warning btn-block " type="submit">
+                  <i class="fa fa-bullhorn" ></i> Shout
+                </button>
+                <div class="text-right">
+                  {{numberOfCharacters2}} / {{maxNumberOfCharacters}}
+                </div>
+      
+            </div>
+            <div class="shout-out-body">
+              <ul id="shoutout-message">
+                <div class="search-result">
+                    <div class="shoutout-message">
+                      <div *ngFor="let in of counter(12) ;let i = index">
+                        <div *ngIf="shimmer">
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-2">
+                                <ngx-shimmer-loading [shape]="'square'" [width]="'50px' " [height]="'70px'"></ngx-shimmer-loading>
+                              </div>
+                              <div class="col-md-10">
+                                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'50%' " class="ml-4" [height]="'10px'">
+                                </ngx-shimmer-loading>
+                                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " class="mt-2 3 ml-4 " [height]="'10px'">
+                                </ngx-shimmer-loading>
+                      
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngFor="let shoutout of loadShoutOut" 
+                      infiniteScroll
+                           (scrolled)="onScroll()"
+                      [infiniteScrollDistance]="2"
+                      [infiniteScrollThrottle]="50">
+                      
+                      <li class="search-results" style="text-decoration: none;"  
+                      >
+                        <div class="message mt-3">
+                          <div class="col-md-12">
+                            <div class="row">
+                            <div class="col-md-2">
+                              <img style="object-fit: cover; height: 70px ;width: 50px; " src="{{shoutout.user.profilePhoto}}" /> 
+                            </div>
+                            <div class="col-md-8 " >
+                              <h6 style="font-size: 18px;color: #004a95;" class="ml-4">{{shoutout.user.username}} </h6>
+                              <p class="mt-2 3 ml-4 " style="font-size:16px;   word-wrap: break-word;
+                            ">  {{shoutout.message}} </p>
+                            </div>
+                            <div class="col-md-2">
+                                       
+                          <span *ngIf="shoutout.user.username ==  authenticatedUser.username" >
+                              <button class="btn btn-light" (click)="deleteShoutout(shoutout.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+                    </div>
+
+                </div>
+                <div *ngIf = "!notEmptyPost" class="row pb-5">
+                  <div class="col-md-12 d-flex justify-content-center">
+                    <div class="text-muted h6 alert alert-secondary p-2">No more items to show</div>
+                  </div>
+                </div>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

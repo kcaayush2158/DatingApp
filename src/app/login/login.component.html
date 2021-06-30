@@ -1,0 +1,73 @@
+
+<div class="container-fluid" style="margin-top: 80px; ">
+    <div class="row">
+        <div class="col-lg-4 mx-auto ">
+            <div class="  my-5">
+                <div class="card-body">
+                    <h2 class="text-center" style="font-size:33px">
+                                <strong>Account Login</strong>
+                            
+                                
+                                <hr class="col-lg-4 mb-4">
+                         </h2>
+                    <form  method="POST" class="form-signin"  role="form" (submit)="login()">
+                       
+                        <!--============================================================== username input field======================================-->
+                        <div class="form-label-group">
+                            <label for="inputEmail">Email :</label>
+                            <input type="text" #email="ngModel" [(ngModel)]="credentials.email" [class.is-invalid]="email.touched && email.invalid" name="email"  minlength="5" maxlength="50" id="email" class="form-control form-control-lg" required>
+                            <small class="invalid-feedback" [class.d-none]="email.valid || email.untouched">Email is required</small>
+                        </div>
+                        <!--============================================================== password input field======================================-->
+                        <div class="form-label-group">
+                            <label for="inputPassword">Password :</label>
+                            <input type="password" name="password" #password="ngModel"  [(ngModel)]="credentials.password" [class.is-invalid]="password.touched && password.invalid" id="inputPassword" class="form-control form-control-lg" required>
+                            <small class="invalid-feedback" *ngIf="password.invalid || password.untouched">Password is required</small>
+                        </div>
+                        <!--============================================================== Remember checkbox input field======================================-->
+                        <div class="custom-control custom-checkbox mb-5 mt-3">
+                            <input type="checkbox" class="custom-control-input form-control-lg" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Remember Me</label>
+                        </div>
+                        <!--=================================================================Signin input button ===============================================-->
+                        <button class="btn btn-lg btn-danger btn-block text-uppercase"  type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+
+                        <button class="btn btn-light btn-block "   data-toggle="modal" data-target="#modelId"> <i class="fa fa-help"></i>Forgot Password ?</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title">Recover your password</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form [formGroup]="changePassword">
+                                     
+                                    <div class="form-group">
+                                       <label class="email">Email : </label>
+                                       <input type="email" class="form-control" [(ngModel)]="recoveryemail" [class.is-invalid]="changePassword.touched && changePassword.invalid"  id="email">
+                                       <small class="invalid-feedback" [class.d-none]="changePassword.valid || changePassword.untouched">Email is required</small>
+                                       <small> *  Note email will be send to your email </small>
+                                      </div>
+                                  </form>
+                         
+                                   
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary">Reset</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </form>
+              
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<app-footer></app-footer>

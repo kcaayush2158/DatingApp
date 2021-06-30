@@ -1,0 +1,51 @@
+
+    <div class="col-md-12  col-xs-12">
+        <h4 class="mt-4" id="label-people-you-like">People who like you<br>
+            <small class="mt-2" id="label-intro">Send an intro message to them!</small></h4>
+    <div class="row" >
+
+        <div  *ngFor="let in of counter(10) ;let i = index">
+            <div *ngIf="shimmer">
+              <div class="card  mb-3 mr-2  ml-2 mt-2 " id="custom-card-design" style="width: 300px;">
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%'" [height]="'200px'"></ngx-shimmer-loading>
+      
+                <div class="mt-2 mb-2 mb-2">
+                  <ngx-shimmer-loading [shape]="'rectangle'" [width]="'50%'" class="pb-3"></ngx-shimmer-loading>
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'20px'"></ngx-shimmer-loading>
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'20px'"></ngx-shimmer-loading>
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'20px'"></ngx-shimmer-loading>
+                <ngx-shimmer-loading [shape]="'rectangle'" [width]="'100%' " [height]="'20px'"></ngx-shimmer-loading>
+              </div>
+            </div>
+              </div>
+            </div>
+<div id="container-users-visits" *ngFor="let user of likes">
+   
+
+        <a routerLink="/profile/{{user.likedBy.username}}" id="card-href "
+            style="list-style-type:none;text-decoration:none;">
+            <div class="card bg-light  mb-3 mr-2  ml-2 mt-2 " id="custom-card-design">
+                <img class="card-img-top image-thumbnail" id="card-img"
+                    src="{{ user.likedBy.profilePhoto}} " alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title ">{{ user.likedBy.firstName}} , {{ user.likedBy.aboutMe.age}}
+
+                        <ng-container *ngIf="user.likedBy.aboutMe.gender == 'Male'">
+                            <span class="badge badge-warning badge-pill ml-1 "><i class="fas fa-male"></i> M</span>
+                          </ng-container>
+                          <ng-container *ngIf="user.likedBy.aboutMe.gender == 'Female'">
+                            <span class="badge badge-lg badge-pill badge-warning ml-1"><i class="fas fa-female"></i> F</span> 
+                          </ng-container>
+
+                    </h5>
+                    <p class="card-text" id="card-bio">
+                        {{ user.likedBy.aboutMe.bio}}
+                    </p>
+                </div>
+            </div>
+
+        </a>
+    </div>
+</div>
+</div>
+
