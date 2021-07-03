@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { HttpClientService } from '../http-client.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -34,7 +33,6 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
     private _httpClient: HttpClient,
-    private service: HttpClientService,
     private localStorage: LocalStorageService
   ) {}
 
@@ -66,16 +64,17 @@ export class LoginComponent implements OnInit {
           this.localStorage.store('isLoggedIn', 'true');
           this.authenciate = true;
           this.messageResponse = 'success';
-          this._router.navigateByUrl('/home');
           this.toastr.success('success', 'Login successful');
           this.onlineUsers.push(response);
+          this._router.navigateByUrl('/home/profiles');
         } else {
-          this._router.navigateByUrl('/login');
+        
           this.messageResponse = 'Bad credentials';
           this.authenciate = false;
+          this._router.navigateByUrl('/login');
         }
       },
-      error => this.toastr.error('error', 'invalid credentials')
+      (err) => this.toastr.error('error', 'invalid credentials')
 
       // // for social-login
       // facebookLogin(){
@@ -97,6 +96,3 @@ export class LoginComponent implements OnInit {
   }
 }
 
-function authenticated(): (error: any) => void {
-  throw new Error('Function not implemented.');
-}

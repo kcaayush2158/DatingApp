@@ -12,18 +12,15 @@ export class AuthguardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
   
     
-    if(!this.isAuthenticated()){
-      return true;
-    }else{
-      this.router.navigateByUrl('/login');
-
-    }
+    return this.isAuthenticated();
   }
 
-  public isAuthenticated(): boolean {
+  public isAuthenticated() {
     const token = localStorage.getItem('user');
-    // Check whether the token is expired and return
-    // true or false
-    return true;
+      if(token != null){
+        return true;
+      }else{
+        return false;
+      };
   }
 }

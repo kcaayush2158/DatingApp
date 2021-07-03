@@ -58,6 +58,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.user = this.localStorage.retrieve('user');
     this.loadCountNotification();
 
@@ -69,7 +70,7 @@ export class HeaderComponent implements OnInit {
   }
 
   authenticated() {
-    if (this.localStorage.retrieve('user') != null) {
+    if (this.localStorage.retrieve('user') !=null && this.localStorage.retrieve('isLoggedIn') ) {
       return true;
     } else {
       return false;
@@ -125,8 +126,6 @@ export class HeaderComponent implements OnInit {
         data => {
           this.toastr.success('success');
           this.userService.setUser(data);
-          console.log('total user ' + data);
-          console.log(data);
           this.router.navigate(['/home/profiles/search']);
         },
         err => {

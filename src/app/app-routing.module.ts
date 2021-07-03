@@ -40,6 +40,7 @@ import { SwitchGenderComponent } from './home/switch-gender/switch-gender.compon
 const routes: Routes = [
   {path:'',component:IndexComponent},
   {path:'login',component:LoginComponent},
+  {path:'teams',component:TeamComponent},
   {path:'recover-password',component:RecoverComponent},
   {path:'profile',canActivate:[AuthGuard],component:ProfileComponent,children:[
     {path:':number/photos', canActivate:[AuthGuard] ,component:ImagesComponent},
@@ -71,6 +72,7 @@ const routes: Routes = [
      {path:'search', component:SearchComponent },
     ]},
     {path:'**' , redirectTo:'/home'}
+
   ],
 
 
