@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { AppService } from '../app.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Options } from '@angular-slider/ngx-slider';
 import { UserService } from '../user.service';
@@ -34,6 +32,8 @@ export class HeaderComponent implements OnInit {
     ceil: 100,
   };
 
+
+  
   get searchUserForm() {
     return this.searchForm.controls;
   }
@@ -51,9 +51,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private toastr: ToastrService,
-    private app: AppService,
     private localStorage: LocalStorageService,
-    private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -62,15 +60,15 @@ export class HeaderComponent implements OnInit {
     this.user = this.localStorage.retrieve('user');
     this.loadCountNotification();
 
-    this.searchForm = this.formBuilder.group({
-      country: ['', Validators.required],
-      age: ['', Validators.required],
-      gender: ['', Validators.required],
+    this.searchForm = new FormGroup({
+      country: new FormControl(['', Validators.required]) ,
+      age: new FormControl(['', Validators.required]),
+      gender: new FormControl(['', Validators.required]),
     });
   }
 
   authenticated() {
-    if (this.localStorage.retrieve('user') !=null && this.localStorage.retrieve('isLoggedIn') ) {
+    if (this.localStorage.retrieve('user') !=null && this.localStorage.retrieve('user') ) {
       return true;
     } else {
       return false;
@@ -99,7 +97,7 @@ export class HeaderComponent implements OnInit {
   }
 
   loadCountNotification() {
-    const $url = this.baseurl + `/count/notification?email=` + this.user.email ;
+    const $url = this.baseurl + `/count/notification?email=` + this.user?.email ;
     this.http.get($url, { responseType: 'text' }).subscribe(data => {
       this.countNotification = data;
     });
@@ -128,7 +126,7 @@ export class HeaderComponent implements OnInit {
           this.userService.setUser(data);
           this.router.navigate(['/home/profiles/search']);
         },
-        err => {
+        () => {
           this.toastr.error('Network Error ');
         }
       );

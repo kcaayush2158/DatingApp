@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
-import { concatMap, map, switchMap, filter, take, startWith } from 'rxjs/operators';
-import { timer, BehaviorSubject, Observable, interval } from 'rxjs';
+import { switchMap, startWith } from 'rxjs/operators';
+import { BehaviorSubject, interval } from 'rxjs';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ToastrService } from 'ngx-toastr';

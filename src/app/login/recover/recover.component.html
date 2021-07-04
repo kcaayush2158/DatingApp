@@ -1,17 +1,21 @@
 <div class="container-fluid mt-5">
     <div class="col-md-12">
         <div class="row">
-          
+
             <div class="col-md-12">
                 <div class="container  container-recover col-md-4">
                     <h2 class="text-center">Recover Account </h2>
-                    <form >
-                        <label>Email : </label>
-                        <input type="text" [(ngModel)]="email" class="form-control mt-2">
-                        <button class="btn btn-light mt-2" (click)="recoverAccount()"><i class="fa fa-send"></i> Recover</button>
+                    <form>
+                        <label>New Password : </label>
+                        <input type="text" [(ngModel)]="newPasword" class="form-control mt-2">
+                        <label>Retype Password : </label>
+                        <input type="text" [(ngModel)]="retypePassword" class="form-control mt-2">
+                        <button class="btn btn-light mt-2" (click)="recoverAccount()"><i class="fa fa-send"></i>
+                            Recover</button>
                     </form>
                 </div>
             </div>
-            
-     </div>
-</div>
+
+        </div>
+    </div>
+    </div>

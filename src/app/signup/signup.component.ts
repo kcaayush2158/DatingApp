@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chatroom } from '../user';
 import { HttpClient } from '@angular/common/http';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, STEP_STATE, THEME } from 'ng-wizard';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
   userSignupModel = new Chatroom();
   genderHasError = true;
   sex = ['Male', 'Female'];
+  submitted = false;
   message: any;
   signupForm: FormGroup;
   baseurl = 'https://lovecupid.herokuapp.com/api';
@@ -24,6 +25,9 @@ export class SignupComponent implements OnInit {
 
   get firstname() {
     return this.signupForm.get('firstname');
+  }
+  get lookingFor() {
+    return this.signupForm.get('lookingFor');
   }
   get lastname() {
     return this.signupForm.get('lastname');
@@ -52,9 +56,7 @@ export class SignupComponent implements OnInit {
   get workAs() {
     return this.signupForm.get('workAs');
   }
-  get lookingFor() {
-    return this.signupForm.get('lookingFor');
-  }
+
   get haveKids() {
     return this.signupForm.get('haveKids');
   }
@@ -92,39 +94,43 @@ export class SignupComponent implements OnInit {
     return this.signupForm.get('age');
   }
 
+  get country() {
+    return this.signupForm.get('country');
+  }
   get bodyType() {
     return this.signupForm.get('bodyType');
   }
-  signupUser() {}
 
   constructor(
     private httpClient: HttpClient,
     private toastr: ToastrService,
     private ngWizardService: NgWizardService,
-    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
-    this.signupForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      repassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-      email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      firstname: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      lastname: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      bodyType: ['', [Validators.required]],
-      height: ['', [Validators.required]],
-      eyes: ['', [Validators.required]],
-      hair: ['', [Validators.required]],
-      languages: ['', [Validators.required]],
-      relationship: ['', [Validators.required]],
-      known: ['', [Validators.required]],
-      workAs: ['', [Validators.required]],
-      lookingFor: ['', [Validators.required, Validators.minLength(40), Validators.maxLength(300)]],
-      bio: ['', [Validators.required, Validators.minLength(40), Validators.maxLength(300)]],
-      haveKids: ['', [Validators.required]],
-      smoke: ['', [Validators.required]],
-      drink: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+    this.signupForm = new FormGroup({
+
+      username: new FormControl(''),
+      firstname:  new FormControl(''),
+      lastname:  new FormControl(''),
+      repassword:  new FormControl(''),
+      password:   new FormControl(''),
+      email:  new FormControl(''),
+
+      bodyType:  new FormControl(''),
+      height:  new FormControl(''),
+      eyes:  new FormControl(''),
+      hair:  new FormControl(''),
+      languages:  new FormControl(''),
+      relationship:  new FormControl(''),
+      country:   new FormControl(''),
+      known:  new FormControl(''),
+      workAs:   new FormControl(''),
+      lookingFor:  new FormControl(''),
+      bio:  new FormControl(''),
+      haveKids:  new FormControl(''),
+      smoke:  new FormControl(''),
+      drink: new FormControl(''),
     });
   }
 
@@ -141,6 +147,7 @@ export class SignupComponent implements OnInit {
       firstname: this.firstname,
       lastname: this.lastname,
       age: this.age,
+      country: this.country,
       gender: this.gender,
       hair: this.hair,
       height: this.height,
@@ -150,10 +157,16 @@ export class SignupComponent implements OnInit {
       bio: this.bio,
     };
 
+    this.submitted = true;
     const url = this.baseurl + '/signup';
-    this.httpClient.post(url, { data }).subscribe(data => {
-      this.toastr.success('Signup complete');
-    });
+    // stop here if form is invalid
+    if (this.signupForm.invalid) {
+      this.httpClient.post(url, JSON.stringify(data)).subscribe(data => {
+        this.toastr.success('Signup complete');
+      });
+    }
+
+ 
   }
   validateGender(value) {
     if (value === 'default') {

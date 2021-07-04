@@ -284,19 +284,20 @@
                                  <option value="Zambia">Zambia</option>
                                  <option value="Zimbabwe">Zimbabwe</option>
                               </select>
-                              <div *ngIf="searchUserForm.country.touched && searchUserForm.country.invalid"
-                                 class="text-danger">
-                                 <div *ngIf="searchUserForm.country.errors.required">
-                                    <div class="alert alert-danger mt-2" role="alert"><i class="fa fa-remove"></i> Name
-                                       is required</div>
-                                 </div>
+                              <span class="text-danger"
+                                 *ngIf="(searchUserForm.country.touched || submitted) && searchUserForm.country.errors?.required">
+                                
+                                    <div class="alert alert-danger mt-2" role="alert"><i class="fa fa-remove"></i> Country  is required</div>
+                               
                                  <div *ngIf="searchUserForm.country.errors?.minlength">Minimum 4 character are required.
                                  </div>
+                              </span>
                               </div>
-                           </div>
+                  
+                        
                            <div class="form-group">
                               <label>Age :</label>
-                              <ngx-slider formControlName="age" [(value)]="fromAge" [(highValue)]="toAge"
+                              <ngx-slider [(value)]="fromAge" [(highValue)]="toAge"
                                  [options]="options"></ngx-slider>
                               <span class="text-danger mt-2"
                                  *ngIf="(searchUserForm.age.touched || submitted) && searchUserForm.age.errors?.required">
