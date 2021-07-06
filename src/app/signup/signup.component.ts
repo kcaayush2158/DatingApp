@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Chatroom } from '../user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, STEP_STATE, THEME } from 'ng-wizard';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { NgxFileUploadRequest, NgxFileUploadStorage, NgxFileUploadOptions, NgxFileUploadFactory } from '@ngx-file-upload/core';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,15 @@ export class SignupComponent implements OnInit {
   submitted = false;
   message: any;
   signupForm: FormGroup;
-  baseurl = 'https://lovecupid.herokuapp.com/api';
+
+  public uploads: NgxFileUploadRequest[] = [];
+
+  private storage: NgxFileUploadStorage;
+
+  private uploadOptions: NgxFileUploadOptions;
+
+
+  baseurl = 'http://localhost:8081/api';
 
   get registerFormControl() {
     return this.signupForm.controls;
@@ -86,7 +95,7 @@ export class SignupComponent implements OnInit {
   get gender() {
     return this.signupForm.get('gender');
   }
-
+ 
   get height() {
     return this.signupForm.get('height');
   }
@@ -100,14 +109,36 @@ export class SignupComponent implements OnInit {
   get bodyType() {
     return this.signupForm.get('bodyType');
   }
+  get interests() {
+    return this.signupForm.get('interests');
+  }
+  get liveIn() {
+    return this.signupForm.get('liveIn');
+  }
+
+  get education() {
+    return this.signupForm.get('education');
+  }
+ 
 
   constructor(
+    @Inject(NgxFileUploadFactory) private uploadFactory: NgxFileUploadFactory,
     private httpClient: HttpClient,
     private toastr: ToastrService,
     private ngWizardService: NgWizardService,
   ) {}
 
   ngOnInit() {
+    this.storage = new NgxFileUploadStorage({
+      concurrentUploads: 2,
+      autoStart: true,
+      removeCompleted: 5000 // remove completed after 5 seconds
+    });
+
+    
+    this.storage.change()
+    .subscribe(uploads => this.uploads = uploads);
+
     this.signupForm = new FormGroup({
 
       username: new FormControl(''),
@@ -116,57 +147,66 @@ export class SignupComponent implements OnInit {
       repassword:  new FormControl(''),
       password:   new FormControl(''),
       email:  new FormControl(''),
-
       bodyType:  new FormControl(''),
       height:  new FormControl(''),
       eyes:  new FormControl(''),
+      gender:  new FormControl(''),
       hair:  new FormControl(''),
+      interests:  new FormControl(''),
       languages:  new FormControl(''),
       relationship:  new FormControl(''),
       country:   new FormControl(''),
       known:  new FormControl(''),
       workAs:   new FormControl(''),
       lookingFor:  new FormControl(''),
+      liveIn:  new FormControl(''),
       bio:  new FormControl(''),
       haveKids:  new FormControl(''),
+      age:  new FormControl(''),
+      education:  new FormControl(''),
       smoke:  new FormControl(''),
       drink: new FormControl(''),
     });
-  }
-
-  signup() {
-    const data = {
-      username: this.username,
-      email: this.email,
-      password: this.password,
-      repassword: this.repassword,
-      bodyType: this.bodyType,
-      languages: this.languages,
-      relationship: this.relationship,
-      known: this.known,
-      firstname: this.firstname,
-      lastname: this.lastname,
-      age: this.age,
-      country: this.country,
-      gender: this.gender,
-      hair: this.hair,
-      height: this.height,
-      occupation: this.occupation,
-      smoke: this.smoke,
-      havekids: this.haveKids,
-      bio: this.bio,
-    };
-
-    this.submitted = true;
-    const url = this.baseurl + '/signup';
-    // stop here if form is invalid
-    if (this.signupForm.invalid) {
-      this.httpClient.post(url, JSON.stringify(data)).subscribe(data => {
-        this.toastr.success('Signup complete');
-      });
-    }
 
  
+    this.uploadOptions = { url: this.baseurl + '/upload?email=' + this.email };
+  }
+
+
+
+  signup() {
+
+const url= this.baseurl+'/signup?email='+this.email.value+
+'&drink='+this.drink.value+
+'&smoke='+this.smoke.value+
+'&haveKids='+this.haveKids.value+
+'&bio='+this.bio.value+
+'&lookingFor='+this.lookingFor.value+
+'&workAs='+this.workAs.value+
+'&country='+this.country.value+
+'&relationship='+this.relationship.value+
+'&password='+this.password.value+
+'&hair='+this.hair.value+
+'&age='+this.age.value+
+'&known='+this.known.value+
+'&eyes='+this.eyes.value+
+'&liveIn='+this.liveIn.value+
+'&gender='+this.gender.value+
+'&bodyType='+this.bodyType.value+
+'&education='+this.education.value+
+'&height='+this.height.value+
+'&interests='+this.interests.value+
+'&lastName='+this.lastname.value+
+'&username='+this.username.value+
+'&firstName='+this.firstname.value+
+'&languages='+this.languages.value;
+
+    this.httpClient.post(url,{}).subscribe(data => {
+      this.toastr.success('Signup complete');
+    },(err)=>{this.toastr.error('failed');});
+    this.submitted = true;
+  
+   
   }
   validateGender(value) {
     if (value === 'default') {
@@ -175,6 +215,7 @@ export class SignupComponent implements OnInit {
       this.genderHasError = false;
     }
   }
+
 
   stepStates = {
     normal: STEP_STATE.normal,
@@ -199,6 +240,19 @@ export class SignupComponent implements OnInit {
     },
   };
 
+  public onSelect(event) {
+    const addedFiles: File[] = event.addedFiles;
+
+    if (addedFiles.length) {
+      const uploads = this.uploadFactory.createUploadRequest(addedFiles, this.uploadOptions);
+      this.storage.add(uploads);
+    }
+  }
+   
+  public onRemove(upload: NgxFileUploadRequest) {
+    this.storage.remove(upload);
+  }
+
   showPreviousStep(event?: Event) {
     this.ngWizardService.previous();
   }
@@ -218,6 +272,7 @@ export class SignupComponent implements OnInit {
   stepChanged(args: StepChangedArgs) {
     console.log(args.step);
   }
+
   counter(i: number) {
     return new Array(i);
   }

@@ -26,7 +26,7 @@
 
             </ng-wizard-step>
     
-        <ng-wizard-step [title]="'Step 2'" [description]="'Step 1 description'">
+        <ng-wizard-step [title]="'Step 2'" [description]="'Your Personal Information '">
 
             <div class="container-fluid  col-md-6 col-xs-12 " id="signup-form">
 
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label for="firstname">First Name: </label>
                                 <input name="firstname" [class.is-valid]="registerFormControl.firstname.valid && registerFormControl.firstname.untouched" [class.is-invalid]="registerFormControl.firstname.invalid && registerFormControl.firstname.touched" formControlName="firstname" type="text" id="firstname" class="form-control mb-2 form-control-lg" autofocus required />
-                                <div class="alert alert-danger mt-1" role="alert"   *ngIf="registerFormControl.invalid && registerFormControl.firstname.touched">
+                                <div class="alert alert-danger mt-1" role="alert"   *ngIf="registerFormControl.firstname.invalid && registerFormControl.firstname.touched">
                                     <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.required"><i class="fa fa-remove"></i>FirstName is required</small>
                                     <small class="text-danger"*ngIf="registerFormControl.firstname.errors?.minlength"><i class="fa fa-remove"></i>FirstName charecters must be atleast 3 charecters</small>
                                     <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.maxlength"><i class="fa fa-remove"></i> FirstName charecters must be less than 20charecters</small>
@@ -123,7 +123,7 @@
 
 
 
-        <ng-wizard-step [title]="'Step 2'" [description]="'Step 2 description'" (stepChanged)="stepChanged($event)">
+        <ng-wizard-step [title]="'Step 3'" [description]="'Your Appearance'" (stepChanged)="stepChanged($event)">
 
             <div class="container-fluid  col-lg-6 " id="signup-form">
                 <h2 class="text-center" style="font-size:33px;">
@@ -219,6 +219,19 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="eye">Gender</label>
+                    <select class="form-control autofill" [class.is-invalid]="registerFormControl.gender.invalid && registerFormControl.gender.touched"  [class.is-valid]="registerFormControl.gender.valid && registerFormControl.gender.untouched"  required name="gender" formControlName="gender" tabindex="2"
+                        id="eye">
+                        <option value="Male" selected>Male</option>
+                        <option value="Female" selected>Female</option>
+                      
+                    </select>
+                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.gender.invalid && registerFormControl.gender.touched"    >
+                        <small class="text-danger" *ngIf="registerFormControl.gender.errors?.required">   <i class="fa fa-remove"></i>Gender is required</small>
+                    
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="eye">What is your eye colour ?</label>
                     <select class="form-control autofill" [class.is-invalid]="registerFormControl.eyes.invalid && registerFormControl.eyes.touched"  [class.is-valid]="registerFormControl.eyes.valid && registerFormControl.eyes.untouched"  required name="eyes" formControlName="eyes" tabindex="2"
                         id="eye">
@@ -251,10 +264,25 @@
                     
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <select class="form-control autofill"[class.is-invalid]="registerFormControl.age.invalid && registerFormControl.age.touched"  [class.is-valid]="registerFormControl.age.valid && registerFormControl.age.untouched"  required name="age"  formControlName="age" tabindex="2">
+                     
+                        
+                        <option value="18" selected>18</option>
+                   
+                    </select>
+                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.age.invalid && registerFormControl.age.touched"    >
+                        <small class="text-danger" *ngIf="registerFormControl.age.errors?.required">   <i class="fa fa-remove"></i>Age is required</small>
+                    
+                    </div>
+                </div>
+
             </div>
         </ng-wizard-step>
 
-        <ng-wizard-step [title]="'Step 3'" [description]="'Step 3 description'">
+        <ng-wizard-step [title]="'Step 4'" [description]="'Your Relationship information'">
 
 
             <div class="container-fluid  col-lg-6 " id="signup-form">
@@ -368,6 +396,14 @@
                     
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="interests">interests</label>
+                    <input type="text" name="interests" [class.is-invalid]="registerFormControl.interests.invalid && registerFormControl.interests.touched"  [class.is-valid]="registerFormControl.interests.valid && registerFormControl.interests.untouched"  required id="interests" formControlName="interests" class="form-control">
+                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.interests.invalid && registerFormControl.interests.touched"    >
+                        <small class="text-danger" *ngIf="registerFormControl.interests.errors?.required">   <i class="fa fa-remove"></i>Intrests  is required</small>
+                    
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="workAs">What is your Occupation ?</label>
@@ -416,7 +452,7 @@
                 </div>
                 <div class="form-group">
                     <label for="lookingFor">Looking For?</label>
-                    <textarea class="form-control" [ngClass]="{ 'is-invalid': submitted && signupForm.lookingFor.errors }"  [class.is-valid]="registerFormControl.lookingFor.valid && registerFormControl.lookingFor.untouched"  required name="lookingFor" formControlName="lookingFor"
+                    <textarea class="form-control" [class.is-invalid]="registerFormControl.lookingFor.invalid && registerFormControl.lookingFor.touched"  [class.is-valid]="registerFormControl.lookingFor.valid && registerFormControl.lookingFor.untouched"  required name="lookingFor" formControlName="lookingFor"
                         id="lookingFor" selected></textarea>
                         <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lookingFor.invalid && registerFormControl.lookingFor.touched"    >
                             <small class="text-danger" *ngIf="registerFormControl.lookingFor.errors?.required">   <i class="fa fa-remove"></i>lookingFor is required</small>
@@ -463,9 +499,79 @@
                     
                     </div>
                 </div>
-                <button class="btn btn-block btn-success" (click)="signup()" type="submit">Signup</button>
+            
             </div>
         </ng-wizard-step>
+
+        <ng-wizard-step [title]="'Step 5'" [description]="'Your Add Photos'">
+
+            <div class="contianer-fluid mt-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="text-center" style="font-size:33px;">
+                            <strong>Your Photos</strong>
+                            <hr class="col-lg-5 mb-4">
+                        </h2>
+                                                        
+                        <h6>Upload Profile Picture: </h6>
+                                                    
+                        <ngx-dropzone (change)="onSelect($event)">
+                            <ngx-dropzone-label>Drop or Browse</ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let upload of uploads"
+                                (removed)="onRemove(upload)" 
+                                [file]="upload.data.raw"
+                                 [removable]="true"
+                          >
+        
+                          <ngx-file-upload-ui--progressbar-circle [progress]="upload.data.progress" [parts]="12" >
+                        </ngx-file-upload-ui--progressbar-circle>
+                            <ngx-dropzone-label>
+                                Name: {{ upload.data.name }}<br />
+                                State: {{upload.data.state}}<br />
+                                Progress: {{upload.data.progress}}%
+                            </ngx-dropzone-label>
+                    
+                          </ngx-dropzone-image-preview>
+                        </ngx-dropzone>
+        
+                  <div  *ngFor="let upload of uploads">
+                    {{ upload}}
+                  </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="photo-rules-card">
+                            <h2 class="photo-rules-header">Photo Rules</h2>
+                            <h5>Post great photos like these</h5>
+                            <h6>You'll get more dates</h6>
+                            <hr>
+                              <h6>Doing something ✅</h6>
+                              <img  height="100"src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png">
+                              <h6>Your face</h6>
+                              <img height="100" src="https://i.ytimg.com/vi/l0W2e1mGntQ/maxresdefault.jpg">
+                              <h6>Your  doing something  ✅ </h6>
+    
+                              <h5 class="mt-4">NOT photos like these</h5>
+                              <h6 >You'll get banned </h6>
+                              <hr>
+                              <img src="https://www.clipartkey.com/mpngs/m/31-312215_kiss-clipart-transparent-background-lips-icon-png.png" height="100">
+                               <h6 class="mt-1">Porn / Nudity ❌</h6>
+                               <img src="https://img.icons8.com/bubbles/2x/visible--v2.png"  class="mt-1" height="100">
+                               <h6 class="mt-1">Extreme Closeups  ❌</h6>
+                               <img src="https://i.pinimg.com/736x/9d/4b/7f/9d4b7fb1195c2dae0fc6f6e0913491cc.jpg" class="mt-1" height="100">
+                               <h6 class="mt-1">Pets / Children Alone ❌</h6>
+                               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTQBPBIdFmRlkwxuMYMbN-BdpdBpDHJzQAkY-vZTbCpYHJLcSKQQHvik4I1RFgBGIHwyA&usqp=CAU" class="mt-1" height="100">
+                               <h6 class="mt-1">Celebrity  / Fake Photos ❌</h6>
+                               <img src="https://static.thenounproject.com/png/105264-200.png" class="mt-1"height="100">
+                               <h6 class="mt-1">Meme / Text / ads ❌</h6>
+                          </div>
+                    </div>
+                   
+                </div>
+            
+
+                <button id="btn-signup" class="btn btn-block mt-5 btn-success offset-md-5 col-xs-12  col-md-4" (click)="signup()" type="submit"> <i class="fas fa-sign-in-alt"></i> Create Account </button>
+                </div>
+            </ng-wizard-step>
 
     </ng-wizard>
     <!--  =============================================== Form submit button  field ========================================-->

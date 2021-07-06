@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light navbar-expand-lg fixed-top">
+<nav class="navbar bg-light navbar-expand-lg fixed-top">
    <a class="navbar-brand ml-5" href="#">
       <h3>
          <b> <span style="color: red"> CUPID </span> <span style="color: #007bff"> LOVE </span> </b>
@@ -414,15 +414,15 @@
       <div [hidden]="authenticated()">
 
      
-         <div class="row">
-            <li class="nav-item">
+         <div class="row mr-2">
+            <li class="nav-item ">
                <button type="button " routerLink="/signup" routerLinkActive="router-link-active"
                   class="btn btn-light col-xs-12 col-sm-12 ml-5 mr-1" id="btn-signup">
                   Signup
                </button>
             </li>
             <li class="nav-item">
-               <button class="btn action-button col-xs-12 mb-1" routerLink="/login"
+               <button class="btn action-button  col-xs-12 mb-1" routerLink="/login"
                   routerLinkActive="router-link-active" role="button" id="btn-login">
                   <i class="fas fa-sign-in-alt"></i> Login
                </button>
