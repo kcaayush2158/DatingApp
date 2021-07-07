@@ -5,6 +5,8 @@ import { NgWizardConfig, NgWizardService, StepChangedArgs, STEP_STATE, THEME } f
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NgxFileUploadRequest, NgxFileUploadStorage, NgxFileUploadOptions, NgxFileUploadFactory } from '@ngx-file-upload/core';
+import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -25,6 +27,8 @@ export class SignupComponent implements OnInit {
 
   private uploadOptions: NgxFileUploadOptions;
 
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
 
   baseurl = 'http://localhost:8081/api';
 
@@ -125,6 +129,7 @@ export class SignupComponent implements OnInit {
     @Inject(NgxFileUploadFactory) private uploadFactory: NgxFileUploadFactory,
     private httpClient: HttpClient,
     private toastr: ToastrService,
+    private router :Router,
     private ngWizardService: NgWizardService,
   ) {}
 
@@ -135,7 +140,7 @@ export class SignupComponent implements OnInit {
       removeCompleted: 5000 // remove completed after 5 seconds
     });
 
-    
+
     this.storage.change()
     .subscribe(uploads => this.uploads = uploads);
 
@@ -203,11 +208,15 @@ const url= this.baseurl+'/signup?email='+this.email.value+
 
     this.httpClient.post(url,{}).subscribe(data => {
       this.toastr.success('Signup complete');
+   
+
     },(err)=>{this.toastr.error('failed');});
     this.submitted = true;
   
    
   }
+
+
   validateGender(value) {
     if (value === 'default') {
       this.genderHasError = true;
@@ -226,18 +235,7 @@ const url= this.baseurl+'/signup?email='+this.email.value+
 
   config: NgWizardConfig = {
     selected: 0,
-    theme: THEME.dots,
-    toolbarSettings: {
-      toolbarExtraButtons: [
-        {
-          text: 'Finish',
-          class: 'btn btn-info',
-          event: () => {
-            console.log('finished');
-          },
-        },
-      ],
-    },
+    theme: THEME.dots
   };
 
   public onSelect(event) {
@@ -246,6 +244,9 @@ const url= this.baseurl+'/signup?email='+this.email.value+
     if (addedFiles.length) {
       const uploads = this.uploadFactory.createUploadRequest(addedFiles, this.uploadOptions);
       this.storage.add(uploads);
+      console.log(uploads);
+      this.toastr.success('profile upload successfully');
+      
     }
   }
    
@@ -261,9 +262,7 @@ const url= this.baseurl+'/signup?email='+this.email.value+
     this.ngWizardService.next();
   }
 
-  resetWizard(event?: Event) {
-    this.ngWizardService.reset();
-  }
+
 
   setTheme(theme: THEME) {
     this.ngWizardService.theme(theme);
@@ -276,6 +275,24 @@ const url= this.baseurl+'/signup?email='+this.email.value+
   counter(i: number) {
     return new Array(i);
   }
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+}
+imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    console.log(this.croppedImage);
+}
+imageLoaded(image: LoadedImage) {
+  
+    // show cropper
+}
+cropperReady() {
+    // cropper ready
+}
+loadImageFailed() {
+    // show message
+}
   // public doSignup(){
   //  let response = this.service.createUser(this.userSignupModel);
   //   response.subscribe((data) => this.message = data);

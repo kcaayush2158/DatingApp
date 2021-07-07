@@ -1,5 +1,5 @@
 
- <div class="container" style="margin-top:150px;">
+ <div class="container-fluid" style="margin-top:150px;">
 <form method="POST" [formGroup]="signupForm" >
     <ng-wizard [config]="config"  (stepChanged)="stepChanged($event)">
 
@@ -130,94 +130,102 @@
                     <strong>Your Appearance</strong>
                     <hr class="col-lg-5 mb-4">
                 </h2>
-                <div class="form-group">
-                    <label for="bodyType ">What is your body type ?</label>
-                    <select class="form-control" formControlName="bodyType" [class.is-invalid]="registerFormControl.bodyType.invalid && registerFormControl.bodyType.touched"  [class.is-valid]="registerFormControl.bodyType.valid && registerFormControl.bodyType.untouched"  required name="bodyType" id="bodyType ">
-                        <option value="" id="bodyType" selected></option>
-                        <option value="Average">Average</option>
-                        <option value="Curvy">Curvy</option>
-                        <option value="Athletic">Athletic</option>
-                        <option value="Muscular">Muscular</option>
-                        <option value="Slim">Slim</option>
-                    </select>
-                    
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.bodyType.invalid && registerFormControl.bodyType.touched">
-                    <small class="text-danger" *ngIf="registerFormControl.bodyType.errors?.required">   
-                        <i class="fa fa-remove"></i>Body Type is required</small>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="bodyType ">What is your body type ?</label>
+                            <select class="form-control" formControlName="bodyType" [class.is-invalid]="registerFormControl.bodyType.invalid && registerFormControl.bodyType.touched"  [class.is-valid]="registerFormControl.bodyType.valid && registerFormControl.bodyType.untouched"  required name="bodyType" id="bodyType ">
+                      
+                                <option value="Average">Average</option>
+                                <option value="Curvy">Curvy</option>
+                                <option value="Athletic">Athletic</option>
+                                <option value="Muscular">Muscular</option>
+                                <option value="Slim">Slim</option>
+                            </select>
+                            
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.bodyType.invalid && registerFormControl.bodyType.touched">
+                            <small class="text-danger" *ngIf="registerFormControl.bodyType.errors?.required">   
+                                <i class="fa fa-remove"></i>Body Type is required</small>
+                                </div>
                         </div>
-                </div>
-                <div class="form-group">
-                    <label for="height">What is your height ?</label>
-                    <select class="form-control autofill" [class.is-invalid]="registerFormControl.height.invalid && registerFormControl.height.touched"  [class.is-valid]="registerFormControl.height.valid && registerFormControl.height.untouched"  formControlName="height" required name="height" id="height"
-                        tabindex="2">
-                        <option value="" selected></option>
-                        <option value="91">3'</option>
-                        <option value="94">3'1"</option>
-                        <option value="96">3'2"</option>
-                        <option value="99">3'3"</option>
-                        <option value="101">3'4"</option>
-                        <option value="104">3'5"</option>
-                        <option value="106">3'6"</option>
-                        <option value="109">3'7"</option>
-                        <option value="111">3'8"</option>
-                        <option value="114">3'9"</option>
-                        <option value="116">3'10"</option>
-                        <option value="119">3'11"</option>
-                        <option value="122">4'</option>
-                        <option value="124">4'1"</option>
-                        <option value="127">4'2"</option>
-                        <option value="129">4'3"</option>
-                        <option value="132">4'4"</option>
-                        <option value="134">4'5"</option>
-                        <option value="137">4'6"</option>
-                        <option value="139">4'7"</option>
-                        <option value="142">4'8"</option>
-                        <option value="144">4'9"</option>
-                        <option value="147">4'10"</option>
-                        <option value="149">4'11"</option>
-                        <option value="152">5'</option>
-                        <option value="155">5'1"</option>
-                        <option value="157">5'2"</option>
-                        <option value="160">5'3"</option>
-                        <option value="162">5'4"</option>
-                        <option value="165">5'5"</option>
-                        <option value="167">5'6"</option>
-                        <option value="170">5'7"</option>
-                        <option value="172">5'8"</option>
-                        <option value="175">5'9"</option>
-                        <option value="177">5'10"</option>
-                        <option value="180">5'11"</option>
-                        <option value="183">6'</option>
-                        <option value="185">6'1"</option>
-                        <option value="188">6'2"</option>
-                        <option value="190">6'3"</option>
-                        <option value="193">6'4"</option>
-                        <option value="195">6'5"</option>
-                        <option value="198">6'6"</option>
-                        <option value="200">6'7"</option>
-                        <option value="203">6'8"</option>
-                        <option value="205">6'9"</option>
-                        <option value="208">6'10"</option>
-                        <option value="210">6'11"</option>
-                        <option value="213">7'</option>
-                        <option value="216">7'1"</option>
-                        <option value="218">7'2"</option>
-                        <option value="221">7'3"</option>
-                        <option value="223">7'4"</option>
-                        <option value="226">7'5"</option>
-                        <option value="228">7'6"</option>
-                        <option value="231">7'7"</option>
-                        <option value="233">7'8"</option>
-                        <option value="236">7'9"</option>
-                        <option value="238">7'10"</option>
-                        <option value="241">7'11"</option>
-                    </select>
-
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.height.invalid && registerFormControl.height.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.height.errors?.required">   <i class="fa fa-remove"></i>Body Type is required</small>
-                    
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="height">What is your height ?</label>
+                            <select class="form-control autofill" [class.is-invalid]="registerFormControl.height.invalid && registerFormControl.height.touched"  [class.is-valid]="registerFormControl.height.valid && registerFormControl.height.untouched"  formControlName="height" required name="height" id="height"
+                                tabindex="2">
+                              
+                                <option value="91">3'</option>
+                                <option value="94">3'1"</option>
+                                <option value="96">3'2"</option>
+                                <option value="99">3'3"</option>
+                                <option value="101">3'4"</option>
+                                <option value="104">3'5"</option>
+                                <option value="106">3'6"</option>
+                                <option value="109">3'7"</option>
+                                <option value="111">3'8"</option>
+                                <option value="114">3'9"</option>
+                                <option value="116">3'10"</option>
+                                <option value="119">3'11"</option>
+                                <option value="122">4'</option>
+                                <option value="124">4'1"</option>
+                                <option value="127">4'2"</option>
+                                <option value="129">4'3"</option>
+                                <option value="132">4'4"</option>
+                                <option value="134">4'5"</option>
+                                <option value="137">4'6"</option>
+                                <option value="139">4'7"</option>
+                                <option value="142">4'8"</option>
+                                <option value="144">4'9"</option>
+                                <option value="147">4'10"</option>
+                                <option value="149">4'11"</option>
+                                <option value="152">5'</option>
+                                <option value="155">5'1"</option>
+                                <option value="157">5'2"</option>
+                                <option value="160">5'3"</option>
+                                <option value="162">5'4"</option>
+                                <option value="165">5'5"</option>
+                                <option value="167">5'6"</option>
+                                <option value="170">5'7"</option>
+                                <option value="172">5'8"</option>
+                                <option value="175">5'9"</option>
+                                <option value="177">5'10"</option>
+                                <option value="180">5'11"</option>
+                                <option value="183">6'</option>
+                                <option value="185">6'1"</option>
+                                <option value="188">6'2"</option>
+                                <option value="190">6'3"</option>
+                                <option value="193">6'4"</option>
+                                <option value="195">6'5"</option>
+                                <option value="198">6'6"</option>
+                                <option value="200">6'7"</option>
+                                <option value="203">6'8"</option>
+                                <option value="205">6'9"</option>
+                                <option value="208">6'10"</option>
+                                <option value="210">6'11"</option>
+                                <option value="213">7'</option>
+                                <option value="216">7'1"</option>
+                                <option value="218">7'2"</option>
+                                <option value="221">7'3"</option>
+                                <option value="223">7'4"</option>
+                                <option value="226">7'5"</option>
+                                <option value="228">7'6"</option>
+                                <option value="231">7'7"</option>
+                                <option value="233">7'8"</option>
+                                <option value="236">7'9"</option>
+                                <option value="238">7'10"</option>
+                                <option value="241">7'11"</option>
+                            </select>
+        
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.height.invalid && registerFormControl.height.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.height.errors?.required">   <i class="fa fa-remove"></i>Body Type is required</small>
+                            
+                            </div>
+                        </div>
                     </div>
                 </div>
+           
+           
                 <div class="form-group">
                     <label for="eye">Gender</label>
                     <select class="form-control autofill" [class.is-invalid]="registerFormControl.gender.invalid && registerFormControl.gender.touched"  [class.is-valid]="registerFormControl.gender.valid && registerFormControl.gender.untouched"  required name="gender" formControlName="gender" tabindex="2"
@@ -231,22 +239,27 @@
                     
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="eye">What is your eye colour ?</label>
-                    <select class="form-control autofill" [class.is-invalid]="registerFormControl.eyes.invalid && registerFormControl.eyes.touched"  [class.is-valid]="registerFormControl.eyes.valid && registerFormControl.eyes.untouched"  required name="eyes" formControlName="eyes" tabindex="2"
-                        id="eye">
-                        <option value=" " selected></option>
-                        <option  value="Blue">Blue</option>
-                        <option  value="Brown">Brown</option>
-                        <option  value="Gray">Gray</option>
-                        <option  value="Green">Green</option>
-                        <option  value="Hazel">Hazel</option>
-                    </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.eyes.invalid && registerFormControl.eyes.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.eyes.errors?.required">   <i class="fa fa-remove"></i>Eye Color is required</small>
-                    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="eye">What is your eye colour ?</label>
+                            <select class="form-control autofill" [class.is-invalid]="registerFormControl.eyes.invalid && registerFormControl.eyes.touched"  [class.is-valid]="registerFormControl.eyes.valid && registerFormControl.eyes.untouched"  required name="eyes" formControlName="eyes" tabindex="2"
+                                id="eye">
+                                <option value=" " selected></option>
+                                <option  value="Blue">Blue</option>
+                                <option  value="Brown">Brown</option>
+                                <option  value="Gray">Gray</option>
+                                <option  value="Green">Green</option>
+                                <option  value="Hazel">Hazel</option>
+                            </select>
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.eyes.invalid && registerFormControl.eyes.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.eyes.errors?.required">   <i class="fa fa-remove"></i>Eye Color is required</small>
+                            
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-md-6">
+                        
                 <div class="form-group">
                     <label for="hair">What is your hair color?</label>
                     <select class="form-control autofill"[class.is-invalid]="registerFormControl.hair.invalid && registerFormControl.hair.touched"  [class.is-valid]="registerFormControl.hair.valid && registerFormControl.hair.untouched"  required name="hair"  formControlName="hair" tabindex="2">
@@ -264,6 +277,9 @@
                     
                     </div>
                 </div>
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <label for="age">Age</label>
@@ -290,6 +306,9 @@
                     <strong>Your Relationship</strong>
                     <hr class="col-lg-5 mb-4">
                 </h2>
+                <div class="row">
+                    <div class="col-md-6">
+
                 <div class="form-group">
                     <label for="languages">Which Language do you know?</label>
                     <select class="form-control" [class.is-invalid]="registerFormControl.languages.invalid && registerFormControl.languages.touched"  [class.is-valid]="registerFormControl.languages.valid && registerFormControl.languages.untouched" required formControlName="languages" name="languages" id="languages">
@@ -372,134 +391,167 @@
                     
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="relationship">What is your relationship Status?</label>
-                    <select class="form-control"[class.is-invalid]="registerFormControl.relationship.invalid && registerFormControl.relationship.touched"  [class.is-valid]="registerFormControl.relationship.valid && registerFormControl.relationship.untouched"  required formControlName="relationship" name="relationship"
-                        id="relationship">
-                        <option value="" selected></option>
-                        <option value="Single">Single</option>
-                        <option value="Married">Married</option>
-                        <option value="Separated">Separated</option>
-                        <option value="Divorced">Divorced</option>
-                        <option value="Widowed">Widowed</option>
-                    </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.relationship.invalid && registerFormControl.relationship.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.relationship.errors?.required">   <i class="fa fa-remove"></i>Relationship Status is required</small>
-                    
-                    </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="relationship">What is your relationship Status?</label>
+                                <select class="form-control"[class.is-invalid]="registerFormControl.relationship.invalid && registerFormControl.relationship.touched"  [class.is-valid]="registerFormControl.relationship.valid && registerFormControl.relationship.untouched"  required formControlName="relationship" name="relationship"
+                                    id="relationship">
+                                    <option value="" selected></option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Separated">Separated</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Widowed">Widowed</option>
+                                </select>
+                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.relationship.invalid && registerFormControl.relationship.touched"    >
+                                    <small class="text-danger" *ngIf="registerFormControl.relationship.errors?.required">   <i class="fa fa-remove"></i>Relationship Status is required</small>
+                                
+                                </div>
+                            </div>
+                        </div>
                 </div>
-                <div class="form-group">
-                    <label for="known">Known</label>
-                    <input type="text" name="known"[class.is-invalid]="registerFormControl.known.invalid && registerFormControl.known.touched"  [class.is-valid]="registerFormControl.known.valid && registerFormControl.known.untouched"  required id="known" formControlName="known" class="form-control">
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.known.invalid && registerFormControl.known.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.known.errors?.required">   <i class="fa fa-remove"></i>Known Status is required</small>
-                    
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="interests">interests</label>
-                    <input type="text" name="interests" [class.is-invalid]="registerFormControl.interests.invalid && registerFormControl.interests.touched"  [class.is-valid]="registerFormControl.interests.valid && registerFormControl.interests.untouched"  required id="interests" formControlName="interests" class="form-control">
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.interests.invalid && registerFormControl.interests.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.interests.errors?.required">   <i class="fa fa-remove"></i>Intrests  is required</small>
-                    
-                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="known">Known</label>
+                            <input type="text" name="known"[class.is-invalid]="registerFormControl.known.invalid && registerFormControl.known.touched"  [class.is-valid]="registerFormControl.known.valid && registerFormControl.known.untouched"  required id="known" formControlName="known" class="form-control">
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.known.invalid && registerFormControl.known.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.known.errors?.required">   <i class="fa fa-remove"></i>Known Status is required</small>
+                            
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="interests">interests</label>
+                                <input type="text" name="interests" [class.is-invalid]="registerFormControl.interests.invalid && registerFormControl.interests.touched"  [class.is-valid]="registerFormControl.interests.valid && registerFormControl.interests.untouched"  required id="interests" formControlName="interests" class="form-control">
+                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.interests.invalid && registerFormControl.interests.touched"    >
+                                    <small class="text-danger" *ngIf="registerFormControl.interests.errors?.required">   <i class="fa fa-remove"></i>Intrests  is required</small>
+                                
+                                </div>
+                            </div>
+                        </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="workAs">What is your Occupation ?</label>
-                    <select class="form-control" [class.is-invalid]="registerFormControl.workAs.invalid && registerFormControl.workAs.touched"  [class.is-valid]="registerFormControl.workAs.valid && registerFormControl.workAs.untouched"  name="workAs" formControlName="workAs" required id="workAs">
-                        <option value="" selected></option>
-                        <option value="Administrative / Secretarial / Clerical">Administrative / Secretarial / Clerical
-                        </option>
-                        <option value="Advertising / Media">Advertising / Media</option>
-                        <option value="Artistic / Creative / Performance">Artistic / Creative / Performance</option>
-                        <option value="Construction / Trades">Construction / Trades</option>
-                        <option value="Domestic Helper">Domestic Helper</option>
-                        <option value="Education / Academic">Education / Academic</option>
-                        <option value="Entertainment / Media">Entertainment / Media</option>
-                        <option value="Executive / Management / HR">Executive / Management / HR</option>
-                        <option value="Farming / Agriculture">Farming / Agriculture</option>
-                        <option value="Finance / Banking / Real Estate">Finance / Banking / Real Estate</option>
-                        <option value="Fire / law enforcement / security">Fire / law enforcement / security</option>
-                        <option value="Hair Dresser / Personal Grooming">Hair Dresser / Personal Grooming</option>
-                        <option value="IT / Communications">IT / Communications</option>
-                        <option value="Laborer / Manufacturing">Laborer / Manufacturing</option>
-                        <option value="Legal">Legal</option>
-                        <option value="Medical / Dental / Veterinary">Medical / Dental / Veterinary</option>
-                        <option value="Military">Military</option>
-                        <option value="Model">Model</option>
-                        <option value="Nanny / Child care">Nanny / Child care</option>
-                        <option value="No occupation / Stay at home">No occupation / Stay at home</option>
-                        <option value="Non-profit / clergy / social services">Non-profit / clergy / social services
-                        </option>
-                        <option value="Political / Govt / Civil Service">Political / Govt / Civil Service</option>
-                        <option value="Retail / Food services">Retail / Food services</option>
-                        <option value="Retired">Retired</option>
-                        <option value="Sales / Marketing">Sales / Marketing</option>
-                        <option value="Self Employed">Self Employed</option>
-                        <option value="Sports / recreation">Sports / recreation</option>
-                        <option value="Student">Student</option>
-                        <option value="Technical / Science / Engineering">Technical / Science / Engineering</option>
-                        <option value="Transportation">Transportation</option>
-                        <option value="Travel / Hospitality">Travel / Hospitality</option>
-                        <option value="Unemployed">Unemployed</option>
-                        <option value="Other">Other</option>
-                    </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.workAs.invalid && registerFormControl.workAs.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.workAs.errors?.required">   <i class="fa fa-remove"></i>Ocuupation is required</small>
-                    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="workAs">What is your Occupation ?</label>
+                            <select class="form-control" [class.is-invalid]="registerFormControl.workAs.invalid && registerFormControl.workAs.touched"  [class.is-valid]="registerFormControl.workAs.valid && registerFormControl.workAs.untouched"  name="workAs" formControlName="workAs" required id="workAs">
+                                <option value="" selected></option>
+                                <option value="Administrative / Secretarial / Clerical">Administrative / Secretarial / Clerical
+                                </option>
+                                <option value="Advertising / Media">Advertising / Media</option>
+                                <option value="Artistic / Creative / Performance">Artistic / Creative / Performance</option>
+                                <option value="Construction / Trades">Construction / Trades</option>
+                                <option value="Domestic Helper">Domestic Helper</option>
+                                <option value="Education / Academic">Education / Academic</option>
+                                <option value="Entertainment / Media">Entertainment / Media</option>
+                                <option value="Executive / Management / HR">Executive / Management / HR</option>
+                                <option value="Farming / Agriculture">Farming / Agriculture</option>
+                                <option value="Finance / Banking / Real Estate">Finance / Banking / Real Estate</option>
+                                <option value="Fire / law enforcement / security">Fire / law enforcement / security</option>
+                                <option value="Hair Dresser / Personal Grooming">Hair Dresser / Personal Grooming</option>
+                                <option value="IT / Communications">IT / Communications</option>
+                                <option value="Laborer / Manufacturing">Laborer / Manufacturing</option>
+                                <option value="Legal">Legal</option>
+                                <option value="Medical / Dental / Veterinary">Medical / Dental / Veterinary</option>
+                                <option value="Military">Military</option>
+                                <option value="Model">Model</option>
+                                <option value="Nanny / Child care">Nanny / Child care</option>
+                                <option value="No occupation / Stay at home">No occupation / Stay at home</option>
+                                <option value="Non-profit / clergy / social services">Non-profit / clergy / social services
+                                </option>
+                                <option value="Political / Govt / Civil Service">Political / Govt / Civil Service</option>
+                                <option value="Retail / Food services">Retail / Food services</option>
+                                <option value="Retired">Retired</option>
+                                <option value="Sales / Marketing">Sales / Marketing</option>
+                                <option value="Self Employed">Self Employed</option>
+                                <option value="Sports / recreation">Sports / recreation</option>
+                                <option value="Student">Student</option>
+                                <option value="Technical / Science / Engineering">Technical / Science / Engineering</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Travel / Hospitality">Travel / Hospitality</option>
+                                <option value="Unemployed">Unemployed</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.workAs.invalid && registerFormControl.workAs.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.workAs.errors?.required">   <i class="fa fa-remove"></i>Ocuupation is required</small>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="haveKids">Do you have kids?</label>
+                            <select class="form-control" [class.is-invalid]="registerFormControl.haveKids.invalid && registerFormControl.haveKids.touched"  [class.is-valid]="registerFormControl.haveKids.valid && registerFormControl.haveKids.untouched"  required name="haveKids" formControlName="haveKids" id="haveKids">
+                                <option value="" selected></option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                                <option value="Maybe">Maybe</option>
+                                <option value="I Want some">I Want some</option>
+                            </select>
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.haveKids.invalid && registerFormControl.haveKids.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.haveKids.errors?.required">   <i class="fa fa-remove"></i>lookingFor is required</small>
+                            
+                            </div>
+                        </div>
+        
                     </div>
                 </div>
+      
+         
+
+         
+           
+          
+
                 <div class="form-group">
                     <label for="lookingFor">Looking For?</label>
-                    <textarea class="form-control" [class.is-invalid]="registerFormControl.lookingFor.invalid && registerFormControl.lookingFor.touched"  [class.is-valid]="registerFormControl.lookingFor.valid && registerFormControl.lookingFor.untouched"  required name="lookingFor" formControlName="lookingFor"
-                        id="lookingFor" selected></textarea>
+                    <textarea class="form-control" cols="20" [class.is-invalid]="registerFormControl.lookingFor.invalid && registerFormControl.lookingFor.touched"  [class.is-valid]="registerFormControl.lookingFor.valid && registerFormControl.lookingFor.untouched"  required name="lookingFor" formControlName="lookingFor"
+                        id="lookingFor"  style="height:150px"selected></textarea>
                         <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lookingFor.invalid && registerFormControl.lookingFor.touched"    >
                             <small class="text-danger" *ngIf="registerFormControl.lookingFor.errors?.required">   <i class="fa fa-remove"></i>lookingFor is required</small>
                         
                         </div>
                 </div>
-                <div class="form-group">
-                    <label for="haveKids">Do you have kids?</label>
-                    <select class="form-control" [class.is-invalid]="registerFormControl.haveKids.invalid && registerFormControl.haveKids.touched"  [class.is-valid]="registerFormControl.haveKids.valid && registerFormControl.haveKids.untouched"  required name="haveKids" formControlName="haveKids" id="haveKids">
-                        <option value="" selected></option>
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                        <option value="Maybe">Maybe</option>
-                        <option value="I Want some">I Want some</option>
-                    </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.haveKids.invalid && registerFormControl.haveKids.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.haveKids.errors?.required">   <i class="fa fa-remove"></i>lookingFor is required</small>
-                    
+                <div class="row">
+
+              
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="smoke">Do you smoke ?</label>
+                        <select class="form-control" [class.is-invalid]="registerFormControl.smoke.invalid && registerFormControl.smoke.touched"  [class.is-valid]="registerFormControl.smoke.valid && registerFormControl.smoke.untouched"  required formControlName="smoke" name="smoke" id="smoke">
+                            <option value="" selected></option>
+                            <option value="Never">Never</option>
+                            <option value="Occasionally">Occasionally</option>
+                            <option value="Regularly">Regularly</option>
+                        </select>
+                        <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.smoke.invalid && registerFormControl.smoke.touched"    >
+                            <small class="text-danger" *ngIf="registerFormControl.smoke.errors?.required">   <i class="fa fa-remove"></i>Smoke  is required</small>
+                        
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="smoke">Do you smoke ?</label>
-                    <select class="form-control" [class.is-invalid]="registerFormControl.smoke.invalid && registerFormControl.smoke.touched"  [class.is-valid]="registerFormControl.smoke.valid && registerFormControl.smoke.untouched"  required formControlName="smoke" name="smoke" id="smoke">
-                        <option value="" selected></option>
-                        <option value="Never">Never</option>
-                        <option value="Occasionally">Occasionally</option>
-                        <option value="Regularly">Regularly</option>
-                    </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.smoke.invalid && registerFormControl.smoke.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.smoke.errors?.required">   <i class="fa fa-remove"></i>Smoke  is required</small>
-                    
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="drink">Do you Drink ?</label>
+                        <select class="form-control"[class.is-invalid]="registerFormControl.drink.invalid && registerFormControl.drink.touched"  [class.is-valid]="registerFormControl.drink.valid && registerFormControl.drink.untouched"   required name="drink" formControlName="drink" id="drink">
+                            <option value="" selected></option>
+                            <option value="Never">Never</option>
+                            <option value="Occasionally">Occasionally</option>
+                            <option value="Regularly">Regularly</option>
+                        </select>
+                        <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.drink.invalid && registerFormControl.drink.touched"    >
+                            <small class="text-danger" *ngIf="registerFormControl.drink.errors?.required">   <i class="fa fa-remove"></i>Smoke  is required</small>
+                        
+                        </div>
                     </div>
+                
                 </div>
-                <div class="form-group">
-                    <label for="drink">Do you Drink ?</label>
-                    <select class="form-control"[class.is-invalid]="registerFormControl.drink.invalid && registerFormControl.drink.touched"  [class.is-valid]="registerFormControl.drink.valid && registerFormControl.drink.untouched"   required name="drink" formControlName="drink" id="drink">
-                        <option value="" selected></option>
-                        <option value="Never">Never</option>
-                        <option value="Occasionally">Occasionally</option>
-                        <option value="Regularly">Regularly</option>
-                    </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.drink.invalid && registerFormControl.drink.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.drink.errors?.required">   <i class="fa fa-remove"></i>Smoke  is required</small>
-                    
-                    </div>
-                </div>
-            
+            </div>
+             
             </div>
         </ng-wizard-step>
 
@@ -507,72 +559,124 @@
 
             <div class="contianer-fluid mt-5">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <h2 class="text-center" style="font-size:33px;">
                             <strong>Your Photos</strong>
                             <hr class="col-lg-5 mb-4">
                         </h2>
-                                                        
-                        <h6>Upload Profile Picture: </h6>
-                                                    
-                        <ngx-dropzone (change)="onSelect($event)">
-                            <ngx-dropzone-label>Drop or Browse</ngx-dropzone-label>
-                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let upload of uploads"
-                                (removed)="onRemove(upload)" 
-                                [file]="upload.data.raw"
-                                 [removable]="true"
-                          >
-        
-                          <ngx-file-upload-ui--progressbar-circle [progress]="upload.data.progress" [parts]="12" >
-                        </ngx-file-upload-ui--progressbar-circle>
-                            <ngx-dropzone-label>
-                                Name: {{ upload.data.name }}<br />
-                                State: {{upload.data.state}}<br />
-                                Progress: {{upload.data.progress}}%
-                            </ngx-dropzone-label>
-                    
-                          </ngx-dropzone-image-preview>
-                        </ngx-dropzone>
-        
-                  <div  *ngFor="let upload of uploads">
-                    {{ upload}}
-                  </div>
+                                         <div class="col-md-12">
+                                             <div class="row">
+
+                                            
+                                                <div class="col-md-4 offset-2">
+                                                  <form >
+
+                                                
+                                                    <input type="file"  (change)="fileChangeEvent($event)" />
+                                               
+                                                </form>
+                                                    <div *ngIf="croppedImage">
+                                                        <label class="mt-5">Preview</label><br>
+                                                        <img [src]="croppedImage"  style="    object-fit: cover;
+                                                        height: 200px;
+                                                        width: 256px;" />
+                                                    </div>
+                                                    <button class="btn btn-success btn-block"> Upload</button>
+                                                </div>
+                                                <div class="col-md-6">
+
+                                                    <image-cropper
+                                                    [imageChangedEvent]="imageChangedEvent"
+                                                    [maintainAspectRatio]="true"
+                                                    [aspectRatio]="1 / 1"
+                                                    format="png"
+                                                    (imageCropped)="imageCropped($event)"
+                                                    (imageLoaded)="imageLoaded()"
+                                                    (cropperReady)="cropperReady()"
+                                                    (loadImageFailed)="loadImageFailed()"
+                                                ></image-cropper>
+                                                
+                                                </div>
+                                            </div>
+                                            <button id="btn-signup" class="btn btn-block mt-5 btn-success offset-md-5 col-xs-12  col-md-4" (click)="signup()" type="submit"> <i class="fas fa-sign-in-alt"></i> Create Account </button>
+                                         </div>               
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="photo-rules-card">
                             <h2 class="photo-rules-header">Photo Rules</h2>
                             <h5>Post great photos like these</h5>
                             <h6>You'll get more dates</h6>
                             <hr>
-                              <h6>Doing something ✅</h6>
-                              <img  height="100"src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png">
-                              <h6>Your face</h6>
-                              <img height="100" src="https://i.ytimg.com/vi/l0W2e1mGntQ/maxresdefault.jpg">
-                              <h6>Your  doing something  ✅ </h6>
-    
+                            <div class="row">
+                                <div class="col-md-6">
+                                   
+                                    <img  height="50"src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png">
+                                    <br>
+                                    <small>Doing something <i class="fa fa-check"></i></small>
+                                </div>
+                                <div class="col-md-6">
+                                    <img height="50" src="https://i.ytimg.com/vi/l0W2e1mGntQ/maxresdefault.jpg">
+                                    <br><small>Doing something  <i class="fa fa-check"></i> </small>
+                                </div>
+      
+                            </div>
+                    
                               <h5 class="mt-4">NOT photos like these</h5>
                               <h6 >You'll get banned </h6>
                               <hr>
-                              <img src="https://www.clipartkey.com/mpngs/m/31-312215_kiss-clipart-transparent-background-lips-icon-png.png" height="100">
-                               <h6 class="mt-1">Porn / Nudity ❌</h6>
-                               <img src="https://img.icons8.com/bubbles/2x/visible--v2.png"  class="mt-1" height="100">
-                               <h6 class="mt-1">Extreme Closeups  ❌</h6>
-                               <img src="https://i.pinimg.com/736x/9d/4b/7f/9d4b7fb1195c2dae0fc6f6e0913491cc.jpg" class="mt-1" height="100">
-                               <h6 class="mt-1">Pets / Children Alone ❌</h6>
-                               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTQBPBIdFmRlkwxuMYMbN-BdpdBpDHJzQAkY-vZTbCpYHJLcSKQQHvik4I1RFgBGIHwyA&usqp=CAU" class="mt-1" height="100">
-                               <h6 class="mt-1">Celebrity  / Fake Photos ❌</h6>
-                               <img src="https://static.thenounproject.com/png/105264-200.png" class="mt-1"height="100">
-                               <h6 class="mt-1">Meme / Text / ads ❌</h6>
-                          </div>
+                              <div class="col-md-12">
+                              <div class="row">
+                                                                 
+                                <div class="col-md-2 ">
+                                    <img src="https://www.clipartkey.com/mpngs/m/31-312215_kiss-clipart-transparent-background-lips-icon-png.png" height="50">
+                                    <small class="mt-1">Porn / Nudity <i class="fa fa-remove"></i></small>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <img src="https://img.icons8.com/bubbles/2x/visible--v2.png"  class="mt-1" height="50">
+                                        <small class="mt-1">Extreme Closeups  <i class="fa fa-remove"></i></small>
+                                    </div>
+                                    <div class="col-md-3 ">
+                                      
+                                            <img src="https://i.pinimg.com/736x/9d/4b/7f/9d4b7fb1195c2dae0fc6f6e0913491cc.jpg" class="mt-1" height="50">
+                                           <br>
+                                            <small class="mt-3">Pets / Children Alone <i class="fa fa-remove"></i></small>
+                                            
+                                    </div>
+                                       
+                                    <div class="col-md-3 ">
+                                       
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTQBPBIdFmRlkwxuMYMbN-BdpdBpDHJzQAkY-vZTbCpYHJLcSKQQHvik4I1RFgBGIHwyA&usqp=CAU" class="mt-1" height="50">
+                                            <small class="mt-1">Celebrity  / Fake Photos <i class="fa fa-remove"></i></small>
+                                                  
+                                    </div>
+                                    <div class="col-md-2">
+                                        <img src="https://static.thenounproject.com/png/105264-200.png" class="mt-1" height="50">
+                                        <small class="mt-1">Meme / Text / ads <i class="fa fa-remove"></i></small>
+                                        </div>
+                                 </div>
+                                  
+                                
+                               
+                                </div>
+                      
+                               
+                            
                     </div>
                    
                 </div>
             
 
-                <button id="btn-signup" class="btn btn-block mt-5 btn-success offset-md-5 col-xs-12  col-md-4" (click)="signup()" type="submit"> <i class="fas fa-sign-in-alt"></i> Create Account </button>
+           </div>
                 </div>
             </ng-wizard-step>
 
+            <ng-wizard-step [title]="'Step 6'" [description]="'Completed'">
+                <div class="container">
+                    <h2 class="">Thank you For Creating Profile</h2>
+                    <button class="bt btn-primary offset-md-4 "  routerLinkActive>Login</button>
+                </div>
+                </ng-wizard-step>
     </ng-wizard>
     <!--  =============================================== Form submit button  field ========================================-->
 
