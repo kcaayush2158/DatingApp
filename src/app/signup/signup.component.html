@@ -40,11 +40,15 @@
                             <!--  ===============================================First Name input field ========================================-->
                             <div class="form-group">
                                 <label for="firstname">First Name: </label>
-                                <input name="firstname" [class.is-valid]="registerFormControl.firstname.valid && registerFormControl.firstname.untouched" [class.is-invalid]="registerFormControl.firstname.invalid && registerFormControl.firstname.touched" formControlName="firstname" type="text" id="firstname" class="form-control mb-2 form-control-lg" autofocus required />
-                                <div class="alert alert-danger mt-1" role="alert"   *ngIf="registerFormControl.firstname.invalid && registerFormControl.firstname.touched">
-                                    <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.required"><i class="fa fa-remove"></i>FirstName is required</small>
-                                    <small class="text-danger"*ngIf="registerFormControl.firstname.errors?.minlength"><i class="fa fa-remove"></i>FirstName charecters must be atleast 3 charecters</small>
-                                    <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.maxlength"><i class="fa fa-remove"></i> FirstName charecters must be less than 20charecters</small>
+                                <input name="firstname" [class.is-valid]="signupForm.controls.firstname?.valid && signupForm.controls.firstname?.untouched" [class.is-invalid]=" signupForm.controls.firstname?.invalid &&  signupForm.controls.firstname?.touched" formControlName="firstname" type="text" id="firstname" class="form-control mb-2 form-control-lg" autofocus required />
+                                <!-- <div *ngIf="submitted &&  signupForm.controls.fullname.errors" class="invalid-feedback">
+                                    <div *ngIf="signupForm.fullname.errors.required">Fullname is required</div>
+                                  </div> -->
+
+                                <div class="alert alert-danger mt-1" role="alert"   *ngIf="registerFormControl.firstname?.invalid && registerFormControl.firstname?.touched">
+                                    <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.required"><i class="fa fa-remove"></i> Firstname is required</small>
+                                    <small class="text-danger"*ngIf="registerFormControl.firstname.errors?.minlength"><i class="fa fa-remove"></i> Firstname charecters must be atleast 3 charecters</small>
+                                    <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.maxlength"><i class="fa fa-remove"></i> Firstname charecters must be less than 20charecters</small>
                                 </div>
                             </div>
                         </div>
@@ -52,11 +56,11 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="lastname">Last Name: </label>
-                                <input name="lastname" formControlName="lastname"  [class.is-valid]="registerFormControl.lastname.valid && registerFormControl.lastname.untouched" [class.is-invalid]="registerFormControl.lastname.invalid && registerFormControl.lastname.touched" id="lastname" type="text" class="form-control mb-2 form-control-lg" autofocus required />
-                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lastname.invalid && registerFormControl.lastname.touched">
-                                    <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.required"><i class="fa fa-remove"></i>Last Name is required</small>
-                                    <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.minlength"><i class="fa fa-remove"></i>Last Name charecters must be atleast 3 charecters</small>
-                                    <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.maxlength"><i  class="fa fa-remove"></i> Last Name charecters must be less than 20 charecters</small>
+                                <input name="lastname" formControlName="lastname"  [class.is-valid]="registerFormControl.lastname?.valid && registerFormControl.lastname?.untouched" [class.is-invalid]="registerFormControl.lastname?.invalid && registerFormControl.lastname?.touched" id="lastname" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lastname?.invalid && registerFormControl.lastname?.touched">
+                                    <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.required"> <i class="fa fa-remove"></i> Last Name is required</small>
+                                    <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.minlength"> <i class="fa fa-remove"></i> Last Name charecters must be atleast 3 charecters</small>
+                                    <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.maxlength"> <i  class="fa fa-remove"></i> Last Name charecters must be less than 20 charecters</small>
                                 </div>
                             </div>
                         </div>
@@ -65,12 +69,14 @@
                 <!--  ===============================================Username input field ========================================-->
                 <div class="form-group">
                     <label for="username">Username: </label>
-                    <input formControlName="username"  [class.is-valid]="registerFormControl.username.valid && registerFormControl.username.untouched" pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="registerFormControl.username.invalid && registerFormControl.username.touched" name="username" id="username" type="text" class="form-control mb-2 form-control-lg" autofocus required />
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.username.invalid && registerFormControl.username.touched">
-                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.required">   <i class="fa fa-remove"></i>Username is required</small>
-                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.minlength"><i class="fa fa-remove"></i>Username charecters must be atleast 3 charecters</small>
-                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.maxlength"><i  class="fa fa-remove"></i> Username charecters must be less than 20 charecters</small>
-                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.forbiddenName"><i class="fa fa-remove"></i> Username is not allowed</small>
+                    <input formControlName="username"  [class.is-valid]="registerFormControl.username?.valid && registerFormControl.username.untouched" [class.is-invalid]="registerFormControl.username?.invalid && registerFormControl.username.touched" name="username" id="username" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                   
+                   
+                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.username?.invalid && registerFormControl.username?.touched">
+                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.required">   <i class="fa fa-remove"></i> Username is required</small>
+                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.minlength" ><i class="fa fa-remove"></i> Username charecters must be atleast 3 charecters</small>
+                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.maxlength"> <i  class="fa fa-remove"></i>  Username charecters must be less than 20 charecters</small>
+                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.pattern"> <i class="fa fa-remove"></i> Username should contain Uppecase , Lowercase and some Number</small>
                     </div>
                 </div>
 
@@ -80,27 +86,29 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="password">Password: </label>
-                                <input formControlName="password" [class.is-valid]="registerFormControl.firstname.valid && registerFormControl.firstname.untouched"  pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="registerFormControl.password.invalid  && registerFormControl.password.touched " name="password" id="password" type="password" class="form-control mb-2 form-control-lg" required />
-                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.password.invalid && registerFormControl.password.touched">
-                                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.required"><i class="fa fa-remove"></i>password is required</small>
-                                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.minlength"><i class="fa fa-remove"></i>password charecters must be atleast 3 charecters</small>
-                                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.maxlength"><i class="fa fa-remove"></i> password charecters must be less than 20 charecters</small>
-                                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.forbiddenName"><i  class="fa fa-remove"></i> password is not allowed</small>
+                                <input formControlName="password" [class.is-valid]="registerFormControl.firstname?.valid && registerFormControl.firstname?.untouched"  pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="registerFormControl.password?.invalid  && registerFormControl.password?.touched " name="password" id="password" type="password" class="form-control mb-2 form-control-lg" required />
+                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.password?.invalid && registerFormControl.password?.touched">
+                                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.required"> <i class="fa fa-remove"></i> Password is required</small>
+                                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.minlength"> <i class="fa fa-remove"></i> Password charecters must be atleast 3 charecters</small>
+                                    <small class="text-danger" *ngIf="registerFormControl.password.errors?.maxlength"> <i class="fa fa-remove"></i> Password charecters must be less than 20 charecters</small>
+                                    <small class="text-danger"   *ngIf="registerFormControl.password.errors?.invalidPassword"> <i class="fa fa-remove"></i> Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number
+                                </small>
                                 </div>
+                             
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <!--  ===============================================Retype password input field========================================-->
                         <div class="form-group">
-                            <label for="repassword">Re-Password: </label>
-                            <input formControlName="repassword" [class.is-valid]="registerFormControl.repassword.valid && registerFormControl.repassword.untouched" name="repassword" pattern="{{password.value}}"  compare="password" [class.is-invalid]="registerFormControl.repassword.invalid &&registerFormControl.repassword.touched" id="repassword" type="password" class="form-control mb-2 form-control-lg" autofocus
+                            <label for="confirmPassword">Confirm Password: </label>
+                            <input formControlName="confirmPassword" [class.is-valid]="registerFormControl.confirmPassword?.valid && registerFormControl.confirmPassword?.untouched" name="confirmPassword" pattern="{{password.value}}"  compare="password" [class.is-invalid]="registerFormControl.confirmPassword?.invalid &&registerFormControl.confirmPassword?.touched" id="repassword" type="password" class="form-control mb-2 form-control-lg" autofocus
                                 required />
-                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.password.invalid && registerFormControl.repassword.touched">
-                                <small class="text-danger" *ngIf="registerFormControl.repassword.errors?.required"><i class="fa fa-remove"></i>repassword is required</small>
-                                <small class="text-danger" *ngIf="registerFormControl.repassword.errors?.minlength"><i class="fa fa-remove"></i>repassword charecters must be atleast 3 charecters</small>
-                                <small class="text-danger" *ngIf="registerFormControl.repassword.errors?.maxlength"><i class="fa fa-remove"></i> repassword charecters must be less than 20 charecters</small>
-                                <small class="text-danger" *ngIf="registerFormControl.repassword.errors?.forbiddenName"><i class="fa fa-remove"></i> repassword is not allowed</small>
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf=" registerFormControl.confirmPassword?.touched && registerFormControl.confirmPassword.errors?.invalid">
+                                <small class="text-danger" *ngIf="registerFormControl.confirmPassword.errors?.required"> <i class="fa fa-remove"></i> Confirm Password is required</small>
+                                <small class="text-danger" *ngIf="registerFormControl.confirmPassword.errors?.minlength"> <i class="fa fa-remove"></i> Confirm Password  charecters must be atleast 3 charecters</small>
+                                <small class="text-danger" *ngIf="registerFormControl.confirmPassword.errors?.maxlength"> <i class="fa fa-remove"></i> Confirm Password  charecters must be less than 20 charecters</small>
+                                <small class="text-danger" *ngIf="registerFormControl.confirmPassword.errors?.passwordMismatch"> <i class="fa fa-remove"></i> Password  does not match </small>
                             </div>
                         </div>
                     </div>
@@ -108,12 +116,12 @@
                 <!--  ===============================================Email field ========================================-->
                 <div class="form-group">
                     <label for="email">Email: </label>
-                    <input formControlName="email" name="email" [class.is-valid]="registerFormControl.email.valid && registerFormControl.email.untouched" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [class.is-invalid]="registerFormControl.email.invalid && registerFormControl.email.touched" name="email" id="email" type="text" class="form-control mb-2 form-control-lg" autofocus required />
-                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.password.invalid && registerFormControl.email.touched">
-                        <small class="text-danger" *ngIf="registerFormControl.email.errors?.required"><i class="fa fa-remove"></i>email is required</small>
-                        <small class="text-danger" *ngIf="registerFormControl.email.errors?.minlength"><i class="fa fa-remove"></i>email charecters must be atleast 3 charecters</small>
-                        <small class="text-danger" *ngIf="registerFormControl.email.errors?.maxlength"><i class="fa fa-remove"></i> email charecters must be less than 20 charecters</small>
-                        <small class="text-danger" *ngIf="registerFormControl.email.errors?.forbiddenName"><i class="fa fa-remove"></i> email is not allowed</small>
+                    <input formControlName="email" name="email" [class.is-valid]="registerFormControl.email?.valid && registerFormControl.email?.untouched" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [class.is-invalid]="registerFormControl.email?.invalid && registerFormControl.email?.touched" name="email" id="email" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.password?.invalid && registerFormControl.email?.touched">
+                        <small class="text-danger" *ngIf="registerFormControl.email.errors?.required"><i class="fa fa-remove"></i> Email is required</small>
+                        <small class="text-danger" *ngIf="registerFormControl.email.errors?.minlength"><i class="fa fa-remove"></i> Email charecters must be atleast 3 charecters</small>
+                        <small class="text-danger" *ngIf="registerFormControl.email.errors?.maxlength"><i class="fa fa-remove"></i> Email charecters must be less than 20 charecters</small>
+                        <small class="text-danger" *ngIf="registerFormControl.email.errors?.forbiddenName"><i class="fa fa-remove"></i> Email is not allowed</small>
                     </div>
                 </div>
             </div>
@@ -134,7 +142,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="bodyType ">What is your body type ?</label>
-                            <select class="form-control" formControlName="bodyType" [class.is-invalid]="registerFormControl.bodyType.invalid && registerFormControl.bodyType.touched"  [class.is-valid]="registerFormControl.bodyType.valid && registerFormControl.bodyType.untouched"  required name="bodyType" id="bodyType ">
+                            <select class="form-control" formControlName="bodyType" [class.is-invalid]="registerFormControl.bodyType?.invalid && registerFormControl.bodyType?.touched"  [class.is-valid]="registerFormControl.bodyType?.valid && registerFormControl.bodyType?.untouched"  required name="bodyType" id="bodyType ">
                       
                                 <option value="Average">Average</option>
                                 <option value="Curvy">Curvy</option>
@@ -143,16 +151,16 @@
                                 <option value="Slim">Slim</option>
                             </select>
                             
-                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.bodyType.invalid && registerFormControl.bodyType.touched">
-                            <small class="text-danger" *ngIf="registerFormControl.bodyType.errors?.required">   
-                                <i class="fa fa-remove"></i>Body Type is required</small>
-                                </div>
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.bodyType?.invalid && registerFormControl.bodyType?.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.bodyType.errors?.required">   <i class="fa fa-remove"></i> Body Type is required</small>
+                            
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="height">What is your height ?</label>
-                            <select class="form-control autofill" [class.is-invalid]="registerFormControl.height.invalid && registerFormControl.height.touched"  [class.is-valid]="registerFormControl.height.valid && registerFormControl.height.untouched"  formControlName="height" required name="height" id="height"
+                            <select class="form-control autofill" [class.is-invalid]="registerFormControl.height?.invalid && registerFormControl.height?.touched"  [class.is-valid]="registerFormControl.height?.valid && registerFormControl.height?.untouched"  formControlName="height" required name="height" id="height"
                                 tabindex="2">
                               
                                 <option value="91">3'</option>
@@ -217,8 +225,8 @@
                                 <option value="241">7'11"</option>
                             </select>
         
-                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.height.invalid && registerFormControl.height.touched"    >
-                                <small class="text-danger" *ngIf="registerFormControl.height.errors?.required">   <i class="fa fa-remove"></i>Body Type is required</small>
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.height?.invalid && registerFormControl.height?.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.height.errors?.required">   <i class="fa fa-remove"></i> Body Type is required</small>
                             
                             </div>
                         </div>
@@ -227,15 +235,14 @@
            
            
                 <div class="form-group">
-                    <label for="eye">Gender</label>
-                    <select class="form-control autofill" [class.is-invalid]="registerFormControl.gender.invalid && registerFormControl.gender.touched"  [class.is-valid]="registerFormControl.gender.valid && registerFormControl.gender.untouched"  required name="gender" formControlName="gender" tabindex="2"
-                        id="eye">
+                    <label for="gender">Gender</label>
+                    <select formControlName="gender"  class="form-control autofill" [class.is-invalid]="registerFormControl.gender?.invalid && registerFormControl.gender?.touched"  [class.is-valid]="registerFormControl.gender?.valid && registerFormControl.gender?.untouched"  required name="gender" tabindex="2" id="gender">
                         <option value="Male" selected>Male</option>
                         <option value="Female" selected>Female</option>
                       
                     </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.gender.invalid && registerFormControl.gender.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.gender.errors?.required">   <i class="fa fa-remove"></i>Gender is required</small>
+                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.gender?.invalid && registerFormControl.gender?.touched"    >
+                        <small class="text-danger" *ngIf="registerFormControl.gender.errors?.required">   <i class="fa fa-remove"></i> Gender is required</small>
                     
                     </div>
                 </div>
@@ -243,17 +250,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="eye">What is your eye colour ?</label>
-                            <select class="form-control autofill" [class.is-invalid]="registerFormControl.eyes.invalid && registerFormControl.eyes.touched"  [class.is-valid]="registerFormControl.eyes.valid && registerFormControl.eyes.untouched"  required name="eyes" formControlName="eyes" tabindex="2"
-                                id="eye">
-                                <option value=" " selected></option>
+                            <select class="form-control autofill" [class.is-invalid]="registerFormControl.eyes?.invalid && registerFormControl.eyes?.touched"  [class.is-valid]="registerFormControl.eyes?.valid && registerFormControl.eyes?.untouched"  required name="eyes" formControlName="eyes" tabindex="2" id="eye">                           
                                 <option  value="Blue">Blue</option>
                                 <option  value="Brown">Brown</option>
                                 <option  value="Gray">Gray</option>
                                 <option  value="Green">Green</option>
                                 <option  value="Hazel">Hazel</option>
                             </select>
-                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.eyes.invalid && registerFormControl.eyes.touched"    >
-                                <small class="text-danger" *ngIf="registerFormControl.eyes.errors?.required">   <i class="fa fa-remove"></i>Eye Color is required</small>
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.eyes?.invalid && registerFormControl.eyes?.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.eyes.errors?.required">   <i class="fa fa-remove"></i> Eye Color is required</small>
                             
                             </div>
                         </div>
@@ -262,8 +267,8 @@
                         
                 <div class="form-group">
                     <label for="hair">What is your hair color?</label>
-                    <select class="form-control autofill"[class.is-invalid]="registerFormControl.hair.invalid && registerFormControl.hair.touched"  [class.is-valid]="registerFormControl.hair.valid && registerFormControl.hair.untouched"  required name="hair"  formControlName="hair" tabindex="2">
-                        <option value="" selected></option>
+                    <select class="form-control autofill"[class.is-invalid]="registerFormControl.hair?.invalid && registerFormControl.hair?.touched"  [class.is-valid]="registerFormControl.hair.valid && registerFormControl.hair?.untouched"  required name="hair"  formControlName="hair" tabindex="2">
+                       
                         <option value="black">Black</option>
                         <option value="blond">Blond</option>
                         <option value="brown">Brown</option>
@@ -272,8 +277,8 @@
                         <option value="red">Red</option>
                         <option value="bal">Bald</option>
                     </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.hair.invalid && registerFormControl.hair.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.hair.errors?.required">   <i class="fa fa-remove"></i>Hair Color is required</small>
+                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.hair?.invalid && registerFormControl.hair?.touched"    >
+                        <small class="text-danger" *ngIf="registerFormControl.hair.errors?.required">   <i class="fa fa-remove"></i> Hair Color is required</small>
                     
                     </div>
                 </div>
@@ -283,14 +288,16 @@
 
                 <div class="form-group">
                     <label for="age">Age</label>
-                    <select class="form-control autofill"[class.is-invalid]="registerFormControl.age.invalid && registerFormControl.age.touched"  [class.is-valid]="registerFormControl.age.valid && registerFormControl.age.untouched"  required name="age"  formControlName="age" tabindex="2">
+                    <select class="form-control autofill"[class.is-invalid]="registerFormControl.age?.invalid && registerFormControl.age?.touched"  [class.is-valid]="registerFormControl.age?.valid && registerFormControl.age?.untouched"  required name="age"  formControlName="age" tabindex="2">
                      
+                        <ng-container *ngFor='let in of counter(60) ;let i = index'>
+
                         
-                        <option value="18" selected>18</option>
-                   
+                        <option value="{i+18}" selected>{{i+18}}</option>
+                    </ng-container>
                     </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.age.invalid && registerFormControl.age.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.age.errors?.required">   <i class="fa fa-remove"></i>Age is required</small>
+                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.age?.invalid && registerFormControl.age?.touched"    >
+                        <small class="text-danger" *ngIf="registerFormControl.age.errors?.required">   <i class="fa fa-remove"></i> Age is required</small>
                     
                     </div>
                 </div>
@@ -311,8 +318,8 @@
 
                 <div class="form-group">
                     <label for="languages">Which Language do you know?</label>
-                    <select class="form-control" [class.is-invalid]="registerFormControl.languages.invalid && registerFormControl.languages.touched"  [class.is-valid]="registerFormControl.languages.valid && registerFormControl.languages.untouched" required formControlName="languages" name="languages" id="languages">
-                        <option value="" selected></option>
+                    <select class="form-control" [class.is-invalid]="registerFormControl.languages?.invalid && registerFormControl.languages?.touched"  [class.is-valid]="registerFormControl.languages?.valid && registerFormControl.languages?.untouched" required formControlName="languages" name="languages" id="languages">
+              
                         <option value="Afrikaans">Afrikaans</option>
                         <option value="Albanian">Albanian</option>
                         <option value="Arabic">Arabic</option>
@@ -386,8 +393,8 @@
                         <option value="Welsh">Welsh</option>
                         <option value="Xhosa">Xhosa</option>
                     </select>
-                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.languages.invalid && registerFormControl.languages.touched"    >
-                        <small class="text-danger" *ngIf="registerFormControl.languages.errors?.required">   <i class="fa fa-remove"></i>Languagesis required</small>
+                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.languages?.invalid && registerFormControl.languages?.touched"    >
+                        <small class="text-danger" *ngIf="registerFormControl.languages.errors?.required">   <i class="fa fa-remove"></i> Language is required</small>
                     
                     </div>
                 </div>
@@ -395,17 +402,17 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="relationship">What is your relationship Status?</label>
-                                <select class="form-control"[class.is-invalid]="registerFormControl.relationship.invalid && registerFormControl.relationship.touched"  [class.is-valid]="registerFormControl.relationship.valid && registerFormControl.relationship.untouched"  required formControlName="relationship" name="relationship"
+                                <select class="form-control"[class.is-invalid]="registerFormControl.relationship?.invalid && registerFormControl.relationship?.touched"  [class.is-valid]="registerFormControl.relationship?.valid && registerFormControl.relationship?.untouched"  required formControlName="relationship" name="relationship"
                                     id="relationship">
-                                    <option value="" selected></option>
+                                  
                                     <option value="Single">Single</option>
                                     <option value="Married">Married</option>
                                     <option value="Separated">Separated</option>
                                     <option value="Divorced">Divorced</option>
                                     <option value="Widowed">Widowed</option>
                                 </select>
-                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.relationship.invalid && registerFormControl.relationship.touched"    >
-                                    <small class="text-danger" *ngIf="registerFormControl.relationship.errors?.required">   <i class="fa fa-remove"></i>Relationship Status is required</small>
+                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.relationship?.invalid && registerFormControl.relationship?.touched"    >
+                                    <small class="text-danger" *ngIf="registerFormControl.relationship.errors?.required">   <i class="fa fa-remove"></i> Relationship Status is required</small>
                                 
                                 </div>
                             </div>
@@ -415,9 +422,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="known">Known</label>
-                            <input type="text" name="known"[class.is-invalid]="registerFormControl.known.invalid && registerFormControl.known.touched"  [class.is-valid]="registerFormControl.known.valid && registerFormControl.known.untouched"  required id="known" formControlName="known" class="form-control">
-                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.known.invalid && registerFormControl.known.touched"    >
-                                <small class="text-danger" *ngIf="registerFormControl.known.errors?.required">   <i class="fa fa-remove"></i>Known Status is required</small>
+                            <input type="text" name="known"[class.is-invalid]="registerFormControl.known?.invalid && registerFormControl.known?.touched"  [class.is-valid]="registerFormControl.known?.valid && registerFormControl.known?.untouched"  required id="known" formControlName="known" class="form-control">
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.known?.invalid && registerFormControl.known?.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.known.errors?.required">   <i class="fa fa-remove"></i> Known Status is required</small>
                             
                             </div>
                         </div>
@@ -425,9 +432,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="interests">interests</label>
-                                <input type="text" name="interests" [class.is-invalid]="registerFormControl.interests.invalid && registerFormControl.interests.touched"  [class.is-valid]="registerFormControl.interests.valid && registerFormControl.interests.untouched"  required id="interests" formControlName="interests" class="form-control">
-                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.interests.invalid && registerFormControl.interests.touched"    >
-                                    <small class="text-danger" *ngIf="registerFormControl.interests.errors?.required">   <i class="fa fa-remove"></i>Intrests  is required</small>
+                                <input type="text" name="interests" [class.is-invalid]="registerFormControl.interests?.invalid && registerFormControl.interests?.touched"  [class.is-valid]="registerFormControl.interests?.valid && registerFormControl.interests?.untouched"  required id="interests" formControlName="interests" class="form-control">
+                                <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.interests?.invalid && registerFormControl.interests?.touched"    >
+                                    <small class="text-danger" *ngIf="registerFormControl.interests.errors?.required">   <i class="fa fa-remove"></i> Intrests  is required</small>
                                 
                                 </div>
                             </div>
@@ -438,8 +445,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="workAs">What is your Occupation ?</label>
-                            <select class="form-control" [class.is-invalid]="registerFormControl.workAs.invalid && registerFormControl.workAs.touched"  [class.is-valid]="registerFormControl.workAs.valid && registerFormControl.workAs.untouched"  name="workAs" formControlName="workAs" required id="workAs">
-                                <option value="" selected></option>
+                            <select class="form-control" [class.is-invalid]="registerFormControl.workAs?.invalid && registerFormControl.workAs?.touched"  [class.is-valid]="registerFormControl.workAs?.valid && registerFormControl.workAs?.untouched"  name="workAs" formControlName="workAs" required id="workAs">
+                             
                                 <option value="Administrative / Secretarial / Clerical">Administrative / Secretarial / Clerical
                                 </option>
                                 <option value="Advertising / Media">Advertising / Media</option>
@@ -476,8 +483,8 @@
                                 <option value="Unemployed">Unemployed</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.workAs.invalid && registerFormControl.workAs.touched"    >
-                                <small class="text-danger" *ngIf="registerFormControl.workAs.errors?.required">   <i class="fa fa-remove"></i>Ocuupation is required</small>
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.workAs?.invalid && registerFormControl.workAs?.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.workAs.errors?.required">   <i class="fa fa-remove"></i> Ocuupation is required</small>
                             
                             </div>
                         </div>
@@ -485,15 +492,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="haveKids">Do you have kids?</label>
-                            <select class="form-control" [class.is-invalid]="registerFormControl.haveKids.invalid && registerFormControl.haveKids.touched"  [class.is-valid]="registerFormControl.haveKids.valid && registerFormControl.haveKids.untouched"  required name="haveKids" formControlName="haveKids" id="haveKids">
-                                <option value="" selected></option>
+                            <select class="form-control" [class.is-invalid]="registerFormControl.haveKids?.invalid && registerFormControl.haveKids?.touched"  [class.is-valid]="registerFormControl.haveKids?.valid && registerFormControl.haveKids?.untouched"  required name="haveKids" formControlName="haveKids" id="haveKids">
+                              
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
                                 <option value="Maybe">Maybe</option>
                                 <option value="I Want some">I Want some</option>
                             </select>
-                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.haveKids.invalid && registerFormControl.haveKids.touched"    >
-                                <small class="text-danger" *ngIf="registerFormControl.haveKids.errors?.required">   <i class="fa fa-remove"></i>lookingFor is required</small>
+                            <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.haveKids?.invalid && registerFormControl.haveKids?.touched"    >
+                                <small class="text-danger" *ngIf="registerFormControl.haveKids.errors?.required">   <i class="fa fa-remove"></i>Kids is required</small>
                             
                             </div>
                         </div>
@@ -509,10 +516,10 @@
 
                 <div class="form-group">
                     <label for="lookingFor">Looking For?</label>
-                    <textarea class="form-control" cols="20" [class.is-invalid]="registerFormControl.lookingFor.invalid && registerFormControl.lookingFor.touched"  [class.is-valid]="registerFormControl.lookingFor.valid && registerFormControl.lookingFor.untouched"  required name="lookingFor" formControlName="lookingFor"
+                    <textarea class="form-control" cols="20" [class.is-invalid]="registerFormControl.lookingFor?.invalid && registerFormControl.lookingFor?.touched"  [class.is-valid]="registerFormControl.lookingFor?.valid && registerFormControl.lookingFor?.untouched"  required name="lookingFor" formControlName="lookingFor"
                         id="lookingFor"  style="height:150px"selected></textarea>
-                        <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lookingFor.invalid && registerFormControl.lookingFor.touched"    >
-                            <small class="text-danger" *ngIf="registerFormControl.lookingFor.errors?.required">   <i class="fa fa-remove"></i>lookingFor is required</small>
+                        <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lookingFor?.invalid && registerFormControl.lookingFor?.touched"    >
+                            <small class="text-danger" *ngIf="registerFormControl.lookingFor.errors?.required">   <i class="fa fa-remove"></i>Looking For is required</small>
                         
                         </div>
                 </div>
@@ -522,13 +529,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="smoke">Do you smoke ?</label>
-                        <select class="form-control" [class.is-invalid]="registerFormControl.smoke.invalid && registerFormControl.smoke.touched"  [class.is-valid]="registerFormControl.smoke.valid && registerFormControl.smoke.untouched"  required formControlName="smoke" name="smoke" id="smoke">
-                            <option value="" selected></option>
+                        <select class="form-control" [class.is-invalid]="registerFormControl.smoke?.invalid && registerFormControl.smoke?.touched"  [class.is-valid]="registerFormControl.smoke?.valid && registerFormControl.smoke?.untouched"  required formControlName="smoke" name="smoke" id="smoke">
+                           
                             <option value="Never">Never</option>
                             <option value="Occasionally">Occasionally</option>
                             <option value="Regularly">Regularly</option>
                         </select>
-                        <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.smoke.invalid && registerFormControl.smoke.touched"    >
+                        <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.smoke?.invalid && registerFormControl.smoke?.touched"    >
                             <small class="text-danger" *ngIf="registerFormControl.smoke.errors?.required">   <i class="fa fa-remove"></i>Smoke  is required</small>
                         
                         </div>
@@ -537,14 +544,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="drink">Do you Drink ?</label>
-                        <select class="form-control"[class.is-invalid]="registerFormControl.drink.invalid && registerFormControl.drink.touched"  [class.is-valid]="registerFormControl.drink.valid && registerFormControl.drink.untouched"   required name="drink" formControlName="drink" id="drink">
-                            <option value="" selected></option>
+                        <select class="form-control"[class.is-invalid]="registerFormControl.drink?.invalid && registerFormControl.drink?.touched"  [class.is-valid]="registerFormControl.drink?.valid && registerFormControl.drink?.untouched"   required name="drink" formControlName="drink" id="drink">
                             <option value="Never">Never</option>
                             <option value="Occasionally">Occasionally</option>
                             <option value="Regularly">Regularly</option>
                         </select>
-                        <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.drink.invalid && registerFormControl.drink.touched"    >
-                            <small class="text-danger" *ngIf="registerFormControl.drink.errors?.required">   <i class="fa fa-remove"></i>Smoke  is required</small>
+                        <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.drink?.invalid && registerFormControl.drink?.touched"    >
+                            <small class="text-danger" *ngIf="registerFormControl.drink.errors?.required">   <i class="fa fa-remove"></i> Smoke Status is required</small>
                         
                         </div>
                     </div>
@@ -605,7 +611,7 @@
                         <div class="photo-rules-card">
                             <h2 class="photo-rules-header">Photo Rules</h2>
                             <h5>Post great photos like these</h5>
-                            <h6>You'll get more dates</h6>
+                            <small>You'll get more dates</small>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">

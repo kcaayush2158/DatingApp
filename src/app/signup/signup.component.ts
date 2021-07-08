@@ -1,12 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Chatroom } from '../user';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NgWizardConfig, NgWizardService, StepChangedArgs, STEP_STATE, THEME } from 'ng-wizard';
-import { FormControl, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { NgWizardConfig, NgWizardService,StepChangedArgs,STEP_STATE, THEME } from 'ng-wizard';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NgxFileUploadRequest, NgxFileUploadStorage, NgxFileUploadOptions, NgxFileUploadFactory } from '@ngx-file-upload/core';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { Router } from '@angular/router';
+import { CustomValidatorService } from './custom-validator.service';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
   sex = ['Male', 'Female'];
   submitted = false;
   message: any;
-  signupForm: FormGroup;
+   signupForm: FormGroup;
 
   public uploads: NgxFileUploadRequest[] = [];
 
@@ -32,15 +33,15 @@ export class SignupComponent implements OnInit {
 
   baseurl = 'http://localhost:8081/api';
 
-  get registerFormControl() {
+  get registerFormControl() : { [key: string]: AbstractControl }  {
     return this.signupForm.controls;
   }
 
   get firstname() {
-    return this.signupForm.get('firstname');
-  }
+    return this.signupForm.get('lastname');
+    }
   get lookingFor() {
-    return this.signupForm.get('lookingFor');
+    return this.signupForm.get('lastname');
   }
   get lastname() {
     return this.signupForm.get('lastname');
@@ -54,6 +55,10 @@ export class SignupComponent implements OnInit {
 
   get password() {
     return this.signupForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.signupForm.get('confirmPassword');
   }
 
   get email() {
@@ -86,9 +91,7 @@ export class SignupComponent implements OnInit {
   get hair() {
     return this.signupForm.get('hair');
   }
-  get repassword() {
-    return this.signupForm.get('repassword');
-  }
+
   get eyes() {
     return this.signupForm.get('eyes');
   }
@@ -129,7 +132,8 @@ export class SignupComponent implements OnInit {
     @Inject(NgxFileUploadFactory) private uploadFactory: NgxFileUploadFactory,
     private httpClient: HttpClient,
     private toastr: ToastrService,
-    private router :Router,
+    private customValidator:CustomValidatorService,
+    private formBuilder :FormBuilder,
     private ngWizardService: NgWizardService,
   ) {}
 
@@ -144,35 +148,36 @@ export class SignupComponent implements OnInit {
     this.storage.change()
     .subscribe(uploads => this.uploads = uploads);
 
-    this.signupForm = new FormGroup({
+    this.signupForm = this.formBuilder.group({
 
-      username: new FormControl(''),
-      firstname:  new FormControl(''),
-      lastname:  new FormControl(''),
-      repassword:  new FormControl(''),
-      password:   new FormControl(''),
-      email:  new FormControl(''),
-      bodyType:  new FormControl(''),
-      height:  new FormControl(''),
-      eyes:  new FormControl(''),
-      gender:  new FormControl(''),
-      hair:  new FormControl(''),
-      interests:  new FormControl(''),
-      languages:  new FormControl(''),
-      relationship:  new FormControl(''),
-      country:   new FormControl(''),
-      known:  new FormControl(''),
-      workAs:   new FormControl(''),
+      firstname:  ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)] )],
+      lastname:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
+      username:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20),Validators.pattern('^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$')])],
+      password:   ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20),this.customValidator.patternValidator()])],
+      confirmPassword:   ['', Validators.compose([Validators.required ])],
+      email:   ['', Validators.required, Validators.email],
+      bodyType:  ['', Validators.required ],
+      height:['', Validators.compose([Validators.required])],
+      eyes:  ['', Validators.required ],
+      gender:   ['', Validators.required ],
+      hair:  ['', Validators.required ],
+      interests:  ['', Validators.required ],
+      languages:  ['', Validators.required ],
+      relationship:  ['', Validators.required ],
+      country:   ['', Validators.required ],
+      known:   ['', Validators.compose([Validators.required, Validators.minLength(200), Validators.maxLength(1800)])],
+      workAs:   ['', Validators.required ],
       lookingFor:  new FormControl(''),
-      liveIn:  new FormControl(''),
-      bio:  new FormControl(''),
-      haveKids:  new FormControl(''),
-      age:  new FormControl(''),
-      education:  new FormControl(''),
-      smoke:  new FormControl(''),
-      drink: new FormControl(''),
-    });
-
+      liveIn:  ['', Validators.required ],
+      bio:  ['', Validators.compose([Validators.required, Validators.minLength(200), Validators.maxLength(1800)])],
+      haveKids:  ['', Validators.required ],
+      age:  ['', Validators.compose([Validators.required, Validators.minLength(18), Validators.maxLength(80)])],
+      smoke :  ['', Validators.required ],
+      drink : ['', Validators.required ]
+    },{
+      validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
+    }
+    );
  
     this.uploadOptions = { url: this.baseurl + '/upload?email=' + this.email };
   }
@@ -299,3 +304,7 @@ loadImageFailed() {
 
   // }
 }
+function forbiddenNameValidator(arg0: RegExp): any {
+  throw new Error('Function not implemented.');
+}
+
