@@ -102,7 +102,7 @@
                         <!--  ===============================================Retype password input field========================================-->
                         <div class="form-group">
                             <label for="confirmPassword">Confirm Password: </label>
-                            <input formControlName="confirmPassword" [class.is-valid]="registerFormControl.confirmPassword?.valid && registerFormControl.confirmPassword?.untouched" name="confirmPassword" pattern="{{password.value}}"  compare="password" [class.is-invalid]="registerFormControl.confirmPassword?.invalid &&registerFormControl.confirmPassword?.touched" id="repassword" type="password" class="form-control mb-2 form-control-lg" autofocus
+                            <input formControlName="confirmPassword" [class.is-valid]="registerFormControl.confirmPassword?.valid && registerFormControl.confirmPassword?.untouched" name="confirmPassword" pattern="{{password.value}}"  compare="password" [class.is-invalid]="registerFormControl.confirmPassword?.invalid &&registerFormControl.confirmPassword?.touched" id="confirmPassword" type="password" class="form-control mb-2 form-control-lg" autofocus
                                 required />
                             <div class="alert alert-danger mt-1" role="alert" *ngIf=" registerFormControl.confirmPassword?.touched && registerFormControl.confirmPassword.errors?.invalid">
                                 <small class="text-danger" *ngIf="registerFormControl.confirmPassword.errors?.required"> <i class="fa fa-remove"></i> Confirm Password is required</small>
@@ -116,7 +116,7 @@
                 <!--  ===============================================Email field ========================================-->
                 <div class="form-group">
                     <label for="email">Email: </label>
-                    <input formControlName="email" name="email" [class.is-valid]="registerFormControl.email?.valid && registerFormControl.email?.untouched" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [class.is-invalid]="registerFormControl.email?.invalid && registerFormControl.email?.touched" name="email" id="email" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                    <input formControlName="email" [class.is-valid]="registerFormControl.email?.valid && registerFormControl.email?.untouched" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [class.is-invalid]="registerFormControl.email?.invalid && registerFormControl.email?.touched" name="email" id="email" type="text" class="form-control mb-2 form-control-lg" autofocus required />
                     <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.password?.invalid && registerFormControl.email?.touched">
                         <small class="text-danger" *ngIf="registerFormControl.email.errors?.required"><i class="fa fa-remove"></i> Email is required</small>
                         <small class="text-danger" *ngIf="registerFormControl.email.errors?.minlength"><i class="fa fa-remove"></i> Email charecters must be atleast 3 charecters</small>
@@ -124,6 +124,37 @@
                         <small class="text-danger" *ngIf="registerFormControl.email.errors?.forbiddenName"><i class="fa fa-remove"></i> Email is not allowed</small>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="bio">About Me: </label>
+                    <textarea formControlName="bio"  [class.is-valid]="registerFormControl.bio?.valid && registerFormControl.bio?.untouched" [class.is-invalid]="registerFormControl.bio?.invalid && registerFormControl.bio?.touched" name="bio" id="bio" type="text" class="form-control mb-2 form-control-lg" autofocus required ></textarea>
+                    <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.bio?.invalid && registerFormControl.bio?.touched">
+                        <small class="text-danger" *ngIf="registerFormControl.bio.errors?.required"><i class="fa fa-remove"></i> Bio is required</small>
+                        <small class="text-danger" *ngIf="registerFormControl.bio.errors?.minlength"><i class="fa fa-remove"></i> Email charecters must be atleast 200 charecters</small>
+                        <small class="text-danger" *ngIf="registerFormControl.bio.errors?.maxlength"><i class="fa fa-remove"></i> Email charecters must be less than 1800 charecters</small>
+                    </div>
+                    <!-- {{numberOfCharactersBio}} / {{maxNumberOfCharactersBio}} -->
+                </div>
+
+
+
+                       <!--  ===============================================Education field ========================================-->
+                       <div class="form-group">
+                        <label for="education">Education: </label>
+                        <select class="form-control" formControlName="education" [class.is-invalid]="registerFormControl.education?.invalid && registerFormControl.education?.touched"  [class.is-valid]="registerFormControl.education?.valid && registerFormControl.education?.untouched"  required name="education" id="education ">
+                        <option value="High school"> High school </option>
+                        <option value="Trade/tech school">Trade/tech school</option>
+                        <option value="In college">In college</option>
+                        <option value="Undergraduate degree">Undergraduate degree</option>
+                        <option value="In grad school">In grad school</option>
+                        <option value="Graduate degree">Graduate degree</option>
+                       </select>
+
+                        <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.education?.invalid && registerFormControl.education?.touched">
+                            <small class="text-danger" *ngIf="registerFormControl.education.errors?.required"><i class="fa fa-remove"></i> Education is required</small>
+                        </div>
+               
+                    </div>
             </div>
 
         </ng-wizard-step>
@@ -293,7 +324,7 @@
                         <ng-container *ngFor='let in of counter(60) ;let i = index'>
 
                         
-                        <option value="{i+18}" selected>{{i+18}}</option>
+                        <option value="{i+18}">{{i+18}}</option>
                     </ng-container>
                     </select>
                     <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.age?.invalid && registerFormControl.age?.touched"    >
@@ -571,23 +602,37 @@
                             <hr class="col-lg-5 mb-4">
                         </h2>
                                          <div class="col-md-12">
-                                             <div class="row">
-
+                                            <ngx-dropzone (change)="onSelect($event)">
+                                                <ngx-dropzone-label>Drop or Browse</ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let upload of uploads"
+                                                    (removed)="onRemove(upload)" 
+                                                    [file]="upload.data.raw"
+                                                [removable]="true"
+                                              >
+                                                <ngx-dropzone-label>
+                                                    Name: {{ upload.data.name }}<br />
+                                                    State: {{upload.data.state}}<br />
+                                                    Progress: {{upload.data.progress}}%
+                                                </ngx-dropzone-label>
                                             
-                                                <div class="col-md-4 offset-2">
-                                                  <form >
+                                              </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+
+                                         
+                                           
+                                                <!-- <div class="col-md-4 offset-2">
+                                                
 
                                                 
-                                                    <input type="file"  (change)="fileChangeEvent($event)" />
-                                               
-                                                </form>
+                                              
+                                            
                                                     <div *ngIf="croppedImage">
                                                         <label class="mt-5">Preview</label><br>
                                                         <img [src]="croppedImage"  style="    object-fit: cover;
                                                         height: 200px;
                                                         width: 256px;" />
                                                     </div>
-                                                    <button class="btn btn-success btn-block"> Upload</button>
+                                                  
                                                 </div>
                                                 <div class="col-md-6">
 
@@ -597,13 +642,13 @@
                                                     [aspectRatio]="1 / 1"
                                                     format="png"
                                                     (imageCropped)="imageCropped($event)"
-                                                    (imageLoaded)="imageLoaded()"
+                                                
                                                     (cropperReady)="cropperReady()"
                                                     (loadImageFailed)="loadImageFailed()"
                                                 ></image-cropper>
                                                 
-                                                </div>
-                                            </div>
+                                                </div> -->
+                                    
                                             <button id="btn-signup" class="btn btn-block mt-5 btn-success offset-md-5 col-xs-12  col-md-4" (click)="signup()" type="submit"> <i class="fas fa-sign-in-alt"></i> Create Account </button>
                                          </div>               
                     </div>

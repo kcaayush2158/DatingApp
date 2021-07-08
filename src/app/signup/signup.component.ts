@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Chatroom } from '../user';
 import { HttpClient } from '@angular/common/http';
 import { NgWizardConfig, NgWizardService,StepChangedArgs,STEP_STATE, THEME } from 'ng-wizard';
@@ -6,7 +6,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { ToastrService } from 'ngx-toastr';
 import { NgxFileUploadRequest, NgxFileUploadStorage, NgxFileUploadOptions, NgxFileUploadFactory } from '@ngx-file-upload/core';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
-import { Router } from '@angular/router';
+
 import { CustomValidatorService } from './custom-validator.service';
 
 @Component({
@@ -28,10 +28,23 @@ export class SignupComponent implements OnInit {
 
   private uploadOptions: NgxFileUploadOptions;
 
+  //charecter counter
+  @Input()
+  maxNumberOfCharactersBio = 1800;
+  numberOfCharactersBio = 0;
+  
+  counters = true;
+
+
+  numberOfCharacters1 = 0;
+  interaction = {
+    textValue: ''
+  };
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
-  baseurl = 'http://localhost:8081/api';
+  baseurl = 'https://lovecupid.com/api';
 
   get registerFormControl() : { [key: string]: AbstractControl }  {
     return this.signupForm.controls;
@@ -152,7 +165,7 @@ export class SignupComponent implements OnInit {
 
       firstname:  ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)] )],
       lastname:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
-      username:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20),Validators.pattern('^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$')])],
+      username:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
       password:   ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20),this.customValidator.patternValidator()])],
       confirmPassword:   ['', Validators.compose([Validators.required ])],
       email:   ['', Validators.required, Validators.email],
@@ -171,9 +184,10 @@ export class SignupComponent implements OnInit {
       liveIn:  ['', Validators.required ],
       bio:  ['', Validators.compose([Validators.required, Validators.minLength(200), Validators.maxLength(1800)])],
       haveKids:  ['', Validators.required ],
-      age:  ['', Validators.compose([Validators.required, Validators.minLength(18), Validators.maxLength(80)])],
+      age:  ['', Validators.compose([Validators.required])],
       smoke :  ['', Validators.required ],
-      drink : ['', Validators.required ]
+      drink : ['', Validators.required ],
+      education : ['', Validators.required ]
     },{
       validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
     }
@@ -183,6 +197,10 @@ export class SignupComponent implements OnInit {
   }
 
 
+  onModelChange(textValue: string): void {
+    this.numberOfCharactersBio= textValue.length;
+  }
+  
 
   signup() {
 
