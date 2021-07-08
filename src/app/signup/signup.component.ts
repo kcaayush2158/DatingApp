@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
-  baseurl = 'https://lovecupid.com/api';
+  baseurl = 'https://lovecupid.herokuapp.com/api';
 
   get registerFormControl() : { [key: string]: AbstractControl }  {
     return this.signupForm.controls;
@@ -193,7 +193,7 @@ export class SignupComponent implements OnInit {
     }
     );
  
-    this.uploadOptions = { url: this.baseurl + '/upload?email=' + this.email };
+    this.uploadOptions = { url: this.baseurl + '/upload?email=' + this.email.value };
   }
 
 

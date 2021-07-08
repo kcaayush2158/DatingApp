@@ -24,13 +24,14 @@ export class LoginComponent implements OnInit {
   authenciate = false;
   onlineUsers = [];
   baseurl = 'https://lovecupid.herokuapp.com/api';
-
+     changePassword;
   constructor(
     private app: AppService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     private activatedRoute: ActivatedRoute,
     private _router: Router,
+ 
     private _userService: UserService,
     private _httpClient: HttpClient,
     private localStorage: LocalStorageService
@@ -63,7 +64,6 @@ export class LoginComponent implements OnInit {
           this.localStorage.store('user', response);
           this.localStorage.store('isLoggedIn', 'true');
           this.authenciate = true;
-          this.messageResponse = 'success';
           this.toastr.success('success', 'Login successful');
           this.onlineUsers.push(response);
           this._router.navigateByUrl('/home/profiles');

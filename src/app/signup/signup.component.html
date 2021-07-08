@@ -618,7 +618,7 @@
                                               </ngx-dropzone-image-preview>
                                             </ngx-dropzone>
 
-                                         
+                                         <h6 class="text-center mt-3">Click next after uploading the picture</h6>
                                            
                                                 <!-- <div class="col-md-4 offset-2">
                                                 
@@ -649,7 +649,7 @@
                                                 
                                                 </div> -->
                                     
-                                            <button id="btn-signup" class="btn btn-block mt-5 btn-success offset-md-5 col-xs-12  col-md-4" (click)="signup()" type="submit"> <i class="fas fa-sign-in-alt"></i> Create Account </button>
+                                      
                                          </div>               
                     </div>
                     <div class="col-md-4">
@@ -724,8 +724,9 @@
 
             <ng-wizard-step [title]="'Step 6'" [description]="'Completed'">
                 <div class="container">
-                    <h2 class="">Thank you For Creating Profile</h2>
-                    <button class="bt btn-primary offset-md-4 "  routerLinkActive>Login</button>
+                    <h6 class="text-center mt-2">Click create account buton to create profile  </h6>
+                    <button id="btn-signup" class="btn btn-block mt-5 btn-success offset-md-5 col-xs-12  col-md-4" (click)="signup()" type="submit"> <i class="fas fa-sign-in-alt"></i> Create Account </button>
+                
                 </div>
                 </ng-wizard-step>
     </ng-wizard>
