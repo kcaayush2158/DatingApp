@@ -158,11 +158,36 @@
                 </form>
              </ng-container>
              <ng-template #elseTemplate>
-              <form  method="GET">
-                <button  routerLink="/rooms/{{room.chatRoomId }}"lass="btn btn-block mt-5 mb-2 btn-join-room-private"  type="submit">
+          
+
+                <!-- Button trigger modal -->
+                <button type="button" outerLink="/rooms/{{room.chatRoomId }}" class="btn btn-block mt-5 mb-2 btn-join-room-private"  data-toggle="modal" data-target="#modelId">
                   <b> <i class="fa fa-plus-circle" aria-hidden="true"></i> Join Room</b>
                 </button>
-                </form>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                        <label for="password"> Password : </label>
+                          <input type="text" class="form-control" >
+                     
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"></i> Close</button>
+                        <button type="button" (click)="joinPrivateRoom()" class="btn btn-primary"><i class="fa fa-plus" ></i> Join</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
              </ng-template>
 
 

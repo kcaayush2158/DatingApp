@@ -30,7 +30,7 @@
             <img id="card-img-top image-thumbnail" id="card-img" src="{{ user.profilePhoto }} " alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title ">{{ user.firstName }} , {{ user.aboutMe.age }}
-                <span class="badge badge-secondary badge-pill  "> {{ user.aboutMe.country }}</span>
+           
                 <ng-container *ngIf="user.aboutMe.gender == 'Male'">
                   <span class="badge badge-warning badge-pill ml-1 "><i class="fas fa-male"></i> M</span>
                 </ng-container>

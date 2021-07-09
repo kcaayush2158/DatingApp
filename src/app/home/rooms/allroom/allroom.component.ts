@@ -76,7 +76,9 @@ export class AllroomComponent implements OnInit {
     componentReference.anyFunction();
   }
 
-
+  joinPrivateRoom(){
+    
+  }
   createChatroom() {
     const url = this.baseurl + '/chatroom/create?chatRoomName=' + this.chatRoomName.value + '&roomDescription=' + this.roomDescription.value + '&roomType=' + this.roomType.value + '&password=' + this.password.value + '&email=' + this.authenticatedUser.email;
     const headers = { 'content-type': 'application/json' }

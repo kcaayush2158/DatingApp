@@ -117,7 +117,6 @@ export class HeaderComponent implements OnInit {
     if (this.searchForm.valid) {
       this.http.get(countUserUrl, { params }).subscribe(data => {
         this.userService.setData(data);
-        console.log(data);
       });
 
       this.http.get(url, { params }).subscribe(

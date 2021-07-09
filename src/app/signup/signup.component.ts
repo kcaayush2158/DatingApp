@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
   }
 
   get firstname() {
-    return this.signupForm.get('lastname');
+    return this.signupForm.get('firstname');
     }
   get lookingFor() {
     return this.signupForm.get('lastname');
@@ -178,9 +178,9 @@ export class SignupComponent implements OnInit {
       languages:  ['', Validators.required ],
       relationship:  ['', Validators.required ],
       country:   ['', Validators.required ],
-      known:   ['', Validators.compose([Validators.required, Validators.minLength(200), Validators.maxLength(1800)])],
+      known:   ['', Validators.compose([Validators.required])],
       workAs:   ['', Validators.required ],
-      lookingFor:  new FormControl(''),
+      lookingFor:  ['', Validators.required ],
       liveIn:  ['', Validators.required ],
       bio:  ['', Validators.compose([Validators.required, Validators.minLength(200), Validators.maxLength(1800)])],
       haveKids:  ['', Validators.required ],
@@ -192,8 +192,8 @@ export class SignupComponent implements OnInit {
       validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
     }
     );
- 
-    this.uploadOptions = { url: this.baseurl + '/upload?email=' + this.email.value };
+  
+  
   }
 
 
@@ -216,9 +216,10 @@ const url= this.baseurl+'/signup?email='+this.email.value+
 '&password='+this.password.value+
 '&hair='+this.hair.value+
 '&age='+this.age.value+
+'&liveIn='+this.liveIn.value+
 '&known='+this.known.value+
 '&eyes='+this.eyes.value+
-'&liveIn='+this.liveIn.value+
+'&country='+this.country.value+
 '&gender='+this.gender.value+
 '&bodyType='+this.bodyType.value+
 '&education='+this.education.value+
@@ -228,6 +229,8 @@ const url= this.baseurl+'/signup?email='+this.email.value+
 '&username='+this.username.value+
 '&firstName='+this.firstname.value+
 '&languages='+this.languages.value;
+
+this.uploadOptions = { url: this.baseurl + '/upload?email=' + this.email.value };
 
     this.httpClient.post(url,{}).subscribe(data => {
       this.toastr.success('Signup complete');
