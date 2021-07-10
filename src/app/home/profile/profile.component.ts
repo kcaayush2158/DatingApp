@@ -242,7 +242,7 @@ export class ProfileComponent implements OnInit {
 
   deleteInterest(id:number){
     const url = this.baseurl + '/interest/delete?id='+id+'&email='+this.user.email;
-    this.http.delete(url,{}).subscribe(
+    this.http.post(url,{}).subscribe(
       (data) => {
         this.toastr.success('Item deleted');
         this.loadInterest();
