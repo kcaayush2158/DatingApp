@@ -1,24 +1,16 @@
-import { Injectable, EventEmitter } from '@angular/core';    
-import { Subscription } from 'rxjs/internal/Subscription';   
+import { Injectable, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventEmmitterService {
+  constructor() {}
 
-  constructor() { }
+  countLikesFunction = new EventEmitter();
+  subsVar: Subscription;
 
-  countLikesFunction= new EventEmitter();
-  subsVar : Subscription;
-
-
-callCountLikes (likes:any){
-
-this.countLikesFunction.emit(likes);
-}
-
-
-
-
-
+  callCountLikes(likes: any) {
+    this.countLikesFunction.emit(likes);
+  }
 }

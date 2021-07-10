@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -35,7 +35,7 @@ export class MessageComponent implements OnInit {
 
   baseurl = 'https://lovecupid.herokuapp.com/api';
   public enableChatBox = false;
-  shimmer: boolean = false;
+  shimmer = false;
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
@@ -47,7 +47,7 @@ export class MessageComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private route: Router,
     private localStorage: LocalStorageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.localStorage.retrieve('user');
@@ -59,6 +59,7 @@ export class MessageComponent implements OnInit {
     this.scrollToBottom();
   }
 
+  // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
@@ -66,7 +67,7 @@ export class MessageComponent implements OnInit {
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch (err) {}
+    } catch (err) { }
   }
   counter(i: number) {
     return new Array(i);
@@ -125,7 +126,7 @@ export class MessageComponent implements OnInit {
       this.baseurl + '/direct/u/' + this.id + '/send?message=' + this.message + '&email=' + this.user.email + '&roomId=' + this.roomId;
 
     this.http.post(url, {}).subscribe(
-      data => {
+      () => {
         this.toastr.success('success', 'Message send ');
         this.loadPrivateMessages(this.id, this.roomId);
       },
@@ -134,10 +135,10 @@ export class MessageComponent implements OnInit {
   }
 
   deleteUser(id: number) {
-    const data = {
-      id: id,
-    };
-    const url = this.baseurl + '/private/user/delete?id=' + id+'&email='+this.user.email;
+    // const data = {
+    //   this.id: id,
+    // };
+    const url = this.baseurl + '/private/user/delete?id=' + id + '&email=' + this.user.email;
     this.shimmer = true;
     this.http.post(url, {}).subscribe(
       () => {
@@ -152,12 +153,10 @@ export class MessageComponent implements OnInit {
   }
 
   deleteUserMessage(id: number) {
-    const data = {
-      id: id,
-      email: this.user.email,
-    };
+    const params = new HttpParams();
+    params.set('id', id);
+    params.set('email', this.user.email);
 
-    const user = this.localStorage.retrieve('user');
     const url = this.baseurl + '/private/message/delete?id=' + id + '&email=' + this.user.email;
     this.shimmer = true;
     this.http.post(url, {}).subscribe(

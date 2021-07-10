@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Chatroom } from '../user';
 import { HttpClient } from '@angular/common/http';
 import { NgWizardConfig, NgWizardService,StepChangedArgs,STEP_STATE, THEME } from 'ng-wizard';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NgxFileUploadRequest, NgxFileUploadStorage, NgxFileUploadOptions, NgxFileUploadFactory } from '@ngx-file-upload/core';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
@@ -15,36 +15,6 @@ import { CustomValidatorService } from './custom-validator.service';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  userSignupModel = new Chatroom();
-  genderHasError = true;
-  sex = ['Male', 'Female'];
-  submitted = false;
-  message: any;
-   signupForm: FormGroup;
-
-  public uploads: NgxFileUploadRequest[] = [];
-
-  private storage: NgxFileUploadStorage;
-
-  private uploadOptions: NgxFileUploadOptions;
-
-  //charecter counter
-  @Input()
-  maxNumberOfCharactersBio = 1800;
-  numberOfCharactersBio = 0;
-  
-  counters = true;
-
-
-  numberOfCharacters1 = 0;
-  interaction = {
-    textValue: ''
-  };
-
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
-
-  baseurl = 'https://lovecupid.herokuapp.com/api';
 
   get registerFormControl() : { [key: string]: AbstractControl }  {
     return this.signupForm.controls;
@@ -115,7 +85,7 @@ export class SignupComponent implements OnInit {
   get gender() {
     return this.signupForm.get('gender');
   }
- 
+
   get height() {
     return this.signupForm.get('height');
   }
@@ -139,7 +109,7 @@ export class SignupComponent implements OnInit {
   get education() {
     return this.signupForm.get('education');
   }
- 
+
 
   constructor(
     @Inject(NgxFileUploadFactory) private uploadFactory: NgxFileUploadFactory,
@@ -149,6 +119,49 @@ export class SignupComponent implements OnInit {
     private formBuilder :FormBuilder,
     private ngWizardService: NgWizardService,
   ) {}
+  userSignupModel = new Chatroom();
+  genderHasError = true;
+  sex = ['Male', 'Female'];
+  submitted = false;
+  message: any;
+   signupForm: FormGroup;
+
+  public uploads: NgxFileUploadRequest[] = [];
+
+  private storage: NgxFileUploadStorage;
+
+  private uploadOptions: NgxFileUploadOptions;
+
+  // charecter counter
+  @Input()
+  maxNumberOfCharactersBio = 1800;
+  numberOfCharactersBio = 0;
+
+  counters = true;
+
+
+  numberOfCharacters1 = 0;
+  interaction = {
+    textValue: ''
+  };
+
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  baseurl = 'https://lovecupid.herokuapp.com/api';
+
+
+  stepStates = {
+    normal: STEP_STATE.normal,
+    disabled: STEP_STATE.disabled,
+    error: STEP_STATE.error,
+    hidden: STEP_STATE.hidden,
+  };
+
+  config: NgWizardConfig = {
+    selected: 0,
+    theme: THEME.dots
+  };
 
   ngOnInit() {
     this.storage = new NgxFileUploadStorage({
@@ -166,6 +179,7 @@ export class SignupComponent implements OnInit {
       firstname:  ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)] )],
       lastname:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
       username:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
+      // tslint:disable-next-line:max-line-length
       password:   ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20),this.customValidator.patternValidator()])],
       confirmPassword:   ['', Validators.compose([Validators.required ])],
       email:   ['', Validators.required, Validators.email],
@@ -192,15 +206,15 @@ export class SignupComponent implements OnInit {
       validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
     }
     );
-  
-  
+
+
   }
 
 
   onModelChange(textValue: string): void {
     this.numberOfCharactersBio= textValue.length;
   }
-  
+
 
   signup() {
 
@@ -211,7 +225,6 @@ const url= this.baseurl+'/signup?email='+this.email.value+
 '&bio='+this.bio.value+
 '&lookingFor='+this.lookingFor.value+
 '&workAs='+this.workAs.value+
-'&country='+this.country.value+
 '&relationship='+this.relationship.value+
 '&password='+this.password.value+
 '&hair='+this.hair.value+
@@ -234,12 +247,12 @@ this.uploadOptions = { url: this.baseurl + '/upload?email=' + this.email.value }
 
     this.httpClient.post(url,{}).subscribe(data => {
       this.toastr.success('Signup complete');
-   
+
 
     },(err)=>{this.toastr.error('failed');});
     this.submitted = true;
-  
-   
+
+
   }
 
 
@@ -251,19 +264,6 @@ this.uploadOptions = { url: this.baseurl + '/upload?email=' + this.email.value }
     }
   }
 
-
-  stepStates = {
-    normal: STEP_STATE.normal,
-    disabled: STEP_STATE.disabled,
-    error: STEP_STATE.error,
-    hidden: STEP_STATE.hidden,
-  };
-
-  config: NgWizardConfig = {
-    selected: 0,
-    theme: THEME.dots
-  };
-
   public onSelect(event) {
     const addedFiles: File[] = event.addedFiles;
 
@@ -271,11 +271,10 @@ this.uploadOptions = { url: this.baseurl + '/upload?email=' + this.email.value }
       const uploads = this.uploadFactory.createUploadRequest(addedFiles, this.uploadOptions);
       this.storage.add(uploads);
       console.log(uploads);
-      this.toastr.success('profile upload successfully');
-      
+
     }
   }
-   
+
   public onRemove(upload: NgxFileUploadRequest) {
     this.storage.remove(upload);
   }
@@ -310,7 +309,7 @@ imageCropped(event: ImageCroppedEvent) {
     console.log(this.croppedImage);
 }
 imageLoaded(image: LoadedImage) {
-  
+
     // show cropper
 }
 cropperReady() {

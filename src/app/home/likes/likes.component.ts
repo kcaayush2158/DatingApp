@@ -18,6 +18,7 @@ export class LikesComponent implements OnInit {
   countYouLike :string;
   countlikedYou:string;
   baseurl='https://lovecupid.herokuapp.com/api';
+  // tslint:disable-next-line:max-line-length
   constructor(private http:HttpClient,private eventEmitter: EventEmmitterService, private localStorage:LocalStorageService,private router:Router,private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -30,20 +31,20 @@ export class LikesComponent implements OnInit {
 
   loadVisits(){
   this.spinner.show();
-    const user= this.localStorage.retrieve("user");
-    var url =this.baseurl+"/v1/likes/all?email="+user.email;
+    const user= this.localStorage.retrieve('user');
+    const url =this.baseurl+'/v1/likes/all?email='+user.email;
     this.http.get(url,{responseType: 'json'}).subscribe((data)=>{
       this.likes=data;
-    
+
       this.spinner.show();
     });
-  
+
   }
 
   countYourLikeProfile(){
     this.spinner.show();
-    const user= this.localStorage.retrieve("user");
-   const url=this.baseurl+"/v1/likes/you-liked/count?email="+user.email;
+    const user= this.localStorage.retrieve('user');
+   const url=this.baseurl+'/v1/likes/you-liked/count?email='+user.email;
    this.http.get(url,{responseType:'text'}).subscribe((data)=>{
     this.countYouLike = data;
 
@@ -54,8 +55,8 @@ export class LikesComponent implements OnInit {
 
  countLikedYourProfile(){
   this.spinner.show();
-    const user= this.localStorage.retrieve("user");
-   const url=this.baseurl+"/v1/likes/users/count?email="+user.email;
+    const user= this.localStorage.retrieve('user');
+   const url=this.baseurl+'/v1/likes/users/count?email='+user.email;
    this.http.get(url,{responseType:'text'}).subscribe((data)=>{
     this.countlikedYou = data;
     this.spinner.hide();
@@ -63,5 +64,5 @@ export class LikesComponent implements OnInit {
   }
 
 
-  
+
 }

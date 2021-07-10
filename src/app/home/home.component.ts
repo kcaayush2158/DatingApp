@@ -11,10 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
-
-
 export class HomeComponent implements OnInit {
   notEmptyPost = true;
   notScrolly = true;
@@ -25,47 +23,53 @@ export class HomeComponent implements OnInit {
   loading$ = new BehaviorSubject('');
   baseurl = 'https://lovecupid.herokuapp.com/api';
 
-  constructor(private http: HttpClient, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router, private localStorage: LocalStorageService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService,
+    private router: Router,
+    private localStorage: LocalStorageService
+  ) {}
 
   ngOnInit() {
     this.countNotification();
     this.loadOnlineUsers();
     this.router.navigate(['/home/profiles']);
-
   }
 
   countNotification() {
-
     const url = this.baseurl + '/count/users/online';
     interval(10000)
       .pipe(
         startWith(0),
-        switchMap(() =>
-          this.http.get(url)
-        )
-      ).subscribe(
-        (data: any) => { console.log(data); this.countNotification = data }
-        , (err) => { this.toastr.error('Network Error') });
-
+        switchMap(() => this.http.get(url))
+      )
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          this.countNotification = data;
+        },
+        err => {
+          this.toastr.error('Network Error');
+        }
+      );
   }
-
-
 
   loadOnlineUsers() {
-
     const url = this.baseurl + '/count/users/online';
     interval(10000)
       .pipe(
         startWith(0),
-        switchMap(() =>
-          this.http.get(url, { responseType: 'text' })
-        )
-      ).subscribe(
-        (data) => {
+        switchMap(() => this.http.get(url, { responseType: 'text' }))
+      )
+      .subscribe(
+        data => {
           this.onlineUsers = data;
         },
-      ), (err) => { this.toastr.error('Network Error') };
-
+        err => {
+          this.toastr.error('Network Error');
+        }
+      );
   }
-
 }

@@ -1,115 +1,110 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-#card-img{
-    object-fit: cover;
-    height: 200px;
-    width: 256px;
+#card-img {
+  object-fit: cover;
+  height: 200px;
+  width: 256px;
 }
 
-
-
-.card{
-    max-width: auto;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
-    border-radius: 10px;
-    overflow: hidden;
-    text-decoration: none;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+.card {
+  max-width: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
-.card-text{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-decoration: none;
-    list-style-type: none;
-    color: #222;
-    min-height: 100px;
-    max-height: 100px;
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 16px;
+.card-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-decoration: none;
+  list-style-type: none;
+  color: #222;
+  min-height: 100px;
+  max-height: 100px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
 }
 
-a{
-    text-decoration: none;
-    list-style-type: none;
-    color: #313437;
+a {
+  text-decoration: none;
+  list-style-type: none;
+  color: #313437;
 }
-a:hover{
-    text-decoration: none;
-    list-style-type: none;
-    color: #313437;
+a:hover {
+  text-decoration: none;
+  list-style-type: none;
+  color: #313437;
 }
-#card-img{
-    object-fit: cover;
-    height: 200px;
-    width: 256px;
+#card-img {
+  object-fit: contain;
+  height: 200px;
+  width: 256px;
 }
-.card-body{
-    max-width: 16rem;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
-    border-radius: 10px;
-    color: #313437;
-    overflow: hidden;
-    background-color: white;
-    text-decoration: none;
-    list-style-type: none;
+.card-body {
+  max-width: 16rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  color: #313437;
+  overflow: hidden;
+  background-color: white;
+  text-decoration: none;
+  list-style-type: none;
 }
-.card-title{
-    font-size: 18px;
-    font-weight: 700;
-    color: #222;
-}
-
-
-#card-href{
-    list-style-type: none;
-    color: black;
-    text-decoration: none;
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 16px;
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
 }
 
-
-#sub-navbar{
-    margin-top: 100px;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
-    padding: 10px;
-    margin-top:100px;
-}
-.text-bold{
-    font-weight: bold;
-}
-#card-href{
-    list-style-type: none;
-    color: black;
-    text-decoration: none;
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 16px;
+#card-href {
+  list-style-type: none;
+  color: black;
+  text-decoration: none;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
 }
 
+#sub-navbar {
+  margin-top: 100px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
+  padding: 10px;
+  margin-top: 100px;
+}
+.text-bold {
+  font-weight: bold;
+}
+#card-href {
+  list-style-type: none;
+  color: black;
+  text-decoration: none;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+}
 
-#pills-visits-tab{
-    color: #1e1e1e;
+#pills-visits-tab {
+  color: #1e1e1e;
 }
-#navbar{
-    margin-top: 100px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08);
+#navbar {
+  margin-top: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: white;
-    /* background-color: #007bff; */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: white;
+  /* background-color: #007bff; */
 }
-#label-people-you-like{
-    color: #1e1e1e;
-    line-height: 26px;
-    font-weight: 400;
-    font-family: "Source Sans Pro", sans-serif;
+#label-people-you-like {
+  color: #1e1e1e;
+  line-height: 26px;
+  font-weight: 400;
+  font-family: 'Source Sans Pro', sans-serif;
 }
-#label-intro{
-   
-    font-family: "Source Sans Pro", sans-serif;
+#label-intro {
+  font-family: 'Source Sans Pro', sans-serif;
 }

@@ -52,38 +52,19 @@
                     </div>
                 </div>
                 <hr>
-                <router-outlet></router-outlet>
-        
-     <div class="row  mb-5" >
+                <owl-carousel-o [options]="customOptions">
 
-               
-                <h4 class="mb-5">Public Photos</h4>
-                <swiper [effect]="'coverflow'" [grabCursor]="true"  [centeredSlides]="true" [slidesPerView]="'auto'" [coverflowEffect]="{
-                    rotate: 50,
-                    stretch: 0,
-                    depth: 20,
-                    modifier: 1,
-                    slideShadows: false
-                  }" class="mySwiper" [lazy]="true">
-               
-            <div *ngFor="let photo of photos">
-    
-    
-                <div *ngIf="photo.photoType == 'PUBLIC'  ">
-                    <ng-template swiperSlide>
-                        <div lightbox-group>
-                            <img class="img-thumbnail" src="{{photo.photoUrl}}" [backgroundOpacity]="0.5" lightbox
-                            height="200" width="200" [fullImage]="photo.photoUrl" style="object-fit: contain;" />
-                        </div>
-                    </ng-template>
-                </div>
-    
-            </div>
-        </swiper>
-    
-    </div>
-<hr>
-    <div class="row  mb-5" >
+                    <ng-container *ngFor="let photo of photos">
+                        
+                      <ng-template lightbox-group carouselSlide [id]="photo.id">
+                        <img [src]="photo.photoUrl" style="height:300px; width:200px ;object-fit:contain" lightbox>
+                      </ng-template>
+                    </ng-container>
+                  </owl-carousel-o>
+        
+                  
+
+    <!-- <div class="row  mb-5" >
 
                
         <h4 class="mb-5">Private Photos</h4>
@@ -111,55 +92,86 @@
  
           
       </swiper>
-    </div>
+    </div> -->
 
-
-
-
-<router-outlet></router-outlet>
                     <div class="col-12">
                         <div class="row">
                         <div class="col-6">
                           
-                            <div *ngIf=" topics == null">
-                                <h1> +ADD Some Answers to get matches</h1>
+                        
+<div *ngIf="topics == false">
+    <div class="col-12">
+        <div class="container-fluid mt-5" >
+    
+            <div class="container-topic ">
+
+                <div class="col-12">
+
+                    <div class="container-topic-header">
+                        <div class="row">
+                            <div class="col-4">
+                                <b id="topicName">About Me</b>
                             </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="container-topic-question" >
+                    
+                        
+                    </div>
+                    <hr>
+                    <div class="container-body-answer" style="height: 200px;">
+
+                       <span class="mt-5">   User have not written anything . 
+                        Ask him/her in the private messages 😉</span> 
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+
+                        <div class="container-fluid" *ngFor="let topic of topics">
                           
-                            <div class="container-fluid" *ngFor="let topic of topics">
-                          
-                                <div class="container-topic ">
-                                  
-                                        <div class="col-12">
-                                          
-                                            <div class="container-topic-header">
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        <b id="topicName">{{topic.topicName}} </b>
-                                                    </div>
-                                                   
-                                                   
-                                                </div>
-                                            
-                      
+                            <div class="container-topic ">
+                        
+                                <div class="col-12">
+                        
+                                    <div class="container-topic-header">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <b id="topicName">{{topic.topicName}} </b>
                                             </div>
-                                            <div class="container-topic-question">
-                                                {{topic.topicQuestion}}
-                                            </div>
-                                            <hr>
-                                            <div class="container-body-answer">
-                                                {{topic.topicAnswer}}
-                                            </div>
+                        
                                         </div>
-                                    
-                                      
+                        
+                        
+                                    </div>
+                                    <div class="container-topic-question">
+                                        {{topic.topicQuestion}}
+                                    </div>
+                                    <hr>
+                                    <div class="container-body-answer">
+                                        {{topic.topicAnswer}}
+                                    </div>
                                 </div>
-                              
+                        
+                        
                             </div>
+                        
+                        </div>
                         </div>
                         <div class="col-6">
                             <div class="container-fluid mt-5 " id="container-information">
                     
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 col-xs-12 col-sm-12">
                                     <div class="row">
                                         <div class="col-12" >
                                             <div class="card">
@@ -245,15 +257,148 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 ">
+                                        <div class="col-lg-12  col-xs-12 col-sm-12">
                                             <div class="container-fluid">
                                                 <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="card mt-3" >
+                                                    <div class="col-12 col-xs-12 col-sm-12">
+                                                        <div class="card mt-3" *ngIf="interests">
                                                             <h2 class=" text-danger text-center card-title mt-3">Interest</h2>
                                                             <div class="card-body" id="card-body-interest">
-                                                                <p class="card-text" > <span class="badge badge-secondary">{{user.aboutMe.interests}} </span>
-                                                                </p>
+                                                                
+                                                                <div *ngFor="let data of interests" > 
+                                                                    <div class="col-md-3">
+                                                                        <div *ngIf="data.interests == 'Swimming' ">
+                                                                            <span class="badge badge-light  mt-2" id="badge"  >
+                                                                                <img src="../../../assets/icons/swimming.png"  height="30">
+                                                                                 <span style="font-size:15px;"> Swimming <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div *ngIf="data.interests == 'Nature' ">
+                                                                            <span class="badge badge-light mt-2" id="badge" >
+                                                                                <img src="../../../assets/icons/leaf.svg"  height="30">
+                                                                                 <span style="font-size:15px;"> Nature <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div *ngIf="data.interests == 'Singing' ">
+                                                                            <span class="badge badge-light mt-2" id="badge"  >
+                                                                                <img src="../../../assets/icons/singing.png"  height="30">
+                                                                                 <span style="font-size:15px;"> Singing <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div *ngIf="data.interests == 'Coding' " >
+                                                                            <span class="badge badge-light mt-2" id="badge" >
+                                                                                <img src="../../../assets/icons/coding.png"  height="30"> 
+                                                                                <span style="font-size:15px;"> Coding <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Hiking' " >
+                                                                            <span class="badge badge-light mt-2" id="badge"  >
+                                                                                <img src="../../../assets/icons/hiking.png" height="30">
+                                                                                 <span style="font-size:15px;"> Hiking <i class="fas fa-minus-circle"></i> </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Cooking' ">
+                                                                            <span class="badge badge-light mt-2" id="badge"   >
+                                                                                <img src="../../../assets/icons/cooking.png" height="30">
+                                                                                 <span   style="font-size:15px;"> Cooking <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Travelling' ">
+                                                                            <span class="badge badge-light  mt-2" id="badge"  >
+                                                                                <img src="../../../assets/icons/passport.png"  height="30"> 
+                                                                                <span style="font-size:15px;"> Travelling <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Gaming' ">
+                                                                            <span class="badge badge-light mt-2" id="badge"  >
+                                                                                <img src="../../../assets/icons/game-controller.svg"  height="30"> 
+                                                                                <span style="font-size:15px;"> Gaming <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                    
+                                                                        <div *ngIf="data.interests == 'Drawing' ">
+                                                                            <span class="badge badge-light mt-2" id="badge"  >
+                                                                                <img src="../../../assets/icons/crayons.png" height="30"> 
+                                                                                <span style="font-size:15px;"> Drawing <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Reading' ">
+                                                                            <span class="badge badge-light  mt-2" id="badge"   >
+                                                                                <img src="../../../assets/icons/read.png"  height="30">
+                                                                                 <span style="font-size:15px;"> Reading <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                 
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Excercises'">
+                                                                            <span class="badge badge-light mt-2" id="badge"  >
+                                                                                <img src="../../../assets/icons/lunges.png" height="30">
+                                                                                 <span style="font-size:15px;"> Excercises <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Working' ">
+                                                                            <span class="badge badge-light mt-2" id="badge" >
+                                                                                <img src="../../../assets/icons/suitcase.png"  height="30">
+                                                                                <span style="font-size:15px;"> Working <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Sleeping' ">
+                                                                            <span class="badge badge-light  mt-2" id="badge"  >
+                                                                                <img src="../../../assets/icons/sleep.png" height="30">
+                                                                                 <span style="font-size:15px;"> Sleeping <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Cinema' ">
+                                                                            <span class="badge badge-light  mt-2" id="badge"  >
+                                                                                <img src="../../../assets/icons/cinema.svg" height="30">
+                                                                                 <span style="font-size:15px;"> Cinema <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Music' ">
+                                                                            <span class="badge badge-light mt-2"  id="badge" >
+                                                                                <img src="../../../assets/icons/music.png" height="30">
+                                                                                 <span  style="font-size:15px;"> Music <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div *ngIf="data.interests == 'Dancing' ">
+                                                                            <span class="badge badge-light mt-2"  id="badge" >
+                                                                                <img src="../../../assets/icons/dance.png" height="30"> 
+                                                                                <span style="font-size:15px;"> Dancing <i class="fas fa-minus-circle"></i></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                         
+                                                          
+                                                                </div>
                                                             </div>
                                                         </div>
         
@@ -288,7 +433,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-12">
+                                                    <div class="col-md-12 col-xs-12 col-sm-12">
                                                         <div class="card mt-3">
                                                             <div class="card-body" id="card-body-lookingfor">
                                                                 <h2 class="text-center text-danger card-title"  >Looking For&nbsp;</h2>

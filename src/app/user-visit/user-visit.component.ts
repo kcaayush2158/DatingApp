@@ -30,6 +30,7 @@ export class UserVisitComponent implements OnInit {
     textValue: ''
   };
   authenticatedUser;
+  interests: any= [];
 
   // tslint:disable-next-line: max-line-length
   constructor(private activatedRoute: ActivatedRoute, private localStorage: LocalStorageService, private spinner: NgxSpinnerService, private http: HttpClient, private toastr: ToastrService) { }
@@ -37,7 +38,7 @@ export class UserVisitComponent implements OnInit {
 
   customOptions: OwlOptions = {
     loop: true,
-    mouseDrag: false,
+    mouseDrag: true,
     touchDrag: false,
     pullDrag: false,
     dots: false,
@@ -79,13 +80,23 @@ export class UserVisitComponent implements OnInit {
 
   }
 
+  loadInterest(){
+    const url = this.baseurl + '/interest/all?email='+this.user.email;
+    this.http.get(url).subscribe(
+      data => {
+        this.interests = data;
+      },
+      err => {
+        this.toastr.error('Network Error');
+      }
+    );
+  }
+
   loadPhotos(email:string) {
     this.spinner.show();
     const url = this.baseurl + '/principal/user/photo?email=' +email;
     this.http.get(url).subscribe((data) => {
       this.photos = data;
-      console.log("photos");
-      console.log(data);
       this.spinner.hide();
     })
   }

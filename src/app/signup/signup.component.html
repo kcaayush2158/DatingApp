@@ -86,12 +86,12 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="password">Password: </label>
-                                <input formControlName="password" [class.is-valid]="registerFormControl.firstname?.valid && registerFormControl.firstname?.untouched"  pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="registerFormControl.password?.invalid  && registerFormControl.password?.touched " name="password" id="password" type="password" class="form-control mb-2 form-control-lg" required />
+                                <input formControlName="password" [class.is-valid]="registerFormControl.password?.valid && registerFormControl.password?.untouched"  pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="registerFormControl.password?.invalid  && registerFormControl.password?.touched " name="password" id="password" type="password" class="form-control mb-2 form-control-lg" required />
                                 <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.password?.invalid && registerFormControl.password?.touched">
                                     <small class="text-danger" *ngIf="registerFormControl.password.errors?.required"> <i class="fa fa-remove"></i> Password is required</small>
                                     <small class="text-danger" *ngIf="registerFormControl.password.errors?.minlength"> <i class="fa fa-remove"></i> Password charecters must be atleast 3 charecters</small>
                                     <small class="text-danger" *ngIf="registerFormControl.password.errors?.maxlength"> <i class="fa fa-remove"></i> Password charecters must be less than 20 charecters</small>
-                                    <small class="text-danger"   *ngIf="registerFormControl.password.errors?.invalidPassword"> <i class="fa fa-remove"></i> Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number
+                                    <small class="text-danger"  *ngIf="registerFormControl.password.errors?.invalidPassword"> <i class="fa fa-remove"></i> Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number
                                 </small>
                                 </div>
                              

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
 import { User } from '../user';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { LocalStorageService } from 'ngx-webstorage';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AppService } from '../app.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -15,7 +13,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  private loggedIn: boolean;
   users = User;
   messageResponse = '';
   credentials = { email: '', password: '' };
@@ -24,26 +21,24 @@ export class LoginComponent implements OnInit {
   authenciate = false;
   onlineUsers = [];
   baseurl = 'https://lovecupid.herokuapp.com/api';
-     changePassword;
+  changePassword;
+
+
   constructor(
-    private app: AppService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     private activatedRoute: ActivatedRoute,
     private _router: Router,
- 
-    private _userService: UserService,
     private _httpClient: HttpClient,
     private localStorage: LocalStorageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();
-    if (this.localStorage.retrieve('isLoggedIn') == true) {
+    if (this.localStorage.retrieve('isLoggedIn') === true && this.localStorage.retrieve('user') != null) {
       this.activatedRoute.params.subscribe(data => {
         this.spinner.hide();
         this.toastr.success('success', 'Login Successful');
-        this._router.navigateByUrl['/home'];
       });
     }
   }
@@ -68,7 +63,7 @@ export class LoginComponent implements OnInit {
           this.onlineUsers.push(response);
           this._router.navigateByUrl('/home/profiles');
         } else {
-        
+
           this.messageResponse = 'Bad credentials';
           this.authenciate = false;
           this._router.navigateByUrl('/login');

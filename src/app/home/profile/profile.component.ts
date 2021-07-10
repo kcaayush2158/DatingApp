@@ -1,8 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, Inject, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgxFileUploadStorage, NgxFileUploadFactory, NgxFileUploadOptions, NgxFileUploadRequest } from '@ngx-file-upload/core';
+import { NgxFileUploadStorage, NgxFileUploadOptions, NgxFileUploadRequest } from '@ngx-file-upload/core';
 import { Gallery } from 'angular-gallery';
 import { EventEmitter } from 'events';
 
@@ -10,8 +9,6 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LikesComponent } from '../likes/likes.component';
-import { Topics } from './topics';
 import SwiperCore, { EffectCoverflow, Pagination } from 'swiper/core';
 
 // install Swiper modules
@@ -30,6 +27,8 @@ export class ProfileComponent implements OnInit {
   topicQuestion = '';
   topicAnswer = '';
   totalLike;
+  interest ;
+  interests:any=[];
   userForm: FormGroup;
 
   public uploads: NgxFileUploadRequest[] = [];
@@ -178,6 +177,7 @@ export class ProfileComponent implements OnInit {
     this.user = this.localStorage.retrieve('user');
     this.loadTopic();
     this.loadAuthenticatedUserPhotos();
+    this.loadInterest();
 
     // this.formChange.emit(this.formTopic)
 
@@ -189,8 +189,6 @@ export class ProfileComponent implements OnInit {
 
 
   }
-
-
 
   countLikes(likes: any) {
     this.totalLikes = likes;
@@ -208,8 +206,55 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  saveInterest(interest:string){
+    const params = new HttpParams();
+    params.set('email',this.user.email);
+    params.set('interest',this.interest);
+
+    const url = this.baseurl + '/interest/save?email='+this.user.email+'&interest='+interest;
+    this.http.post(url,{}).subscribe(
+      data => {
+        this.toastr.success('Interest Added');
+        this.loadInterest();
+      },
+      err => {
+        this.toastr.error('Intrest Already Existed');
+      }
+    );
+
+  }
+
+  loadInterest(){
+    const params = new HttpParams();
+    params.set('email',this.user.email);
+
+
+    const url = this.baseurl + '/interest/all?email='+this.user.email;
+    this.http.get(url,{params}).subscribe(
+      data => {
+        this.interests = data;
+      },
+      err => {
+        this.toastr.error('Network Error');
+      }
+    );
+  }
+
+  deleteInterest(id:number){
+    const url = this.baseurl + '/interest/delete?id='+id+'&email='+this.user.email;
+    this.http.delete(url,{}).subscribe(
+      (data) => {
+        this.toastr.success('Item deleted');
+        this.loadInterest();
+      },
+      err => {
+        this.toastr.error('Network Error');
+      }
+    );
+  }
+
   showGallery(index: number, picture: any) {
-    let prop = {
+    const prop = {
       images: [{ path: picture }],
       index,
     };

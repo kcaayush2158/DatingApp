@@ -87,19 +87,24 @@ label {
     font-size: 20px
 }
 .image{
-    height: 300px; width: 300px; object-fit: cover
+    height: 300px; width: 300px; object-fit: cover;
 }
 
-
+#badge{
+    width: 150px;
+}
 #card-body-lookingfor{
     height: auto;
+    width: auto;
 }
 #card-body-infos{
     height: auto;
-
+    width: auto;
 }
 #card-body-interest{
     height: auto;
+    width: auto;
+
 }
 .modal-dialog{
     max-width: 900px!important;

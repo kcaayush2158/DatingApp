@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.card-text{
+.card-text {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -13,7 +13,7 @@
   color: #222;
   min-height: 100px;
   max-height: 100px;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 16px;
 }
 
@@ -28,7 +28,6 @@
   display: block;
   width: 100%;
 }
-
 
 .text-bold {
   font-weight: bold;
@@ -175,7 +174,7 @@ label {
 #topicAnswer {
   color: #2a2f35;
   word-wrap: break-word;
-  font-family: "GT America", Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: 'GT America', Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.0625rem;

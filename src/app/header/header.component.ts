@@ -21,11 +21,11 @@ export class HeaderComponent implements OnInit {
   loading$ = new BehaviorSubject('');
   user: any = [];
   baseurl = 'https://lovecupid.herokuapp.com/api';
-  shimmer: boolean = false;
+  shimmer = false;
   searchForm: FormGroup;
   submitted = false;
-  fromAge: number = 18;
-  toAge: number = 80;
+  fromAge = 18;
+  toAge = 80;
 
   options: Options = {
     floor: 0,
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   };
 
 
-  
+
   get searchUserForm() {
     return this.searchForm.controls;
   }
@@ -86,12 +86,12 @@ export class HeaderComponent implements OnInit {
       this.userNotification = data;
 
       for (let i = 0; i <= this.userNotification.length; i++) {
-        const $url = this.baseurl + '/notification/read/' + this.userNotification[i].id + '?email=' + user.email;
+        const $url = this.baseurl + '/notification/read/' + this.userNotification[i]?.id + '?email=' + user.email;
         this.http.post($url, {}).subscribe(() => {
           this.loadCountNotification();
           this.shimmer = false;
         });
-        
+
       }
     });
   }

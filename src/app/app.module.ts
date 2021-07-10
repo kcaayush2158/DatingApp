@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,27 +51,23 @@ import { NgxFileUploadUiCommonModule, NgxFileUploadUiProgressbarModule, NgxFileU
 import { IvyGalleryModule } from 'angular-gallery';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { SwiperModule } from 'swiper/angular';
-import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 // import Swiper core and required modules
-import SwiperCore, {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-} from 'swiper/core';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper/core';
 import { RecoverComponent } from './login/recover/recover.component';
 import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { SearchComponent } from './home/profiles/search/search.component';
 import { NearbyComponent } from './home/nearby/nearby.component';
 import { SwitchGenderComponent } from './home/switch-gender/switch-gender.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const ngWizardConfig: NgWizardConfig = {
-  theme: THEME.dots
+  theme: THEME.dots,
 };
 
 // import { AuthService, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule } from 'ng4-social-login';
@@ -92,12 +87,11 @@ const ngWizardConfig: NgWizardConfig = {
 //   return config;
 // }
 
-
-
 @NgModule({
   declarations: [
     // tslint:disable-next-line: max-line-length
-    AppComponent, routingComponents,
+    AppComponent,
+    routingComponents,
     ImagesComponent,
     IndexComponent,
     PasswordValidatorDirective,
@@ -134,9 +128,8 @@ const ngWizardConfig: NgWizardConfig = {
     SwitchGenderComponent,
   ],
 
-
   imports: [
-
+    CarouselModule,
     NgWizardModule.forRoot(ngWizardConfig),
     Ng2SearchPipeModule,
     IvyCarouselModule,
@@ -144,7 +137,7 @@ const ngWizardConfig: NgWizardConfig = {
     AppRoutingModule,
     SwiperModule,
     FormsModule,
-   ReactiveFormsModule,
+    ReactiveFormsModule,
     CommonModule,
     NgxDropzoneModule,
     InfiniteScrollModule,
@@ -165,7 +158,7 @@ const ngWizardConfig: NgWizardConfig = {
       positionClass: 'toast-bottom-left',
       preventDuplicates: true,
       progressBar: true,
-      progressAnimation: 'increasing'
+      progressAnimation: 'increasing',
     }),
 
     NgxSpinnerModule,
@@ -195,25 +188,23 @@ const ngWizardConfig: NgWizardConfig = {
     { provide: ActivatedRoute, useValue: { snapshot: {} } },
     NgxSpinnerService,
     // AuthService
-
-
-  ], schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
-    NO_ERRORS_SCHEMA
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
-platformBrowserDynamic().bootstrapModule(AppModule).then((ref) => {
-  // Ensure Angular destroys itself on hot reloads.
-  if (window["ngRef"]) {
-    window["ngRef"].destroy();
-  }
-  // papas fritas para todos
-  window["ngRef"] = ref;
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .then(ref => {
+    // Ensure Angular destroys itself on hot reloads.
+    if (window['ngRef']) {
+      window['ngRef'].destroy();
+    }
+    // papas fritas para todos
+    window['ngRef'] = ref;
 
-  // Otherwise, log the boot error
-})
-  .catch((err) => console.error(err));;
+    // Otherwise, log the boot error
+  })
+  .catch(err => console.error(err));

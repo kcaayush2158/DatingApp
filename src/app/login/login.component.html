@@ -15,14 +15,14 @@
                         <!--============================================================== username input field======================================-->
                         <div class="form-label-group">
                             <label for="inputEmail">Email :</label>
-                            <input type="text" #email="ngModel" [(ngModel)]="credentials.email" [class.is-invalid]="email.touched && email.invalid" name="email"  minlength="5" maxlength="50" id="email" class="form-control form-control-lg" required>
-                            <small class="invalid-feedback" [class.d-none]="email.valid || email.untouched">Email is required</small>
+                            <input type="text" #email="ngModel" [(ngModel)]="credentials.email" [class.is-invalid]="email?.touched && email?.invalid" name="email"  minlength="5" maxlength="50" id="email" class="form-control form-control-lg" required>
+                            <small class="invalid-feedback" [class.d-none]="email?.valid || email?.untouched">Email is required</small>
                         </div>
                         <!--============================================================== password input field======================================-->
                         <div class="form-label-group">
                             <label for="inputPassword">Password :</label>
-                            <input type="password" name="password" #password="ngModel"  [(ngModel)]="credentials.password" [class.is-invalid]="password.touched && password.invalid" id="inputPassword" class="form-control form-control-lg" required>
-                            <small class="invalid-feedback" *ngIf="password.invalid || password.untouched">Password is required</small>
+                            <input type="password" name="password" #password="ngModel"  [(ngModel)]="credentials.password" [class.is-invalid]="password?.touched && password.invalid" id="inputPassword" class="form-control form-control-lg" required>
+                            <small class="invalid-feedback" *ngIf="password?.invalid || password?.untouched">Password is required</small>
                         </div>
                         <!--============================================================== Remember checkbox input field======================================-->
                         <div class="custom-control custom-checkbox mb-5 mt-3">
@@ -48,8 +48,8 @@
                                      
                                     <div class="form-group">
                                        <label class="email">Email : </label>
-                                       <input type="email" class="form-control" [(ngModel)]="recoveryemail" [class.is-invalid]="changePassword.touched && changePassword.invalid"  id="email">
-                                       <small class="invalid-feedback" [class.d-none]="changePassword.valid || changePassword.untouched">Email is required</small>
+                                       <input type="email" class="form-control" [(ngModel)]="recoveryemail" [class.is-invalid]="changePassword?.touched && changePassword?.invalid"  id="email">
+                                       <small class="invalid-feedback" [class.d-none]="changePassword?.valid || changePassword?.untouched">Email is required</small>
                                        <small> *  Note email will be send to your email </small>
                                       </div>
                                   </form>

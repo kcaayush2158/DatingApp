@@ -1,52 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap');
 #custom-card-design {
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
-    border-radius: 20px;
-    max-width: 300px;
-    height: 300px;
-    width: 300px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
+  border-radius: 20px;
+  max-width: 300px;
+  height: 300px;
+  width: 300px;
 }
 
 .btn-join-room-private {
-    background-color: #7207ff;
-    border-color: #7207ff;
-    color: #fff;
+  background-color: #7207ff;
+  border-color: #7207ff;
+  color: #fff;
 }
 .card-title {
-    color: #222;
-    font-weight: bold;
-    font-family: 'Open Sans', sans-serif;
+  color: #222;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
 }
 
-.card-body{
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+.card-body {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 #chatDescription {
-    font-family: 'Open Sans', sans-serif;
-    color: #313437;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    height: 130px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+  font-family: 'Open Sans', sans-serif;
+  color: #313437;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 130px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .btn-join-room-public {
-    background-color: #ffc107;
-    border-color: #ffc107;
-    color: white;
-
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: white;
 }
 
-
 .btn-join-room-private {
-    background-color: #7207ff;
-    border-color: #7207ff;
-    color: white;
+  background-color: #7207ff;
+  border-color: #7207ff;
+  color: white;
 }
