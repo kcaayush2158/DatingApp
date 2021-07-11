@@ -47,7 +47,7 @@ export class MessageComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private route: Router,
     private localStorage: LocalStorageService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.user = this.localStorage.retrieve('user');
@@ -67,7 +67,7 @@ export class MessageComponent implements OnInit {
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch (err) { }
+    } catch (err) {}
   }
   counter(i: number) {
     return new Array(i);
@@ -79,15 +79,16 @@ export class MessageComponent implements OnInit {
 
     const url = this.baseurl + '/direct/inbox?email=' + this.user.email;
 
-    interval(4000)
+    this.timeInterval = interval(1000)
       .pipe(
         startWith(0),
-        switchMap(() => this.http.get(url, { responseType: 'json' }))
+        switchMap(() => this.http.get(url, { observe: 'response' }))
       )
       .subscribe(
         data => {
-          this.shimmer = false;
+          console.log('1');
           this.users = data;
+          this.shimmer = false;
           console.log('message loading');
           this.loadPrivateMessages(this.id, this.users.conversation.roomId);
         },
@@ -169,5 +170,10 @@ export class MessageComponent implements OnInit {
         this.spinner.hide();
       }
     );
+  }
+
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy(): void {
+    this.timeInterval.unsubscribe();
   }
 }

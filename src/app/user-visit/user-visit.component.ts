@@ -74,6 +74,7 @@ export class UserVisitComponent implements OnInit {
         this.navigateProfile(this.user.id);
         this.loadPhotos(this.user.email);
         this.loadTopic(this.user.id);
+        this.loadInterest();
 
       });
     });

@@ -21,7 +21,7 @@
                         <!--============================================================== password input field======================================-->
                         <div class="form-label-group">
                             <label for="inputPassword">Password :</label>
-                            <input type="password" name="password" #password="ngModel"  [(ngModel)]="credentials.password" [class.is-invalid]="password?.touched && password.invalid" id="inputPassword" class="form-control form-control-lg" required>
+                            <input type="password" name="password" #password="ngModel"  [(ngModel)]="credentials.password" [class.is-invalid]="password?.touched && password?.invalid" id="inputPassword" class="form-control form-control-lg" required>
                             <small class="invalid-feedback" *ngIf="password?.invalid || password?.untouched">Password is required</small>
                         </div>
                         <!--============================================================== Remember checkbox input field======================================-->

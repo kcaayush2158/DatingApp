@@ -96,9 +96,6 @@ label {
   color: #077aec;
   height: 300px;
 }
-#card-body-lookingfor {
-  height: auto;
-}
 
 .bio {
   font-size: 20px;
@@ -108,13 +105,10 @@ label {
   width: 300px;
   object-fit: cover;
 }
-#card-body-infos {
-  height: 300px;
-}
-#card-body-interest {
+#card-body-lookingfor ,#card-body-infos ,#card-body-interest {
   height: auto;
-  width: fit-content;
 }
+ 
 .modal-dialog {
   max-width: 900px !important;
 }
@@ -180,4 +174,8 @@ label {
   font-size: 1.0625rem;
   line-height: 25px;
   white-space: pre-wrap;
+}
+
+#badge{
+  width: 150px;
 }

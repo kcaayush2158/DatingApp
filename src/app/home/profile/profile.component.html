@@ -1132,7 +1132,11 @@
                                              
                                                                     <div class="col-md-12">
                                                            <div class="row">
+                                                            <div class="container-fluid mt-5 mb-5" *ngIf="interests ==false">
+                                                                <h6 class="text-center "><b>Click <button class="btn btn-light" disabled><i class="fas fa-plus-circle"></i> </button>   to add interests</b> </h6>
+                                                            </div>  
                                                             <div *ngFor="let data of interests" > 
+                                                                
                                                                 <div class="col-md-3">
                                                                     <div *ngIf="data.interests == 'Swimming' ">
                                                                         <span class="badge badge-light  mt-2" id="badge" (click)="deleteInterest(data.id)" >
@@ -1269,7 +1273,7 @@
                                                                                     
                                                                      <!-- Button trigger modal -->
                                                                     
-                                                           <button type="button" class="btn btn-light btn-block  mt-2" data-toggle="modal" data-target="#modelId">
+                                                           <button type="button" class="btn btn-light btn-block  mt-5" data-toggle="modal" data-target="#modelId">
                                                             <i class="fas fa-plus-circle"></i> 
                                                            </button>
                                                                 

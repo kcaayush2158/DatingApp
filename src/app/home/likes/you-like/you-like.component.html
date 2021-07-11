@@ -20,33 +20,33 @@
             </div>
 
             </div>
-    <div id="container-users-visits" *ngFor="let user of users">
-
-      <div id="container-users-visits" *ngIf="!user">
-        <h1 class="text-center">
-          Please improve your profile to get more views
-        </h1>
-
-            <a routerLink="/profile/{{user.likedBy.username}}" id="card-href " style="list-style-type:none;text-decoration:none;">
-                <div class="card bg-light  mb-3 mr-2  ml-2 mt-2 " id="custom-card-design">
-                    <img class="card-img-top image-thumbnail" id="card-img"
-                        src="{{ user.likedTo.profilePhoto}} " alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title ">{{ user.likedTo.firstName}} , {{ user.likedTo.aboutMe.age}}
-                            <ng-container *ngIf="user.likedTo.aboutMe.gender == 'Male'">
-                                <span class="badge badge-warning badge-pill ml-1 "><i class="fas fa-male"></i> M</span>
-                              </ng-container>
-                              <ng-container *ngIf="user.likedTo.aboutMe.gender == 'Female'">
-                                <span class="badge badge-lg badge-pill badge-warning ml-1"><i class="fas fa-female"></i> F</span> 
-                              </ng-container>
-                        </h5>
-                        <p class="card-text" id="card-bio">{{ user.likedTo.aboutMe.bio}}
-                        </p>
-                    </div>
-                </div>
-
-            </a>
+            <div class="row">
+            <div id="container-users-visits" *ngFor="let user of users">
+   
+              <a routerLink="/profile/{{user.likedTo.username}}" id="card-href "
+                  style="list-style-type:none;text-decoration:none;">
+                  <div class="card bg-light  mb-3 mr-2  ml-2 mt-2 " id="custom-card-design">
+                      <img class="card-img-top image-thumbnail" id="card-img"
+                          src="{{ user.likedTo.profilePhoto}} " alt="Card image cap">
+                      <div class="card-body">
+                          <h5 class="card-title ">{{ user.likedTo.firstName}} , {{ user.likedTo.aboutMe.age}}
+      
+                              <ng-container *ngIf="user.likedTo.aboutMe.gender == 'Male'">
+                                  <span class="badge badge-warning badge-pill ml-1 "><i class="fas fa-male"></i> M</span>
+                                </ng-container>
+                                <ng-container *ngIf="user.likedTo.aboutMe.gender == 'Female'">
+                                  <span class="badge badge-lg badge-pill badge-warning ml-1"><i class="fas fa-female"></i> F</span> 
+                                </ng-container>
+      
+                          </h5>
+                          <p class="card-text" id="card-bio">
+                              {{ user.likedTo.aboutMe.bio}}
+                          </p>
+                      </div>
+                  </div>
+      
+              </a>
             </div>
-        </div>
+          </div>
     </div>
 

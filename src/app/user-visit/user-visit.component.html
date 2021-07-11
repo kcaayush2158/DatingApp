@@ -258,19 +258,24 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12  col-xs-12 col-sm-12">
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-12 col-xs-12 col-sm-12">
-                                                        <div class="card mt-3" *ngIf="interests">
+                                        
+                                                 
+                                                        <div class="card col-md-12  mt-3" >
                                                             <h2 class=" text-danger text-center card-title mt-3">Interest</h2>
-                                                            <div class="card-body" id="card-body-interest">
-                                                                
+                                                            <div class="card-body ">
+                                                                <div class="container-fluid" *ngIf="interests ==false">
+                                                                    <h6 class="text-center "><b>No data available</b> </h6>
+                                                                </div>  
+
+                                                                <div class="row">
+                                                                  
                                                                 <div *ngFor="let data of interests" > 
+                                                                 
                                                                     <div class="col-md-3">
                                                                         <div *ngIf="data.interests == 'Swimming' ">
                                                                             <span class="badge badge-light  mt-2" id="badge"  >
                                                                                 <img src="../../../assets/icons/swimming.png"  height="30">
-                                                                                 <span style="font-size:15px;"> Swimming <i class="fas fa-minus-circle"></i></span>
+                                                                                 <span style="font-size:15px;"> Swimming </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -278,7 +283,7 @@
                                                                         <div *ngIf="data.interests == 'Nature' ">
                                                                             <span class="badge badge-light mt-2" id="badge" >
                                                                                 <img src="../../../assets/icons/leaf.svg"  height="30">
-                                                                                 <span style="font-size:15px;"> Nature <i class="fas fa-minus-circle"></i></span>
+                                                                                 <span style="font-size:15px;"> Nature </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -286,7 +291,7 @@
                                                                         <div *ngIf="data.interests == 'Singing' ">
                                                                             <span class="badge badge-light mt-2" id="badge"  >
                                                                                 <img src="../../../assets/icons/singing.png"  height="30">
-                                                                                 <span style="font-size:15px;"> Singing <i class="fas fa-minus-circle"></i></span>
+                                                                                 <span style="font-size:15px;"> Singing </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -294,7 +299,7 @@
                                                                         <div *ngIf="data.interests == 'Coding' " >
                                                                             <span class="badge badge-light mt-2" id="badge" >
                                                                                 <img src="../../../assets/icons/coding.png"  height="30"> 
-                                                                                <span style="font-size:15px;"> Coding <i class="fas fa-minus-circle"></i></span>
+                                                                                <span style="font-size:15px;"> Coding </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -302,7 +307,7 @@
                                                                         <div *ngIf="data.interests == 'Hiking' " >
                                                                             <span class="badge badge-light mt-2" id="badge"  >
                                                                                 <img src="../../../assets/icons/hiking.png" height="30">
-                                                                                 <span style="font-size:15px;"> Hiking <i class="fas fa-minus-circle"></i> </span>
+                                                                                 <span style="font-size:15px;"> Hiking  </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -310,7 +315,7 @@
                                                                         <div *ngIf="data.interests == 'Cooking' ">
                                                                             <span class="badge badge-light mt-2" id="badge"   >
                                                                                 <img src="../../../assets/icons/cooking.png" height="30">
-                                                                                 <span   style="font-size:15px;"> Cooking <i class="fas fa-minus-circle"></i></span>
+                                                                                 <span   style="font-size:15px;"> Cooking </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -318,7 +323,7 @@
                                                                         <div *ngIf="data.interests == 'Travelling' ">
                                                                             <span class="badge badge-light  mt-2" id="badge"  >
                                                                                 <img src="../../../assets/icons/passport.png"  height="30"> 
-                                                                                <span style="font-size:15px;"> Travelling <i class="fas fa-minus-circle"></i></span>
+                                                                                <span style="font-size:15px;"> Travelling </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -326,7 +331,7 @@
                                                                         <div *ngIf="data.interests == 'Gaming' ">
                                                                             <span class="badge badge-light mt-2" id="badge"  >
                                                                                 <img src="../../../assets/icons/game-controller.svg"  height="30"> 
-                                                                                <span style="font-size:15px;"> Gaming <i class="fas fa-minus-circle"></i></span>
+                                                                                <span style="font-size:15px;"> Gaming </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -335,7 +340,7 @@
                                                                         <div *ngIf="data.interests == 'Drawing' ">
                                                                             <span class="badge badge-light mt-2" id="badge"  >
                                                                                 <img src="../../../assets/icons/crayons.png" height="30"> 
-                                                                                <span style="font-size:15px;"> Drawing <i class="fas fa-minus-circle"></i></span>
+                                                                                <span style="font-size:15px;"> Drawing </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -343,7 +348,7 @@
                                                                         <div *ngIf="data.interests == 'Reading' ">
                                                                             <span class="badge badge-light  mt-2" id="badge"   >
                                                                                 <img src="../../../assets/icons/read.png"  height="30">
-                                                                                 <span style="font-size:15px;"> Reading <i class="fas fa-minus-circle"></i></span>
+                                                                                 <span style="font-size:15px;"> Reading </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -352,7 +357,7 @@
                                                                         <div *ngIf="data.interests == 'Excercises'">
                                                                             <span class="badge badge-light mt-2" id="badge"  >
                                                                                 <img src="../../../assets/icons/lunges.png" height="30">
-                                                                                 <span style="font-size:15px;"> Excercises <i class="fas fa-minus-circle"></i></span>
+                                                                                 <span style="font-size:15px;"> Excercises </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -360,7 +365,7 @@
                                                                         <div *ngIf="data.interests == 'Working' ">
                                                                             <span class="badge badge-light mt-2" id="badge" >
                                                                                 <img src="../../../assets/icons/suitcase.png"  height="30">
-                                                                                <span style="font-size:15px;"> Working <i class="fas fa-minus-circle"></i></span>
+                                                                                <span style="font-size:15px;"> Working </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -368,7 +373,7 @@
                                                                         <div *ngIf="data.interests == 'Sleeping' ">
                                                                             <span class="badge badge-light  mt-2" id="badge"  >
                                                                                 <img src="../../../assets/icons/sleep.png" height="30">
-                                                                                 <span style="font-size:15px;"> Sleeping <i class="fas fa-minus-circle"></i></span>
+                                                                                 <span style="font-size:15px;"> Sleeping </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -376,7 +381,7 @@
                                                                         <div *ngIf="data.interests == 'Cinema' ">
                                                                             <span class="badge badge-light  mt-2" id="badge"  >
                                                                                 <img src="../../../assets/icons/cinema.svg" height="30">
-                                                                                 <span style="font-size:15px;"> Cinema <i class="fas fa-minus-circle"></i></span>
+                                                                                 <span style="font-size:15px;"> Cinema </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -384,7 +389,7 @@
                                                                         <div *ngIf="data.interests == 'Music' ">
                                                                             <span class="badge badge-light mt-2"  id="badge" >
                                                                                 <img src="../../../assets/icons/music.png" height="30">
-                                                                                 <span  style="font-size:15px;"> Music <i class="fas fa-minus-circle"></i></span>
+                                                                                 <span  style="font-size:15px;"> Music </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -392,7 +397,7 @@
                                                                         <div *ngIf="data.interests == 'Dancing' ">
                                                                             <span class="badge badge-light mt-2"  id="badge" >
                                                                                 <img src="../../../assets/icons/dance.png" height="30"> 
-                                                                                <span style="font-size:15px;"> Dancing <i class="fas fa-minus-circle"></i></span>
+                                                                                <span style="font-size:15px;"> Dancing </span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -400,14 +405,15 @@
                                                           
                                                                 </div>
                                                             </div>
-                                                        </div>
-        
+                                                            </div>
+                                                            </div>
+                      
                                                 
                                                         <br>
                                                         <div class="card">
                                                             <div class="card-body" id="card-body-infos">
                                                                 <h2 class="text-center text-danger card-title">Infos</h2>
-                                                                <p class="card-text"></p>
+                                                         
                                                                 <div class="table-responsive">
                                                                     <table class="table table-sm table-hover">
                                                                         <thead>
@@ -424,8 +430,8 @@
                                                                         </tr>
                                                                 
                                                                         <tr>
-                                                                            <td class="text-bold">Profile Likes:</td>
-                                                                            <!-- <td >{{totalLikes}}</td> -->
+                                                                            <td class="text-bold">Profile Likes:</td>  
+                                                                            <td></td>                                                                      
                                                                         </tr>
                                                                         </tbody>
                                                                     </table>
@@ -448,8 +454,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>

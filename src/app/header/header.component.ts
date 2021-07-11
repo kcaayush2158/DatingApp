@@ -86,7 +86,7 @@ export class HeaderComponent implements OnInit {
       this.userNotification = data;
 
       for (let i = 0; i <= this.userNotification.length; i++) {
-        const $url = this.baseurl + '/notification/read/' + this.userNotification[i]?.id + '?email=' + user.email;
+        const $url = this.baseurl + '/notification/read/' + this.userNotification[i].id + '?email=' + user.email;
         this.http.post($url, {}).subscribe(() => {
           this.loadCountNotification();
           this.shimmer = false;
