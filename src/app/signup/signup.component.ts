@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit {
     return this.signupForm.get('firstname');
     }
   get lookingFor() {
-    return this.signupForm.get('lastname');
+    return this.signupForm.get('lookingFor');
   }
   get lastname() {
     return this.signupForm.get('lastname');

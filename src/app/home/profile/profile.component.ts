@@ -110,6 +110,24 @@ export class ProfileComponent implements OnInit {
     return this.userForm.get('liveIn');
   }
 
+  get age() {
+    return this.userForm.get('age');
+  }
+
+  get country() {
+    return this.userForm.get('country');
+  }
+  get gender() {
+
+    return this.userForm.get('gender');
+  }
+  get bodyType() {
+    return this.userForm.get('bodyType');
+  }
+
+  get education() {
+    return this.userForm.get('education');
+  }
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -145,31 +163,29 @@ export class ProfileComponent implements OnInit {
     private localStorage: LocalStorageService
   ) {
     this.userForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      gender: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      education: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      country: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      bio: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-      email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      firstname: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      lastname: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      bodyType: ['', [Validators.required]],
-      height: ['', [Validators.required]],
-      eyes: ['', [Validators.required]],
-      hair: ['', [Validators.required]],
-      interests: ['', [Validators.required]],
-      liveIn: ['', [Validators.required]],
-      occupation: ['', [Validators.required]],
-      age: ['', [Validators.required]],
-      languages: ['', [Validators.required]],
-      relationship: ['', [Validators.required]],
-      known: ['', [Validators.required]],
-      workAs: ['', [Validators.required]],
-      lookingFor: ['', [Validators.required, Validators.minLength(40), Validators.maxLength(300)]],
-      haveKids: ['', [Validators.required]],
-      smoke: ['', [Validators.required]],
-      drink: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+      firstname:  ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)] )],
+      lastname:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
+      username:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
+      email:   ['', Validators.compose([Validators.required, Validators.email])],
+      bodyType:  ['', Validators.required ],
+      height:['', Validators.compose([Validators.required])],
+      eyes:  ['', Validators.required ],
+      gender:   ['', Validators.required ],
+      hair:  ['', Validators.required ],
+      interests:  ['', Validators.required ],
+      languages:  ['', Validators.required ],
+      relationship:  ['', Validators.required ],
+      country:   ['', Validators.required ],
+      known:   ['', Validators.compose([Validators.required])],
+      workAs:   ['', Validators.required ],
+      lookingFor:  ['', Validators.required ],
+      liveIn:  ['', Validators.required ],
+      bio:  ['', Validators.compose([Validators.required, Validators.minLength(200), Validators.maxLength(1800)])],
+      haveKids:  ['', Validators.required ],
+      age:  ['', Validators.compose([Validators.required])],
+      smoke :  ['', Validators.required ],
+      drink : ['', Validators.required ],
+      education : ['', Validators.required ],
     });
   }
 
@@ -205,6 +221,42 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
+
+  updateUser() {
+
+    const url= this.baseurl+'/user/update?email='+this.email.value+
+    '&drink='+this.drink.value+
+    '&smoke='+this.smoke.value+
+    '&haveKids='+this.haveKids.value+
+    '&bio='+this.bio.value+
+    '&lookingFor='+this.lookingFor.value+
+    '&workAs='+this.workAs.value+
+    '&relationship='+this.relationship.value+
+    '&password='+this.password.value+
+    '&hair='+this.hair.value+
+    '&age='+this.age.value+
+    '&liveIn='+this.liveIn.value+
+    '&known='+this.known.value+
+    '&eyes='+this.eyes.value+
+    '&country='+this.country.value+
+    '&gender='+this.gender.value+
+    '&bodyType='+this.bodyType.value+
+    '&education='+this.education.value+
+    '&height='+this.height.value+
+    '&interests='+this.interests.value+
+    '&lastName='+this.lastname.value+
+    '&username='+this.username.value+
+    '&firstName='+this.firstname.value+
+    '&languages='+this.languages.value;
+
+        this.http.post(url,{}).subscribe(data => {
+          this.toastr.success('Signup complete');
+
+        },(err)=>{this.toastr.error('failed');});
+
+}
+
 
   saveInterest(interest:string){
     const params = new HttpParams();
@@ -270,7 +322,7 @@ export class ProfileComponent implements OnInit {
   //   });
   // }
   saveUser() {
-    const url = this.baseurl + '/aboutme/save?';
+    const url = this.baseurl + '/user/save';
   }
 
 
