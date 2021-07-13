@@ -11,8 +11,8 @@ import { LocalStorageService } from 'ngx-webstorage';
 export class YouLikeComponent implements OnInit {
   users: any = [];
   baseurl='https://lovecupid.herokuapp.com/api';
-  shimmer : boolean=false;
-  
+  shimmer=false;
+
   constructor(private router: Router, private localStorage: LocalStorageService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {

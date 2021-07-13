@@ -39,7 +39,8 @@
                     <ng-container *ngFor="let photo of photos">
                         
                       <ng-template lightbox-group carouselSlide [id]="photo.id">
-                        <img [src]="photo.photoUrl" style="height:300px; width:200px ;object-fit:contain" lightbox>
+                        <img [src]="photo.photoUrl" counterSeparator=" of " [counter]="true" [simpleMode]="false"  [fullImage]="photo.photoUrl" style="height:300px; width:200px ;object-fit:contain" lightbox  
+                        animationDuration="500">
                       </ng-template>
                     </ng-container>
                   </owl-carousel-o>
@@ -340,9 +341,9 @@
                                                                                 <div class="form-group">
                                                                                     <label for="username">Username: </label>
                                                                                  
-                                                                                    <input formControlName="username"  value="{{user.username}}"  [class.is-valid]="registerFormControl.username?.valid && registerFormControl.username?.untouched" pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="registerFormControl.username?.invalid && registerFormControl.username?.touched" name="username" id="username" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                                                                                    <input formControlName="username"  [value]="user.username"  [class.is-valid]="registerFormControl.username?.valid && registerFormControl.username?.untouched" pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" [class.is-invalid]="registerFormControl.username?.invalid && registerFormControl.username?.touched" name="username" id="username" type="text" class="form-control mb-2 form-control-lg" autofocus required />
                                                                                     <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.username?.invalid && registerFormControl.username?.touched">
-                                                                                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.required">   <i class="fa fa-remove"></i>Username is required</small>
+                                                                                        <small class="text-danger" *ngIf="registerFormControl.username.errors?.required"><i class="fa fa-remove"></i>Username is required</small>
                                                                                         <small class="text-danger" *ngIf="registerFormControl.username.errors?.minlength"><i class="fa fa-remove"></i>Username charecters must be atleast 5 charecters</small>
                                                                                         <small class="text-danger" *ngIf="registerFormControl.username.errors?.maxlength"><i  class="fa fa-remove"></i> Username charecters must be less than 20 charecters</small>
                                                                                     </div>
@@ -350,8 +351,8 @@
 
                                                                                 <div class="form-group">
                                                                                     <label for="firstname">First Name</label>
-                                                                                    <input type="text"  value="{{user.firstname}}" [class.is-valid]="registerFormControl.firstname?.valid && registerFormControl.firstname?.untouched" [class.is-.invalid]="registerFormControl.firstname?.invalid && registerFormControl.firstname?.touched"   formControlName="firstname" name="firstname" id="firstName" value="{{user.firstname}} " class="form-control">
-                                                                                    <div class="alert alert-danger mt-1" role="alert"   *ngIf="registerFormControl.firstnam?.invalid && registerFormControl.firstname?.touched">
+                                                                                    <input type="text" [value]="user.firstname"  [class.is-valid]="registerFormControl.firstname?.valid && registerFormControl.firstname?.untouched" [class.is-invalid]="registerFormControl.firstname?.invalid && registerFormControl.firstname?.touched"   formControlName="firstname" name="firstname" id="firstName"  class="form-control">
+                                                                                    <div class="alert alert-danger mt-1" role="alert"   *ngIf="registerFormControl.firstname?.invalid && registerFormControl.firstname?.touched">
                                                                                         <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.required"><i class="fa fa-remove"></i>FirstName is required</small>
                                                                                         <small class="text-danger"*ngIf="registerFormControl.firstname.errors?.minlength"><i class="fa fa-remove"></i>FirstName charecters must be atleast 3 charecters</small>
                                                                                         <small class="text-danger" *ngIf="registerFormControl.firstname.errors?.maxlength"><i class="fa fa-remove"></i> FirstName charecters must be less than 20charecters</small>
@@ -360,8 +361,8 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="lastName">Last Name :</label>
-                                                                                    <input name="lastname" formControlName="lastname"   value="{{user.lastName}} "  [class.is-valid]="registerFormControl.lastname?.valid && registerFormControl.lastname.untouched" [class.i?.invalid]="registerFormControl.lastnam?.invalid && registerFormControl.lastname?.touched" id="lastname" type="text" class="form-control mb-2 form-control-lg" autofocus required />
-                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lastnam?.invalid && registerFormControl.lastname.touched">
+                                                                                    <input name="lastname" formControlName="lastname"   value="{{user.lastname}} "  [class.is-valid]="registerFormControl.lastname?.valid && registerFormControl.lastname.untouched" [class.is-invalid]="registerFormControl.lastname?.invalid && registerFormControl.lastname?.touched" id="lastname" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                                                                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="registerFormControl.lastname?.invalid && registerFormControl.lastname.touched">
                                                                                         <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.required"><i class="fa fa-remove"></i>Last Name is required</small>
                                                                                         <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.minlength"><i class="fa fa-remove"></i>Last Name charecters must be atleast 3 charecters</small>
                                                                                         <small class="text-danger" *ngIf="registerFormControl.lastname.errors?.maxlength"><i  class="fa fa-remove"></i> Last Name charecters must be less than 20 charecters</small>
@@ -370,7 +371,7 @@
                                                                                     </div>
                                                                                  <div class="form-group">
                                                                                        <label for="email">Email: </label>
-                                                                                      <input formControlName="email" name="email" [class.is-valid]="registerFormControl.email?.valid && registerFormControl.email?.untouched" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [class.i?.invalid]="registerFormControl.emai?.invalid && registerFormControl.email?.touched" name="email" id="email" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+                                                                                      <input formControlName="email" name="email" [class.is-valid]="registerFormControl.email?.valid && registerFormControl.email?.untouched" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [class.is-invalid]="registerFormControl.emai?.invalid && registerFormControl.email?.touched" name="email" id="email" type="text" class="form-control mb-2 form-control-lg" autofocus required />
                                                                                          <div class="alert alert-danger mt-1" role="alert"  *ngIf="registerFormControl.password?.invalid && registerFormControl.email?.touched">
                                                                                             <small class="text-danger" *ngIf="registerFormControl.email.errors?.required"><i class="fa fa-remove"></i>email is required</small>
                                                                                             <small class="text-danger" *ngIf="registerFormControl.email.errors?.minlength"><i class="fa fa-remove"></i>email charecters must be atleast 3 charecters</small>
@@ -1008,7 +1009,7 @@
                                                                                     <label for="drink">Do you Drink ?</label>
                                                                                     <select class="form-control" [class.is-valid]="registerFormControl.drink?.valid && registerFormControl.drink?.untouched" [class.is-invalid]="registerFormControl.drink?.invalid && registerFormControl.drink?.touched" formControlName="drink"  name="drink" id="drink">
                                                                                         <option  disabled data-divider="true"></option>
-                                                                                        <option  value="{{user.aboutMe.drink}}"selected> {{user.aboutMe.drink}}</option>
+                                                                                        <option  value="{{user.aboutMe.drink}}" selected> {{user.aboutMe.drink}}</option>
                                                                                         <option value="Never">Never</option>
                                                                                         <option value="Occasionally">Occasionally</option>
                                                                                         <option value="Regularly">Regularly</option>
@@ -1024,7 +1025,7 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                            <button class="btn btn-primary"  (click)="updateUser()" type="submit">Save changes</button>
+                                                                            <button class="btn btn-primary"  (click)="updateUser()"  type="submit">Save changes</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>

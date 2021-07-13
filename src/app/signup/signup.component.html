@@ -850,13 +850,21 @@
             </div>
         </ng-wizard-step>
 
-        <ng-wizard-step [title]="'Step 5'" [description]="'Your Add Photos'">
+        <ng-wizard-step [title]="'Step 5'" [description]="'Create Profile'">
+            <div class="container">
+                <h6 class="text-center mt-2">Click create account buton to create profile  </h6>
+                <button id="btn-signup"  [disabled]="signupForm.invalid" class="btn btn-block mt-5 btn-success offset-md-5 col-xs-12  col-md-4" (click)="signup()" type="submit"> <i class="fas fa-sign-in-alt"></i> Create Account </button>
+            
+            </div>
+            </ng-wizard-step>
+
+        <ng-wizard-step [title]="'Step 6'" [description]="'Add Photos'">
 
             <div class="contianer-fluid mt-5">
                 <div class="row">
                     <div class="col-md-8">
                         <h2 class="text-center" style="font-size:33px;">
-                            <strong>Your Photos</strong>
+                            <strong>Add your Profile Picture</strong>
                             <hr class="col-lg-5 mb-4">
                         </h2>
                                          <div class="col-md-12">
@@ -980,13 +988,6 @@
                 </div>
             </ng-wizard-step>
 
-            <ng-wizard-step [title]="'Step 6'" [description]="'Completed'">
-                <div class="container">
-                    <h6 class="text-center mt-2">Click create account buton to create profile  </h6>
-                    <button id="btn-signup"  [disabled]="signupForm.invalid" class="btn btn-block mt-5 btn-success offset-md-5 col-xs-12  col-md-4" (click)="signup()" type="submit"> <i class="fas fa-sign-in-alt"></i> Create Account </button>
-                
-                </div>
-                </ng-wizard-step>
     </ng-wizard>
     <!--  =============================================== Form submit button  field ========================================-->
 

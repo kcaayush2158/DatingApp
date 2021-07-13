@@ -324,7 +324,5 @@ loadImageFailed() {
 
   // }
 }
-function forbiddenNameValidator(arg0: RegExp): any {
-  throw new Error('Function not implemented.');
-}
+
 

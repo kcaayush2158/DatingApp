@@ -159,7 +159,6 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService,
     private localStorage: LocalStorageService
   ) {
     this.userForm = this.formBuilder.group({
@@ -167,9 +166,9 @@ export class ProfileComponent implements OnInit {
       lastname:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
       username:   ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])],
       email:   ['', Validators.compose([Validators.required, Validators.email])],
-      bodyType:  ['', Validators.required ],
+      bodyType:  ['', Validators.compose([Validators.required ])],
       height:['', Validators.compose([Validators.required])],
-      eyes:  ['', Validators.required ],
+      eyes:  ['', Validators.compose([Validators.required]) ],
       gender:   ['', Validators.required ],
       hair:  ['', Validators.required ],
       interests:  ['', Validators.required ],
@@ -225,7 +224,7 @@ export class ProfileComponent implements OnInit {
 
   updateUser() {
 
-    const url= this.baseurl+'/user/update?email='+this.email.value+
+    const url= 'http://localhost:8081/api/user/update?email='+this.email.value+
     '&drink='+this.drink.value+
     '&smoke='+this.smoke.value+
     '&haveKids='+this.haveKids.value+
@@ -233,7 +232,6 @@ export class ProfileComponent implements OnInit {
     '&lookingFor='+this.lookingFor.value+
     '&workAs='+this.workAs.value+
     '&relationship='+this.relationship.value+
-    '&password='+this.password.value+
     '&hair='+this.hair.value+
     '&age='+this.age.value+
     '&liveIn='+this.liveIn.value+

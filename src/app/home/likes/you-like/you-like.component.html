@@ -21,8 +21,14 @@
 
             </div>
             <div class="row">
+              <div class="contianer" *ngIf="users == false">
+  
+                <img src="../../../../assets/image/discover.jpg" height="250">
+                <small class="text-center"People you like will show up here until you send them an intro, or they like you back.></small>
+                <button class="btn btn-primary btn-block"></button>
+              </div>
             <div id="container-users-visits" *ngFor="let user of users">
-   
+            
               <a routerLink="/profile/{{user.likedTo.username}}" id="card-href "
                   style="list-style-type:none;text-decoration:none;">
                   <div class="card bg-light  mb-3 mr-2  ml-2 mt-2 " id="custom-card-design">
